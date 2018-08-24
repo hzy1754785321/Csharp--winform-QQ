@@ -1,0 +1,13 @@
+C:\Users\ychi\source\repos\Server\Server\bin\Debug\Server.exe.config
+C:\Users\ychi\source\repos\Server\Server\bin\Debug\Server.exe
+C:\Users\ychi\source\repos\Server\Server\bin\Debug\Server.pdb
+C:\Users\ychi\source\repos\Server\Server\bin\Debug\Newtonsoft.Json.dll
+C:\Users\ychi\source\repos\Server\Server\bin\Debug\Newtonsoft.Json.xml
+C:\Users\ychi\source\repos\Server\Server\obj\Debug\Server.csprojResolveAssemblyReference.cache
+C:\Users\ychi\source\repos\Server\Server\obj\Debug\Server.server.resources
+C:\Users\ychi\source\repos\Server\Server\obj\Debug\Server.Properties.Resources.resources
+C:\Users\ychi\source\repos\Server\Server\obj\Debug\Server.csproj.GenerateResource.cache
+C:\Users\ychi\source\repos\Server\Server\obj\Debug\Server.csproj.CoreCompileInputs.cache
+C:\Users\ychi\source\repos\Server\Server\obj\Debug\Server.csproj.CopyComplete
+C:\Users\ychi\source\repos\Server\Server\obj\Debug\Server.exe
+C:\Users\ychi\source\repos\Server\Server\obj\Debug\Server.pdb

@@ -1,0 +1,14 @@
+c:\users\ychi\source\repos\hzy\hzy\obj\Debug\hzy.csprojResolveAssemblyReference.cache
+c:\users\ychi\source\repos\hzy\hzy\obj\Debug\hzy.Properties.Resources.resources
+c:\users\ychi\source\repos\hzy\hzy\obj\Debug\hzy.csproj.GenerateResource.cache
+c:\users\ychi\source\repos\hzy\hzy\obj\Debug\hzy.csproj.CoreCompileInputs.cache
+c:\users\ychi\source\repos\hzy\hzy\bin\Debug\hzy.exe.config
+c:\users\ychi\source\repos\hzy\hzy\bin\Debug\hzy.exe
+c:\users\ychi\source\repos\hzy\hzy\bin\Debug\hzy.pdb
+c:\users\ychi\source\repos\hzy\hzy\obj\Debug\hzy.exe
+c:\users\ychi\source\repos\hzy\hzy\obj\Debug\hzy.pdb
+c:\users\ychi\source\repos\hzy\hzy\obj\Debug\hzy.RegisterForm.resources
+c:\users\ychi\source\repos\hzy\hzy\obj\Debug\hzy.Form1.resources
+C:\Users\ychi\source\repos\hzy\hzy\bin\Debug\Newtonsoft.Json.dll
+C:\Users\ychi\source\repos\hzy\hzy\bin\Debug\Newtonsoft.Json.xml
+C:\Users\ychi\source\repos\hzy\hzy\obj\Debug\hzy.csproj.CopyComplete
