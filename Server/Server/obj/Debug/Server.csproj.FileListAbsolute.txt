@@ -11,3 +11,5 @@ C:\Users\ychi\source\repos\Server\Server\obj\Debug\Server.csproj.CoreCompileInpu
 C:\Users\ychi\source\repos\Server\Server\obj\Debug\Server.csproj.CopyComplete
 C:\Users\ychi\source\repos\Server\Server\obj\Debug\Server.exe
 C:\Users\ychi\source\repos\Server\Server\obj\Debug\Server.pdb
+C:\Users\ychi\source\repos\Server\Server\bin\Debug\CSkin.dll
+C:\Users\ychi\source\repos\Server\Server\bin\Debug\CSkin.xml

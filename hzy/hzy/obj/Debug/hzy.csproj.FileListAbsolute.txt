@@ -12,3 +12,7 @@ c:\users\ychi\source\repos\hzy\hzy\obj\Debug\hzy.Form1.resources
 C:\Users\ychi\source\repos\hzy\hzy\bin\Debug\Newtonsoft.Json.dll
 C:\Users\ychi\source\repos\hzy\hzy\bin\Debug\Newtonsoft.Json.xml
 C:\Users\ychi\source\repos\hzy\hzy\obj\Debug\hzy.csproj.CopyComplete
+C:\Users\ychi\source\repos\hzy\hzy\obj\Debug\hzy.UserHome.resources
+C:\Users\ychi\source\repos\hzy\hzy\obj\Debug\hzy.Chat.resources
+C:\Users\ychi\source\repos\hzy\hzy\bin\Debug\CSkin.dll
+C:\Users\ychi\source\repos\hzy\hzy\bin\Debug\CSkin.xml

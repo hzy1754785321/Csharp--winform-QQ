@@ -19,7 +19,7 @@ namespace hzy
 
 	public partial class Form1 : Form
 	{
-		public static string ipAddress = "192.168.8.102";
+		public static string ipAddress = "192.168.8.188";
 		public static string port = "36001";
 		public Form1()
 		{
@@ -41,10 +41,7 @@ namespace hzy
 			if (isSuccess)
 			{
 				MessageBox.Show("登陆成功!");
-				var  = new RegisterForm();
-				registerForm.MdiParent = this.MdiParent;
-				registerForm.Show();
-				this.Hide();
+				UserHomeStart();
 			}
 			else
 			{
@@ -103,6 +100,14 @@ namespace hzy
 			var registerForm = new RegisterForm();
 			registerForm.MdiParent = this.MdiParent;
 			registerForm.Show();
+			this.Hide();
+		}
+
+		public void UserHomeStart()
+		{
+			var userHome = new UserHome();
+			userHome.MdiParent = this.MdiParent;
+			userHome.Show();
 			this.Hide();
 		}
 
