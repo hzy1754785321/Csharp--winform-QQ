@@ -1,0 +1,13 @@
+c:\users\ychi\source\repos\test\test\bin\Debug\test.exe.config
+c:\users\ychi\source\repos\test\test\bin\Debug\test.exe
+c:\users\ychi\source\repos\test\test\bin\Debug\test.pdb
+c:\users\ychi\source\repos\test\test\bin\Debug\CSkin.dll
+c:\users\ychi\source\repos\test\test\bin\Debug\CSkin.xml
+c:\users\ychi\source\repos\test\test\obj\Debug\test.csprojResolveAssemblyReference.cache
+c:\users\ychi\source\repos\test\test\obj\Debug\test.Form1.resources
+c:\users\ychi\source\repos\test\test\obj\Debug\test.Properties.Resources.resources
+c:\users\ychi\source\repos\test\test\obj\Debug\test.csproj.GenerateResource.cache
+c:\users\ychi\source\repos\test\test\obj\Debug\test.csproj.CoreCompileInputs.cache
+c:\users\ychi\source\repos\test\test\obj\Debug\test.csproj.CopyComplete
+c:\users\ychi\source\repos\test\test\obj\Debug\test.exe
+c:\users\ychi\source\repos\test\test\obj\Debug\test.pdb
