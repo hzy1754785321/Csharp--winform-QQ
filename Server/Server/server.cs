@@ -34,6 +34,7 @@ namespace Server
 		//}
 
 		//public static server _instance = new server();
+
 		private void StartServer_Click(object sender, EventArgs e)
 		{
 			try
@@ -179,16 +180,16 @@ namespace Server
 					{
 						var st = new char[] { ',' };
 						var args = line1.Split(st, StringSplitOptions.RemoveEmptyEntries);
-						string name1;
+						int userId;
 						string passwd1;
-						name1 = args[0];
+						userId = int.Parse(args[0]);
 						passwd1 = args[1];
-						var account = new UserAccount() { name = name1, passwd = passwd1 };
+						var account = new UserAccount() { userId = userId, passwd = passwd1 };
 						users.Add(account);
 					}
 					sr.Close();
 				}
-				var user = users.FirstOrDefault(t => t.name == name);
+				var user = users.FirstOrDefault(t => t.userId == int.Parse(name));
 				if (user != null)
 				{
 					Log.Error("用户账号已存在");
@@ -223,21 +224,21 @@ namespace Server
 					{
 						var st = new char[] { ',' };
 						var args = line1.Split(st, StringSplitOptions.RemoveEmptyEntries);
-						string name1;
+						int userId;
 						string passwd1;
-						name1 = args[0];
+						userId =int.Parse(args[0]);
 						passwd1 = args[1];
-						var account = new UserAccount() { name = name1, passwd = passwd1 };
+						var account = new UserAccount() { userId = userId, passwd = passwd1 };
 						users.Add(account);
 					}
 					sr.Close();
 				}
-				var user = users.FirstOrDefault(t => t.name == name);
+				var user = users.FirstOrDefault(t => t.userId == int.Parse(name));
 				if (user != null)
 				{
 					if (user.passwd == passwd)
 					{
-						Log.Debug("user:{0} 登录成功", user.name);
+						Log.Debug("user:{0} 登录成功", user.userId);
 						return true;
 					}
 					else

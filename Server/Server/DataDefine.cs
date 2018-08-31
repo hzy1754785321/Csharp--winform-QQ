@@ -3,18 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
 
 namespace Server
 {
 	[Serializable]
 	public class UserAccount
 	{
-		public string name;
+		public int userId;
 		public string passwd;
 		public UserAccount() { }
-		public UserAccount(string name, string passwd)
+		public UserAccount(int userId, string passwd)
 		{
-			this.name = name;
+			this.userId = userId;
 			this.passwd = passwd;
 		}
 		public static UserAccount Parse(string str)
@@ -24,8 +25,101 @@ namespace Server
 				return null;
 			}
 			var args = str.Split(';');
-			return new UserAccount() { name = args[0], passwd = args[1] };
+			return new UserAccount() { userId = int.Parse(args[0]), passwd = args[1] };
 		}
+	}
+
+	[Serializable]
+	public class UserInfo
+	{
+		/// <summary>
+		/// 用户ID
+		/// </summary>
+		public int userId;
+		/// <summary>
+		/// 昵称
+		/// </summary>
+		public string name;
+		/// <summary>
+		/// 好友
+		/// </summary>
+		public List<FriendInfo> friend;
+		/// <summary>
+		/// 最近聊天ID
+		/// </summary>
+		public List<int> historyId;
+		/// <summary>
+		/// 头像
+		/// </summary>
+		public MemoryStream photoPath;
+	}
+
+	[Serializable]
+	public class FriendInfo
+	{
+		/// <summary>
+		/// 好友Id
+		/// </summary>
+		public int friendId;
+		/// <summary>
+		/// 备注
+		/// </summary>
+		public string remark;
+		/// <summary>
+		/// 历史聊天记录
+		/// </summary>
+		public List<ChatMessage> history;
+		public List 
+	}
+
+	[Serializable]
+	public class ChatMessage
+	{
+		/// <summary>
+		/// 内容
+		/// </summary>
+		public string content;
+		/// <summary>
+		/// 发言者ID
+		/// </summary>
+		public int chatId;
+		/// <summary>
+		/// 发出时间
+		/// </summary>
+		public DateTime time;
+	}
+
+	[Serializable]
+	public class GroupInfo
+	{
+		/// <summary>
+		/// 群号
+		/// </summary>
+		public int groupId;
+		/// <summary>
+		/// 群名称
+		/// </summary>
+		public string groupName;
+		/// <summary>
+		/// 群简介
+		/// </summary>
+		public string groupSynopsis;
+		/// <summary>
+		/// 群成员
+		/// </summary>
+		public List<int> groupMember;
+		/// <summary>
+		/// 历史发言
+		/// </summary>
+		public List<ChatMessage> historyChat;
+		/// <summary>
+		/// 群主
+		/// </summary>
+		public int master;
+		/// <summary>
+		/// 管理员
+		/// </summary>
+		public List<int> admin;
 	}
 
 	[Serializable]

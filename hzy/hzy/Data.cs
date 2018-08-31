@@ -34,12 +34,12 @@ namespace hzy
 	}
 	public class UserAccount
 	{
-		public string name;
+		public int userId;
 		public string passwd;
 		public UserAccount() { }
-		public UserAccount(string name, string passwd)
+		public UserAccount(int userId, string passwd)
 		{
-			this.name = name;
+			this.userId = userId;
 			this.passwd = passwd;
 		}
 		public static UserAccount Parse(string str)
@@ -49,7 +49,7 @@ namespace hzy
 				return null;
 			}
 			var args = str.Split(';');
-			return new UserAccount() { name = args[0], passwd = args[1] };
+			return new UserAccount() { userId =int.Parse(args[0]), passwd = args[1] };
 		}
 
 	}

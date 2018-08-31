@@ -19,7 +19,7 @@ namespace hzy
 
 	public partial class Form1 : Form
 	{
-		public static string ipAddress = "192.168.8.188";
+		public static string ipAddress = "192.168.8.187";
 		public static string port = "36001";
 		public Form1()
 		{
