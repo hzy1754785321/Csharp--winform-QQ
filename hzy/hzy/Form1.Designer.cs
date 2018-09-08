@@ -113,7 +113,7 @@
 			this.Controls.Add(this.name);
 			this.Name = "Form1";
 			this.Text = "登陆界面";
-			this.Load += new System.EventHandler(this.Form1_Load);
+//			this.Load += new System.EventHandler(this.Form1_Load);
 			this.ResumeLayout(false);
 			this.PerformLayout();
 

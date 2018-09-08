@@ -3,7 +3,6 @@ C:\Users\ychi\source\repos\Server\Server\bin\Debug\Server.exe
 C:\Users\ychi\source\repos\Server\Server\bin\Debug\Server.pdb
 C:\Users\ychi\source\repos\Server\Server\bin\Debug\Newtonsoft.Json.dll
 C:\Users\ychi\source\repos\Server\Server\bin\Debug\Newtonsoft.Json.xml
-C:\Users\ychi\source\repos\Server\Server\obj\Debug\Server.csprojResolveAssemblyReference.cache
 C:\Users\ychi\source\repos\Server\Server\obj\Debug\Server.server.resources
 C:\Users\ychi\source\repos\Server\Server\obj\Debug\Server.Properties.Resources.resources
 C:\Users\ychi\source\repos\Server\Server\obj\Debug\Server.csproj.GenerateResource.cache
@@ -13,3 +12,13 @@ C:\Users\ychi\source\repos\Server\Server\obj\Debug\Server.exe
 C:\Users\ychi\source\repos\Server\Server\obj\Debug\Server.pdb
 C:\Users\ychi\source\repos\Server\Server\bin\Debug\CSkin.dll
 C:\Users\ychi\source\repos\Server\Server\bin\Debug\CSkin.xml
+C:\Users\ychi\source\repos\Server\Server\bin\Debug\EntityFramework.dll
+C:\Users\ychi\source\repos\Server\Server\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\ychi\source\repos\Server\Server\bin\Debug\System.Data.SQLite.dll
+C:\Users\ychi\source\repos\Server\Server\bin\Debug\System.Data.SQLite.EF6.dll
+C:\Users\ychi\source\repos\Server\Server\bin\Debug\System.Data.SQLite.Linq.dll
+C:\Users\ychi\source\repos\Server\Server\bin\Debug\EntityFramework.xml
+C:\Users\ychi\source\repos\Server\Server\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\ychi\source\repos\Server\Server\bin\Debug\System.Data.SQLite.xml
+C:\Users\ychi\source\repos\Server\Server\bin\Debug\System.Data.SQLite.dll.config
+C:\Users\ychi\source\repos\Server\Server\obj\Debug\Server.csprojResolveAssemblyReference.cache

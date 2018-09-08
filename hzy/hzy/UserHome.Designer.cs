@@ -37,7 +37,9 @@
 			this.skinTextBox1 = new CCWin.SkinControl.SkinTextBox();
 			this.skinLabel1 = new CCWin.SkinControl.SkinLabel();
 			this.skinLabel2 = new CCWin.SkinControl.SkinLabel();
-			this.skinPictureBox1 = new CCWin.SkinControl.SkinPictureBox();
+			this.UserPhoto = new CCWin.SkinControl.SkinPictureBox();
+			this.choosePhoto = new CCWin.SkinControl.SkinContextMenuStrip();
+			this.选择图片ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.skinButton5 = new CCWin.SkinControl.SkinButton();
 			this.skinButton10 = new CCWin.SkinControl.SkinButton();
 			this.skinButton7 = new CCWin.SkinControl.SkinButton();
@@ -62,7 +64,9 @@
 			this.skinPictureBox2 = new CCWin.SkinControl.SkinPictureBox();
 			this.skinButton6 = new CCWin.SkinControl.SkinButton();
 			this.skinPictureBox6 = new CCWin.SkinControl.SkinPictureBox();
-			((System.ComponentModel.ISupportInitialize)(this.skinPictureBox1)).BeginInit();
+			this.openFile = new System.Windows.Forms.OpenFileDialog();
+			((System.ComponentModel.ISupportInitialize)(this.UserPhoto)).BeginInit();
+			this.choosePhoto.SuspendLayout();
 			this.skinPanel1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.skinPictureBox5)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.skinPictureBox4)).BeginInit();
@@ -203,15 +207,51 @@
 			this.skinLabel2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			this.skinLabel2.Click += new System.EventHandler(this.skinLabel2_Click);
 			// 
-			// skinPictureBox1
+			// UserPhoto
 			// 
-			this.skinPictureBox1.BackColor = System.Drawing.Color.Transparent;
-			this.skinPictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("skinPictureBox1.Image")));
-			this.skinPictureBox1.Location = new System.Drawing.Point(16, 12);
-			this.skinPictureBox1.Name = "skinPictureBox1";
-			this.skinPictureBox1.Size = new System.Drawing.Size(60, 60);
-			this.skinPictureBox1.TabIndex = 8;
-			this.skinPictureBox1.TabStop = false;
+			this.UserPhoto.BackColor = System.Drawing.Color.Transparent;
+			this.UserPhoto.ContextMenuStrip = this.choosePhoto;
+			this.UserPhoto.Image = ((System.Drawing.Image)(resources.GetObject("UserPhoto.Image")));
+			this.UserPhoto.Location = new System.Drawing.Point(16, 12);
+			this.UserPhoto.Name = "UserPhoto";
+			this.UserPhoto.Size = new System.Drawing.Size(60, 60);
+			this.UserPhoto.TabIndex = 8;
+			this.UserPhoto.TabStop = false;
+			this.UserPhoto.MouseClick += new System.Windows.Forms.MouseEventHandler(this.SetNewPhoto);
+			// 
+			// choosePhoto
+			// 
+			this.choosePhoto.Arrow = System.Drawing.Color.Black;
+			this.choosePhoto.Back = System.Drawing.Color.White;
+			this.choosePhoto.BackRadius = 4;
+			this.choosePhoto.Base = System.Drawing.Color.FromArgb(((int)(((byte)(105)))), ((int)(((byte)(200)))), ((int)(((byte)(254)))));
+			this.choosePhoto.DropDownImageSeparator = System.Drawing.Color.FromArgb(((int)(((byte)(197)))), ((int)(((byte)(197)))), ((int)(((byte)(197)))));
+			this.choosePhoto.Fore = System.Drawing.Color.Black;
+			this.choosePhoto.HoverFore = System.Drawing.Color.White;
+			this.choosePhoto.ItemAnamorphosis = true;
+			this.choosePhoto.ItemBorder = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(148)))), ((int)(((byte)(212)))));
+			this.choosePhoto.ItemBorderShow = true;
+			this.choosePhoto.ItemHover = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(148)))), ((int)(((byte)(212)))));
+			this.choosePhoto.ItemPressed = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(148)))), ((int)(((byte)(212)))));
+			this.choosePhoto.ItemRadius = 4;
+			this.choosePhoto.ItemRadiusStyle = CCWin.SkinClass.RoundStyle.All;
+			this.choosePhoto.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.选择图片ToolStripMenuItem});
+			this.choosePhoto.ItemSplitter = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(148)))), ((int)(((byte)(212)))));
+			this.choosePhoto.Name = "choosePhoto";
+			this.choosePhoto.RadiusStyle = CCWin.SkinClass.RoundStyle.All;
+			this.choosePhoto.Size = new System.Drawing.Size(137, 26);
+			this.choosePhoto.SkinAllColor = true;
+			this.choosePhoto.TitleAnamorphosis = true;
+			this.choosePhoto.TitleColor = System.Drawing.Color.FromArgb(((int)(((byte)(209)))), ((int)(((byte)(228)))), ((int)(((byte)(236)))));
+			this.choosePhoto.TitleRadius = 4;
+			this.choosePhoto.TitleRadiusStyle = CCWin.SkinClass.RoundStyle.All;
+			// 
+			// 选择图片ToolStripMenuItem
+			// 
+			this.选择图片ToolStripMenuItem.Name = "选择图片ToolStripMenuItem";
+			this.选择图片ToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
+			this.选择图片ToolStripMenuItem.Text = "   选择图片";
 			// 
 			// skinButton5
 			// 
@@ -549,6 +589,10 @@
 			this.skinPictureBox6.TabIndex = 12;
 			this.skinPictureBox6.TabStop = false;
 			// 
+			// openFile
+			// 
+			this.openFile.FileName = "openFileDialog1";
+			// 
 			// UserHome
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -559,7 +603,7 @@
 			this.Controls.Add(this.skinButton10);
 			this.Controls.Add(this.skinPanel1);
 			this.Controls.Add(this.skinButton5);
-			this.Controls.Add(this.skinPictureBox1);
+			this.Controls.Add(this.UserPhoto);
 			this.Controls.Add(this.skinLabel2);
 			this.Controls.Add(this.skinLabel1);
 			this.Controls.Add(this.skinTextBox1);
@@ -572,7 +616,8 @@
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.Text = "QQ";
 			this.Load += new System.EventHandler(this.UserHome_Load);
-			((System.ComponentModel.ISupportInitialize)(this.skinPictureBox1)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.UserPhoto)).EndInit();
+			this.choosePhoto.ResumeLayout(false);
 			this.skinPanel1.ResumeLayout(false);
 			this.skinPanel1.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.skinPictureBox5)).EndInit();
@@ -594,7 +639,7 @@
 		private CCWin.SkinControl.SkinTextBox skinTextBox1;
 		private CCWin.SkinControl.SkinLabel skinLabel1;
 		private CCWin.SkinControl.SkinLabel skinLabel2;
-		private CCWin.SkinControl.SkinPictureBox skinPictureBox1;
+		private CCWin.SkinControl.SkinPictureBox UserPhoto;
 		private CCWin.SkinControl.SkinButton skinButton5;
 		private CCWin.SkinControl.SkinButton skinButton10;
 		private CCWin.SkinControl.SkinButton skinButton7;
@@ -619,5 +664,8 @@
 		private CCWin.SkinControl.SkinPictureBox skinPictureBox4;
 		private CCWin.SkinControl.SkinPictureBox skinPictureBox3;
 		private CCWin.SkinControl.SkinPictureBox skinPictureBox6;
+		private CCWin.SkinControl.SkinContextMenuStrip choosePhoto;
+		private System.Windows.Forms.ToolStripMenuItem 选择图片ToolStripMenuItem;
+		private System.Windows.Forms.OpenFileDialog openFile;
 	}
 }

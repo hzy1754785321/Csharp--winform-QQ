@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
+using System.Windows.Forms;
+using Backend;
 
 namespace Server
 {
@@ -59,6 +61,19 @@ namespace Server
 			}
 			Log.Error("没有找到对应函数:{0}", key);
 			return null;
+		}
+
+		public static void DataCheck()
+		{
+			string strAppPath = Application.StartupPath;
+			string QQChatPath = @"\Data\QQChat.db3";
+			var strPath = strAppPath + QQChatPath;
+			if (!File.Exists(strPath))
+			{
+				DataStorage.SQLiteHelper.NewDbFile(strPath);
+				string tableName = "user";
+				DataStorage.SQLiteHelper.NewUserTable(strPath, tableName);
+			}
 		}
 	}
 }

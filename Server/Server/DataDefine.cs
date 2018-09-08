@@ -11,11 +11,13 @@ namespace Server
 	public class UserAccount
 	{
 		public int userId;
+		public string name;
 		public string passwd;
 		public UserAccount() { }
-		public UserAccount(int userId, string passwd)
+		public UserAccount(int userId,string name, string passwd)
 		{
 			this.userId = userId;
+			this.name = name;
 			this.passwd = passwd;
 		}
 		public static UserAccount Parse(string str)
@@ -25,7 +27,7 @@ namespace Server
 				return null;
 			}
 			var args = str.Split(';');
-			return new UserAccount() { userId = int.Parse(args[0]), passwd = args[1] };
+			return new UserAccount() { userId = int.Parse(args[0]),name = args[1], passwd = args[2] };
 		}
 	}
 
@@ -51,7 +53,19 @@ namespace Server
 		/// <summary>
 		/// 头像
 		/// </summary>
-		public MemoryStream photoPath;
+		public byte[] photo;
+		/// <summary>
+		/// 个性签名
+		/// </summary>
+		public string signature;
+		/// <summary>
+		/// 创建时间
+		/// </summary>
+		public DateTime CreateTime;
+		/// <summary>
+		/// 密码
+		/// </summary>
+		public string passwd;
 	}
 
 	[Serializable]
@@ -69,7 +83,6 @@ namespace Server
 		/// 历史聊天记录
 		/// </summary>
 		public List<ChatMessage> history;
-		public List 
 	}
 
 	[Serializable]
@@ -133,6 +146,10 @@ namespace Server
 		/// 传递参数内容
 		/// </summary>
 		public List<string> Value;
+		/// <summary>
+		/// 长度 0:string 1:int
+		/// </summary>
+		public List<int> length;
 	}
 
 	[Serializable]

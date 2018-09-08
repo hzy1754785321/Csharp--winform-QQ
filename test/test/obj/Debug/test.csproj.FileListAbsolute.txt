@@ -11,3 +11,5 @@ c:\users\ychi\source\repos\test\test\obj\Debug\test.csproj.CoreCompileInputs.cac
 c:\users\ychi\source\repos\test\test\obj\Debug\test.csproj.CopyComplete
 c:\users\ychi\source\repos\test\test\obj\Debug\test.exe
 c:\users\ychi\source\repos\test\test\obj\Debug\test.pdb
+C:\Users\ychi\source\repos\test\test\bin\Debug\Newtonsoft.Json.dll
+C:\Users\ychi\source\repos\test\test\bin\Debug\Newtonsoft.Json.xml

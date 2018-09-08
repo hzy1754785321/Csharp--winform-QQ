@@ -18,6 +18,10 @@ namespace hzy
 		/// 传递参数内容
 		/// </summary>
 		public List<string> Value;
+		/// <summary>
+		/// 长度 0:string 1:int
+		/// </summary>
+		public List<int> length;
 	}
 
 	[Serializable]

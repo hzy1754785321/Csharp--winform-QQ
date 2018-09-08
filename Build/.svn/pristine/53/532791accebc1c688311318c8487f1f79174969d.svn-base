@@ -1,0 +1,1 @@
+copy D:\work\xulong\栩龙SVN\策划\宝可梦表\*.csv 游戏配表\Pokemon\GameTables

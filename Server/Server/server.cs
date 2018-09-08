@@ -13,12 +13,15 @@ using System.Threading;
 using System.IO;
 using System.Security.Cryptography;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-
+using System.Data.SQLite;
+using Backend;
 namespace Server
 {
 	public partial class server : Form
 	{
+		public static string strAppPath = Application.StartupPath;
+		public static string QQChatPath = @"\Data\QQChat.db3";
+		public static string strPath = strAppPath + QQChatPath;
 		public server()
 		{
 			InitializeComponent();
@@ -56,6 +59,7 @@ namespace Server
 					thread.IsBackground = true;
 					thread.Start(socketWatch);
 					ServerManager.InitDispatcher();
+					ServerManager.DataCheck();
 					StartServer.Text = "关闭服务器";
 				}
 			}
@@ -113,9 +117,12 @@ namespace Server
 					System.Reflection.MethodInfo method = t.GetMethod(callMethodName); 
 					obj = System.Activator.CreateInstance(t);
 					var value = new object[count];
-					for (int i = 0; i < msg.Value.Count; i++)
+					for (int i = 0; i < msg.length.Count; i++)
 					{
-						value[i] = msg.Value[i];
+						if (msg.length[i] == 0)
+							value[i] = msg.Value[i];
+						else if (msg.length[i] == 1)
+							value[i] = Convert.ToInt32(msg.Value[i]);
 					}
 					Object result = new Object();
 					if (count > 0)
@@ -167,49 +174,26 @@ namespace Server
 			Control.CheckForIllegalCrossThreadCalls = false;
 		}
 
-		public static bool Register(string name, string passwd)
+		public static bool Register(int userId,string name, string passwd)
 		{
-		//	ServerManager.AddDispatcher((int)Interface.register, System.Reflection.MethodBase.GetCurrentMethod().Name);
-			if (!string.IsNullOrEmpty(name) && !string.IsNullOrEmpty(passwd))
+			//	ServerManager.AddDispatcher((int)Interface.register, System.Reflection.MethodBase.GetCurrentMethod().Name);
+			if (!string.IsNullOrEmpty(name) && !string.IsNullOrEmpty(userId.ToString()) && !string.IsNullOrEmpty(passwd))
 			{
 				var users = new List<UserAccount>();
-				using (StreamReader sr = new StreamReader("d:\\user.txt", Encoding.GetEncoding("UTF-8")))
+				var info = DataStorage.SQLiteHelper.QueryUserInfo(userId);
+				if (info != null)
 				{
-					string line1;
-					while ((line1 = sr.ReadLine()) != null)
-					{
-						var st = new char[] { ',' };
-						var args = line1.Split(st, StringSplitOptions.RemoveEmptyEntries);
-						int userId;
-						string passwd1;
-						userId = int.Parse(args[0]);
-						passwd1 = args[1];
-						var account = new UserAccount() { userId = userId, passwd = passwd1 };
-						users.Add(account);
-					}
-					sr.Close();
-				}
-				var user = users.FirstOrDefault(t => t.userId == int.Parse(name));
-				if (user != null)
-				{
-					Log.Error("用户账号已存在");
+					MessageBox.Show(JsonConvert.SerializeObject(info));
+					Log.Error("该ID已存在");
 					return false;
 				}
-				
-				using (var sw = new StreamWriter(@"d:\user.txt", true, Encoding.GetEncoding(@"UTF-8")))
-				{
-					var line = name + "," + passwd;
-					sw.WriteLine(line);
-					sw.Close();
-					Log.Debug("注册完成");
-					return true;
-				}
+				var now = DateTime.Now;
+				DataStorage.SQLiteHelper.CreateUserInfoAsync(userId,now,name,passwd );
+				Log.Debug("user:{0} register success!", userId);
+				return true;
 			}
-			else
-			{
-				Log.Error("账号或密码为空");
-				return false;
-			}
+			Log.Error("账号或密码为空");
+			return false;
 		}
 
 		public static bool Login(string name, string passwd)
