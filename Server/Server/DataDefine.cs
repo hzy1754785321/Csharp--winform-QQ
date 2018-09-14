@@ -53,7 +53,7 @@ namespace Server
 		/// <summary>
 		/// 头像
 		/// </summary>
-		public byte[] photo;
+		public string photo;
 		/// <summary>
 		/// 个性签名
 		/// </summary>
@@ -62,6 +62,10 @@ namespace Server
 		/// 创建时间
 		/// </summary>
 		public DateTime CreateTime;
+		/// <summary>
+		/// 上次登录时间
+		/// </summary>
+		public DateTime lastActive;
 		/// <summary>
 		/// 密码
 		/// </summary>
@@ -143,11 +147,15 @@ namespace Server
 		/// </summary>
 		public int key;
 		/// <summary>
+		/// 参数
+		/// </summary>
+		public List<object> Values;
+		/// <summary>
 		/// 传递参数内容
 		/// </summary>
-		public List<string> Value;
+	//	public List<string> Value;
 		/// <summary>
-		/// 长度 0:string 1:int
+		/// 长度 0:string 1:int 2:byte[]
 		/// </summary>
 		public List<int> length;
 	}
@@ -156,7 +164,7 @@ namespace Server
 	public class Result
 	{
 		/// <summary>
-		/// 执行结果   0:失败  1:成功
+		/// 执行结果   1:成功 else:失败
 		/// </summary>
 		public int ret;
 		/// <summary>

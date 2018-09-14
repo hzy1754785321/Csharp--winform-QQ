@@ -19,7 +19,7 @@ namespace hzy
 
 	public partial class Form1 : Form
 	{
-		public static string ipAddress = "192.168.8.187";
+		public static string ipAddress = "192.168.8.190";
 		public static string port = "36001";
 		public Form1()
 		{
@@ -30,22 +30,35 @@ namespace hzy
 			//var userAccount = new UserAccount() { name = name.Text, passwd = passwd.Text };
 			//	var userStr = JsonConvert.SerializeObject(userAccount);
 			List<object> userStr = new List<object>();
-			userStr.Add(name.Text);
+			userStr.Add(int.Parse(name.Text));
 			userStr.Add(passwd.Text);
 			SendMessage((int)Interface.login, userStr);
 			var task = new Task<string>(Received);
 			task.Start();
 			task.Wait();
 			var receiveStr = task.Result;
-			var isSuccess = JsonConvert.DeserializeObject<Boolean>(receiveStr);
-			if (isSuccess)
+			var result = JsonConvert.DeserializeObject<Result>(receiveStr);
+			var userInfo = new UserInfo();
+			userInfo = JsonConvert.DeserializeObject<UserInfo>(result.Value);
+			if (result.ret == 1)
 			{
-				MessageBox.Show("登陆成功!");
-				UserHomeStart();
+				MessageBox.Show("登陆成功,欢迎使用"); 
+				UserHomeStart(userInfo);
 			}
-			else
+			else if (result.ret == 0)
 			{
-				MessageBox.Show("登陆失败,账号或密码错误");
+				MessageBox.Show("登陆失败,账号不存在!");
+				return;
+			}
+			else if (result.ret == -1)
+			{
+				MessageBox.Show("登陆失败,密码错误");
+				return;
+			}
+			else if (result.ret == -2)
+			{
+				MessageBox.Show("登陆失败,账号或密码为空");
+				return;
 			}
 		}
 
@@ -84,22 +97,22 @@ namespace hzy
 
 		public static void SendMessage(int key,List<object> content)
 		{
-			var msg = new Message() { key = key, Value = new List<string>(), length = new List<int>() };
+			var msg = new Message() { key = key, Values = new List<object>(), length = new List<int>() };
 			for (int i = 0; i < content.Count(); i++)
 			{
 				if (content[i] is int)
 				{
-					msg.Value.Add(Convert.ToString(content[i]));
+					msg.Values.Add(content[i]);
 					msg.length.Add(1);
 				}
 				else if (content[i] is string)
 				{
-					msg.Value.Add(Convert.ToString(content[i]));
+					msg.Values.Add(content[i]);
 					msg.length.Add(0);
 				}
 			}
 			var sendMsg = JsonConvert.SerializeObject(msg);
-			byte[] buffer = new byte[1024 * 1024 * 3];
+			byte[] buffer = new byte[1024 * 1024 * 10];
 			buffer = Encoding.UTF8.GetBytes(sendMsg);
 			socketSend.Send(buffer);
 		}
@@ -112,9 +125,11 @@ namespace hzy
 			this.Hide();
 		}
 
-		public void UserHomeStart()
+		public void UserHomeStart(UserInfo info)
 		{
 			var userHome = new UserHome();
+			userHome._mineInfo = info;
+			userHome.InitUserHome(info);
 			userHome.MdiParent = this.MdiParent;
 			userHome.Show();
 			this.Hide();

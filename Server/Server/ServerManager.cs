@@ -46,8 +46,11 @@ namespace Server
 
 		public static void InitDispatcher()
 		{
-			AddDispatcher(1, "Server.server.Login");
-			AddDispatcher(2, "Server.server.Register");
+			AddDispatcher(1, "ServerUser.User.Login");
+			AddDispatcher(2, "ServerUser.User.Register");
+			AddDispatcher(3, "ServerUser.User.SetName");
+			AddDispatcher(4, "ServerUser.User.SetSign");
+			AddDispatcher(5, "ServerUser.User.SetPhoto");
 		}
 
 		public static string GetFunInfo(int key)

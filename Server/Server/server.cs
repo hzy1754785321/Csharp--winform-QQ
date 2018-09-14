@@ -22,6 +22,7 @@ namespace Server
 		public static string strAppPath = Application.StartupPath;
 		public static string QQChatPath = @"\Data\QQChat.db3";
 		public static string strPath = strAppPath + QQChatPath;
+		public static Dictionary<int, UserInfo> activeUser = new Dictionary<int, UserInfo>();
 		public server()
 		{
 			InitializeComponent();
@@ -80,6 +81,7 @@ namespace Server
 					socketSend = socketWatch.Accept();
 					ShowMsg(socketSend.RemoteEndPoint + ":" + "连接成功");
 					Thread r_thread = new Thread(Receive);
+					var s = new ServerUser.User();
 					r_thread.IsBackground = true;
 					r_thread.Start(socketSend);
 				}
@@ -97,7 +99,7 @@ namespace Server
 				Socket socketSend = o as Socket;
 				while (true)
 				{
-					byte[] buffer = new byte[1024 * 1024 * 3];
+					byte[] buffer = new byte[1024 * 1024 * 10];
 					int len = socketSend.Receive(buffer);
 					if (len == 0)
 					{
@@ -106,7 +108,7 @@ namespace Server
 					string str = Encoding.UTF8.GetString(buffer, 0, len);
 					var msg = JsonConvert.DeserializeObject<Message>(str);
 					//var msg = ToMessage(str)
-					var count = msg.Value.Count;
+					var count = msg.Values.Count;
 					var funInfo = ServerManager.GetFunInfo(msg.key);
 					var parseFun = funInfo.Split('.');
 					string strClass = parseFun[0]+"."+parseFun[1];
@@ -119,10 +121,13 @@ namespace Server
 					var value = new object[count];
 					for (int i = 0; i < msg.length.Count; i++)
 					{
-						if (msg.length[i] == 0)
-							value[i] = msg.Value[i];
-						else if (msg.length[i] == 1)
-							value[i] = Convert.ToInt32(msg.Value[i]);
+					var type = msg.Values[i].GetType();
+					if (msg.length[i] == 0)
+					{
+						value[i] = msg.Values[i] as string;
+					}
+					else if (msg.length[i] == 1)
+						value[i] = Convert.ToInt32(msg.Values[i]);
 					}
 					Object result = new Object();
 					if (count > 0)
@@ -174,75 +179,7 @@ namespace Server
 			Control.CheckForIllegalCrossThreadCalls = false;
 		}
 
-		public static bool Register(int userId,string name, string passwd)
-		{
-			//	ServerManager.AddDispatcher((int)Interface.register, System.Reflection.MethodBase.GetCurrentMethod().Name);
-			if (!string.IsNullOrEmpty(name) && !string.IsNullOrEmpty(userId.ToString()) && !string.IsNullOrEmpty(passwd))
-			{
-				var users = new List<UserAccount>();
-				var info = DataStorage.SQLiteHelper.QueryUserInfo(userId);
-				if (info != null)
-				{
-					MessageBox.Show(JsonConvert.SerializeObject(info));
-					Log.Error("该ID已存在");
-					return false;
-				}
-				var now = DateTime.Now;
-				DataStorage.SQLiteHelper.CreateUserInfoAsync(userId,now,name,passwd );
-				Log.Debug("user:{0} register success!", userId);
-				return true;
-			}
-			Log.Error("账号或密码为空");
-			return false;
-		}
-
-		public static bool Login(string name, string passwd)
-		{
-			if (!string.IsNullOrEmpty(name) && !string.IsNullOrEmpty(passwd))
-			{
-				var users = new List<UserAccount>();
-				using (StreamReader sr = new StreamReader("d:\\user.txt", Encoding.GetEncoding("UTF-8")))
-				{
-					string line1;
-					while ((line1 = sr.ReadLine()) != null)
-					{
-						var st = new char[] { ',' };
-						var args = line1.Split(st, StringSplitOptions.RemoveEmptyEntries);
-						int userId;
-						string passwd1;
-						userId =int.Parse(args[0]);
-						passwd1 = args[1];
-						var account = new UserAccount() { userId = userId, passwd = passwd1 };
-						users.Add(account);
-					}
-					sr.Close();
-				}
-				var user = users.FirstOrDefault(t => t.userId == int.Parse(name));
-				if (user != null)
-				{
-					if (user.passwd == passwd)
-					{
-						Log.Debug("user:{0} 登录成功", user.userId);
-						return true;
-					}
-					else
-					{
-						Log.Error("密码错误");
-						return false;
-					}
-				}
-				else
-				{
-					Log.Error("用户不存在");
-					return false;
-				}
-			}
-			else
-			{
-				Log.Error("用户名和密码不能为空");
-				return false;
-			}
-		}
+	
 
 		private void showWindow_DrawItem(object sender, DrawItemEventArgs e)
 		{

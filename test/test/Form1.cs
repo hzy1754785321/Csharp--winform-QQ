@@ -13,6 +13,7 @@ using System.Collections;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
 using System.Diagnostics;
+using Newtonsoft.Json;
 
 namespace test
 {
@@ -33,71 +34,115 @@ namespace test
 		private static Process p;
 		private void button1_Click(object sender, EventArgs e)
 		{
-			if (p == null)
+			//if (p == null)
+			//{
+			//	p = new Process();
+			//	p.StartInfo.FileName = "Server.exe";
+			//	p.Start();
+			//}
+			//else
+			//{
+			//	if (p.HasExited) //是否正在运行
+			//	{
+			//		p.Start();
+			//	}
+			//}
+			//p.StartInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Normal;
+
+
+			OpenFileDialog filedialog = new OpenFileDialog();
+
+			if (filedialog.ShowDialog() == DialogResult.OK)
 			{
-				p = new Process();
-				p.StartInfo.FileName = "Server.exe";
-				p.Start();
-			}
-			else
-			{
-				if (p.HasExited) //是否正在运行
+				string extension = Path.GetExtension(filedialog.FileName);
+				string[] str = new string[] { ".gif", ".jpge", ".jpg" };
+				if (!((IList)str).Contains(extension))
 				{
-					p.Start();
+					MessageBox.Show("仅能上传gif,jpge,jpg格式的图片！");
+				}
+				else
+				{
+					var fileinfo = new FileInfo(filedialog.FileName);
+					if (fileinfo.Length > 20480)
+					{
+						MessageBox.Show("上传的图片不能大于20k");
+					}
+					else
+					{
+						source.Image = Image.FromFile(filedialog.FileName);
+						ms = new MemoryStream();
+						var bi = source.Image;
+						bi.Save(ms, source.Image.RawFormat);
+						byte[] bytes = null;
+						object ob = new object();
+						bytes = ms.ToArray();
+						var sbt1 = Convert.ToBase64String(bytes);
+
+						var sbt = Encoding.ASCII.GetString(bytes);
+						//			var tbs = Encoding.ASCII.GetBytes(sbt);
+						//		var sbt1 = Encoding.Unicode.GetString(bytes);
+						//	var tbs1 = Encoding.Unicode.GetBytes(sbt1);
+						//			listBox1.Items.Add(tbs.Length.ToString());
+						//		listBox1.Items.Add(tbs1.Length.ToString());
+						//	ob = bytes;
+						ob = sbt1;
+						var test = new testInfo();
+						test.test = ob;
+						var type = test.test.GetType();
+						listBox1.Items.Add(type.ToString());
+						listBox1.Items.Add(bytes.Length.ToString());
+						var msg = JsonConvert.SerializeObject(test);
+						var newTest = new testInfo();
+						newTest = JsonConvert.DeserializeObject<testInfo>(msg);
+						var type1 = newTest.test.GetType();
+						string ss = newTest.test as string;
+						//	var newByte = Encoding.ASCII.GetBytes(ss);
+						var newByte = Convert.FromBase64String(ss);
+						listBox1.Items.Add(type1.ToString());
+						listBox1.Items.Add(newByte.Length);
+
+						var ts = new MemoryStream(newByte);
+						ts.Position = 0;
+						try
+						{
+							var img = Image.FromStream(ts);
+							target.Image = img;
+						}
+						catch(Exception ex)
+						{
+							listBox1.Items.Add(ex.Message);
+						}
+						ts.Close();
+
+						//	string strpath = strAppPath + "\\image\\photo.png";
+						//using (var fswrite = new FileStream(strpath, FileMode.Append))
+						//{
+						//	fswrite.Write(bytes, 0, bytes.Length);
+						//}
+					}
 				}
 			}
-			p.StartInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Normal;
+		}
 
-
-		//OpenFileDialog fileDialog = new OpenFileDialog();
-
-		//if (fileDialog.ShowDialog() == DialogResult.OK)
-		//{
-		//	string extension = Path.GetExtension(fileDialog.FileName);
-		//	string[] str = new string[] { ".gif", ".jpge", ".jpg" };
-		//	if (!((IList)str).Contains(extension))
-		//	{
-		//		MessageBox.Show("仅能上传gif,jpge,jpg格式的图片！");
-		//	}
-		//	else
-		//	{
-		//		FileInfo fileInfo = new FileInfo(fileDialog.FileName);
-		//		if (fileInfo.Length > 20480)
-		//		{
-		//			MessageBox.Show("上传的图片不能大于20K");
-		//		}
-		//		else
-		//		{
-		//			source.Image = Image.FromFile(fileDialog.FileName);
-		//			ms = new MemoryStream();
-		//			Image bi = source.Image;
-		//			bi.Save(ms, source.Image.RawFormat);
-		//			byte[] bytes = null;
-		//			bytes = ms.ToArray();
-		//			listBox1.Items.Add(bytes);
-		//			string strPath = strAppPath + "\\Image\\photo.png";
-		//			using (var fsWrite = new FileStream(strPath, FileMode.Append))
-		//			{
-		//				fsWrite.Write(bytes, 0, bytes.Length);
-		//			}
-		//		}
-		//	}
-		//}
-	}
+		[Serializable]
+		public class testInfo
+		{
+			public object test;
+		}
 
 
 		private void button2_Click(object sender, EventArgs e)
 		{
-			Process[] pProcess;
-			pProcess = Process.GetProcesses();
-			for (int i = 1; i <= pProcess.Length - 1; i++)
-			{
-				if (pProcess[i].ProcessName == "Server")   //任务管理器应用程序的名
-				{
-					pProcess[i].Kill();
-					break;
-				}
-			}
+			//Process[] pProcess;
+			//pProcess = Process.GetProcesses();
+			//for (int i = 1; i <= pProcess.Length - 1; i++)
+			//{
+			//	if (pProcess[i].ProcessName == "Server")   //任务管理器应用程序的名
+			//	{
+			//		pProcess[i].Kill();
+			//		break;
+			//	}
+			//}
 				//string strpath = strapppath + "\\image\\photo.png";
 				//using (var fsread = new filestream(strpath, filemode.open))
 				//{

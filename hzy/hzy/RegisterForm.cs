@@ -35,15 +35,15 @@ namespace hzy
 			task.Start();
 			task.Wait();
 			var receiveStr = task.Result;
-		//	var isSuccess = JsonConvert.DeserializeObject<Boolean>(receiveStr);
-			//if (isSuccess)
-			//{
-			//	MessageBox.Show("注册成功!");
-			//}
-			//else
-			//{
-			//	MessageBox.Show("注册失败，请重试!");
-			//}
+			var isSuccess = JsonConvert.DeserializeObject<Boolean>(receiveStr);
+			if (isSuccess)
+			{
+				MessageBox.Show("注册成功!");
+			}
+			else
+			{
+				MessageBox.Show("注册失败，请重试!");
+			}
 		}
 
 		private void backLogin(object sender, EventArgs e)

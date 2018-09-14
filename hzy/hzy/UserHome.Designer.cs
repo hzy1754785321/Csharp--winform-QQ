@@ -22,6 +22,8 @@
 
 		#region Windows Form Designer generated code
 
+
+
 		/// <summary>
 		/// Required method for Designer support - do not modify
 		/// the contents of this method with the code editor.
@@ -35,8 +37,8 @@
 			this.skinButton3 = new CCWin.SkinControl.SkinButton();
 			this.skinButton4 = new CCWin.SkinControl.SkinButton();
 			this.skinTextBox1 = new CCWin.SkinControl.SkinTextBox();
-			this.skinLabel1 = new CCWin.SkinControl.SkinLabel();
-			this.skinLabel2 = new CCWin.SkinControl.SkinLabel();
+			this.userName = new CCWin.SkinControl.SkinLabel();
+			this.signature = new CCWin.SkinControl.SkinLabel();
 			this.UserPhoto = new CCWin.SkinControl.SkinPictureBox();
 			this.choosePhoto = new CCWin.SkinControl.SkinContextMenuStrip();
 			this.选择图片ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -49,22 +51,23 @@
 			this.label12 = new System.Windows.Forms.Label();
 			this.label11 = new System.Windows.Forms.Label();
 			this.label10 = new System.Windows.Forms.Label();
-			this.label9 = new System.Windows.Forms.Label();
 			this.label8 = new System.Windows.Forms.Label();
 			this.label7 = new System.Windows.Forms.Label();
 			this.label6 = new System.Windows.Forms.Label();
 			this.label5 = new System.Windows.Forms.Label();
 			this.label4 = new System.Windows.Forms.Label();
 			this.label3 = new System.Windows.Forms.Label();
-			this.label2 = new System.Windows.Forms.Label();
+			this.mineSign = new System.Windows.Forms.Label();
 			this.skinPictureBox5 = new CCWin.SkinControl.SkinPictureBox();
 			this.skinPictureBox4 = new CCWin.SkinControl.SkinPictureBox();
 			this.skinPictureBox3 = new CCWin.SkinControl.SkinPictureBox();
-			this.label1 = new System.Windows.Forms.Label();
+			this.mineName = new System.Windows.Forms.Label();
 			this.skinPictureBox2 = new CCWin.SkinControl.SkinPictureBox();
-			this.skinButton6 = new CCWin.SkinControl.SkinButton();
+			this.mineInfo = new CCWin.SkinControl.SkinButton();
 			this.skinPictureBox6 = new CCWin.SkinControl.SkinPictureBox();
 			this.openFile = new System.Windows.Forms.OpenFileDialog();
+			this.entryMyName = new System.Windows.Forms.TextBox();
+			this.signText = new System.Windows.Forms.TextBox();
 			((System.ComponentModel.ISupportInitialize)(this.UserPhoto)).BeginInit();
 			this.choosePhoto.SuspendLayout();
 			this.skinPanel1.SuspendLayout();
@@ -163,49 +166,51 @@
 			// 
 			// 
 			// 
+			this.skinTextBox1.SkinTxt.BackColor = System.Drawing.SystemColors.Window;
 			this.skinTextBox1.SkinTxt.BorderStyle = System.Windows.Forms.BorderStyle.None;
 			this.skinTextBox1.SkinTxt.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.skinTextBox1.SkinTxt.Font = new System.Drawing.Font("微软雅黑", 9.75F);
+			this.skinTextBox1.SkinTxt.ForeColor = System.Drawing.SystemColors.WindowText;
 			this.skinTextBox1.SkinTxt.Location = new System.Drawing.Point(5, 5);
 			this.skinTextBox1.SkinTxt.Multiline = true;
 			this.skinTextBox1.SkinTxt.Name = "BaseText";
 			this.skinTextBox1.SkinTxt.Size = new System.Drawing.Size(306, 23);
 			this.skinTextBox1.SkinTxt.TabIndex = 0;
 			this.skinTextBox1.SkinTxt.Text = "搜索：联系人、讨论组、群";
-			this.skinTextBox1.SkinTxt.WaterColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(127)))), ((int)(((byte)(127)))));
+			this.skinTextBox1.SkinTxt.WaterColor = System.Drawing.Color.White;
 			this.skinTextBox1.SkinTxt.WaterText = "";
 			this.skinTextBox1.TabIndex = 4;
 			this.skinTextBox1.Text = "搜索：联系人、讨论组、群";
 			this.skinTextBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
-			this.skinTextBox1.WaterColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(127)))), ((int)(((byte)(127)))));
+			this.skinTextBox1.WaterColor = System.Drawing.Color.White;
 			this.skinTextBox1.WaterText = "";
 			this.skinTextBox1.WordWrap = true;
-			this.skinTextBox1.Paint += new System.Windows.Forms.PaintEventHandler(this.skinTextBox1_Paint);
 			// 
-			// skinLabel1
+			// userName
 			// 
-			this.skinLabel1.AutoSize = true;
-			this.skinLabel1.BackColor = System.Drawing.Color.Transparent;
-			this.skinLabel1.BorderColor = System.Drawing.Color.White;
-			this.skinLabel1.Font = new System.Drawing.Font("微软雅黑", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-			this.skinLabel1.Location = new System.Drawing.Point(79, 46);
-			this.skinLabel1.Name = "skinLabel1";
-			this.skinLabel1.Size = new System.Drawing.Size(92, 27);
-			this.skinLabel1.TabIndex = 6;
-			this.skinLabel1.Text = "嗨哟阳光";
+			this.userName.AutoSize = true;
+			this.userName.BackColor = System.Drawing.Color.Transparent;
+			this.userName.BorderColor = System.Drawing.Color.White;
+			this.userName.Font = new System.Drawing.Font("微软雅黑", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+			this.userName.Location = new System.Drawing.Point(79, 46);
+			this.userName.Name = "userName";
+			this.userName.Size = new System.Drawing.Size(92, 27);
+			this.userName.TabIndex = 6;
+			this.userName.Text = "嗨哟阳光";
+			this.userName.DoubleClick += new System.EventHandler(this.EntryName);
 			// 
-			// skinLabel2
+			// signature
 			// 
-			this.skinLabel2.BackColor = System.Drawing.Color.Transparent;
-			this.skinLabel2.BorderColor = System.Drawing.Color.White;
-			this.skinLabel2.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-			this.skinLabel2.Location = new System.Drawing.Point(12, 76);
-			this.skinLabel2.Name = "skinLabel2";
-			this.skinLabel2.Size = new System.Drawing.Size(288, 30);
-			this.skinLabel2.TabIndex = 7;
-			this.skinLabel2.Text = "这个人还没有个性签名";
-			this.skinLabel2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-			this.skinLabel2.Click += new System.EventHandler(this.skinLabel2_Click);
+			this.signature.BackColor = System.Drawing.Color.Transparent;
+			this.signature.BorderColor = System.Drawing.Color.White;
+			this.signature.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+			this.signature.Location = new System.Drawing.Point(12, 85);
+			this.signature.Name = "signature";
+			this.signature.Size = new System.Drawing.Size(288, 18);
+			this.signature.TabIndex = 7;
+			this.signature.Text = "这个人还没有个性签名";
+			this.signature.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			this.signature.DoubleClick += new System.EventHandler(this.EntrySign);
 			// 
 			// UserPhoto
 			// 
@@ -342,20 +347,19 @@
 			this.skinPanel1.Controls.Add(this.label12);
 			this.skinPanel1.Controls.Add(this.label11);
 			this.skinPanel1.Controls.Add(this.label10);
-			this.skinPanel1.Controls.Add(this.label9);
 			this.skinPanel1.Controls.Add(this.label8);
 			this.skinPanel1.Controls.Add(this.label7);
 			this.skinPanel1.Controls.Add(this.label6);
 			this.skinPanel1.Controls.Add(this.label5);
 			this.skinPanel1.Controls.Add(this.label4);
 			this.skinPanel1.Controls.Add(this.label3);
-			this.skinPanel1.Controls.Add(this.label2);
+			this.skinPanel1.Controls.Add(this.mineSign);
 			this.skinPanel1.Controls.Add(this.skinPictureBox5);
 			this.skinPanel1.Controls.Add(this.skinPictureBox4);
 			this.skinPanel1.Controls.Add(this.skinPictureBox3);
-			this.skinPanel1.Controls.Add(this.label1);
+			this.skinPanel1.Controls.Add(this.mineName);
 			this.skinPanel1.Controls.Add(this.skinPictureBox2);
-			this.skinPanel1.Controls.Add(this.skinButton6);
+			this.skinPanel1.Controls.Add(this.mineInfo);
 			this.skinPanel1.Controls.Add(this.skinButton9);
 			this.skinPanel1.Controls.Add(this.skinButton8);
 			this.skinPanel1.Controls.Add(this.skinButton7);
@@ -406,19 +410,6 @@
 			this.label10.TabIndex = 18;
 			this.label10.Text = "（雪风）";
 			this.label10.UseWaitCursor = true;
-			// 
-			// label9
-			// 
-			this.label9.AutoSize = true;
-			this.label9.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-			this.label9.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-			this.label9.ForeColor = System.Drawing.Color.Red;
-			this.label9.Location = new System.Drawing.Point(105, 12);
-			this.label9.Name = "label9";
-			this.label9.Size = new System.Drawing.Size(65, 12);
-			this.label9.TabIndex = 17;
-			this.label9.Text = "（何朝阳）";
-			this.label9.UseWaitCursor = true;
 			// 
 			// label8
 			// 
@@ -495,17 +486,17 @@
 			this.label3.Text = "雪风";
 			this.label3.UseWaitCursor = true;
 			// 
-			// label2
+			// mineSign
 			// 
-			this.label2.AutoSize = true;
-			this.label2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-			this.label2.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-			this.label2.Location = new System.Drawing.Point(54, 30);
-			this.label2.Name = "label2";
-			this.label2.Size = new System.Drawing.Size(137, 12);
-			this.label2.TabIndex = 10;
-			this.label2.Text = "这个人很懒,什么都没写!";
-			this.label2.UseWaitCursor = true;
+			this.mineSign.AutoSize = true;
+			this.mineSign.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+			this.mineSign.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+			this.mineSign.Location = new System.Drawing.Point(54, 30);
+			this.mineSign.Name = "mineSign";
+			this.mineSign.Size = new System.Drawing.Size(137, 12);
+			this.mineSign.TabIndex = 10;
+			this.mineSign.Text = "这个人很懒,什么都没写!";
+			this.mineSign.UseWaitCursor = true;
 			// 
 			// skinPictureBox5
 			// 
@@ -537,19 +528,18 @@
 			this.skinPictureBox3.TabIndex = 7;
 			this.skinPictureBox3.TabStop = false;
 			// 
-			// label1
+			// mineName
 			// 
-			this.label1.AutoSize = true;
-			this.label1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-			this.label1.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-			this.label1.ForeColor = System.Drawing.Color.Red;
-			this.label1.Location = new System.Drawing.Point(54, 12);
-			this.label1.Name = "label1";
-			this.label1.Size = new System.Drawing.Size(53, 12);
-			this.label1.TabIndex = 6;
-			this.label1.Text = "嗨哟阳光";
-			this.label1.UseWaitCursor = true;
-			this.label1.Click += new System.EventHandler(this.label1_Click);
+			this.mineName.AutoSize = true;
+			this.mineName.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+			this.mineName.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+			this.mineName.ForeColor = System.Drawing.Color.Red;
+			this.mineName.Location = new System.Drawing.Point(54, 12);
+			this.mineName.Name = "mineName";
+			this.mineName.Size = new System.Drawing.Size(53, 12);
+			this.mineName.TabIndex = 6;
+			this.mineName.Text = "嗨哟阳光";
+			this.mineName.UseWaitCursor = true;
 			// 
 			// skinPictureBox2
 			// 
@@ -561,22 +551,22 @@
 			this.skinPictureBox2.TabIndex = 5;
 			this.skinPictureBox2.TabStop = false;
 			// 
-			// skinButton6
+			// mineInfo
 			// 
-			this.skinButton6.BackColor = System.Drawing.Color.Transparent;
-			this.skinButton6.BaseColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-			this.skinButton6.ControlState = CCWin.SkinClass.ControlState.Normal;
-			this.skinButton6.DownBack = null;
-			this.skinButton6.DownBaseColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
-			this.skinButton6.ForeColor = System.Drawing.SystemColors.ControlText;
-			this.skinButton6.Location = new System.Drawing.Point(4, 3);
-			this.skinButton6.MouseBack = null;
-			this.skinButton6.MouseBaseColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-			this.skinButton6.Name = "skinButton6";
-			this.skinButton6.NormlBack = null;
-			this.skinButton6.Size = new System.Drawing.Size(309, 48);
-			this.skinButton6.TabIndex = 4;
-			this.skinButton6.UseVisualStyleBackColor = false;
+			this.mineInfo.BackColor = System.Drawing.Color.Transparent;
+			this.mineInfo.BaseColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+			this.mineInfo.ControlState = CCWin.SkinClass.ControlState.Normal;
+			this.mineInfo.DownBack = null;
+			this.mineInfo.DownBaseColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
+			this.mineInfo.ForeColor = System.Drawing.SystemColors.ControlText;
+			this.mineInfo.Location = new System.Drawing.Point(4, 3);
+			this.mineInfo.MouseBack = null;
+			this.mineInfo.MouseBaseColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+			this.mineInfo.Name = "mineInfo";
+			this.mineInfo.NormlBack = null;
+			this.mineInfo.Size = new System.Drawing.Size(309, 48);
+			this.mineInfo.TabIndex = 4;
+			this.mineInfo.UseVisualStyleBackColor = false;
 			// 
 			// skinPictureBox6
 			// 
@@ -593,19 +583,39 @@
 			// 
 			this.openFile.FileName = "openFileDialog1";
 			// 
+			// entryMyName
+			// 
+			this.entryMyName.Location = new System.Drawing.Point(81, 51);
+			this.entryMyName.Name = "entryMyName";
+			this.entryMyName.Size = new System.Drawing.Size(90, 21);
+			this.entryMyName.TabIndex = 13;
+			this.entryMyName.Visible = false;
+			this.entryMyName.KeyDown += new System.Windows.Forms.KeyEventHandler(this.SetMyName);
+			// 
+			// signText
+			// 
+			this.signText.Location = new System.Drawing.Point(11, 85);
+			this.signText.Name = "signText";
+			this.signText.Size = new System.Drawing.Size(309, 21);
+			this.signText.TabIndex = 14;
+			this.signText.Visible = false;
+			this.signText.KeyDown += new System.Windows.Forms.KeyEventHandler(this.SetMySign);
+			// 
 			// UserHome
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
 			this.ClientSize = new System.Drawing.Size(340, 538);
+			this.Controls.Add(this.signText);
+			this.Controls.Add(this.entryMyName);
 			this.Controls.Add(this.skinPictureBox6);
 			this.Controls.Add(this.skinButton10);
 			this.Controls.Add(this.skinPanel1);
 			this.Controls.Add(this.skinButton5);
 			this.Controls.Add(this.UserPhoto);
-			this.Controls.Add(this.skinLabel2);
-			this.Controls.Add(this.skinLabel1);
+			this.Controls.Add(this.signature);
+			this.Controls.Add(this.userName);
 			this.Controls.Add(this.skinTextBox1);
 			this.Controls.Add(this.skinButton4);
 			this.Controls.Add(this.skinButton3);
@@ -615,7 +625,7 @@
 			this.Name = "UserHome";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.Text = "QQ";
-			this.Load += new System.EventHandler(this.UserHome_Load);
+			this.Click += new System.EventHandler(this.CloseChild);
 			((System.ComponentModel.ISupportInitialize)(this.UserPhoto)).EndInit();
 			this.choosePhoto.ResumeLayout(false);
 			this.skinPanel1.ResumeLayout(false);
@@ -637,8 +647,8 @@
 		private CCWin.SkinControl.SkinButton skinButton3;
 		private CCWin.SkinControl.SkinButton skinButton4;
 		private CCWin.SkinControl.SkinTextBox skinTextBox1;
-		private CCWin.SkinControl.SkinLabel skinLabel1;
-		private CCWin.SkinControl.SkinLabel skinLabel2;
+		private CCWin.SkinControl.SkinLabel userName;
+		private CCWin.SkinControl.SkinLabel signature;
 		private CCWin.SkinControl.SkinPictureBox UserPhoto;
 		private CCWin.SkinControl.SkinButton skinButton5;
 		private CCWin.SkinControl.SkinButton skinButton10;
@@ -647,19 +657,18 @@
 		private CCWin.SkinControl.SkinButton skinButton9;
 		private CCWin.SkinControl.SkinPanel skinPanel1;
 		private CCWin.SkinControl.SkinPictureBox skinPictureBox2;
-		private CCWin.SkinControl.SkinButton skinButton6;
-		private System.Windows.Forms.Label label1;
+		private CCWin.SkinControl.SkinButton mineInfo;
+		private System.Windows.Forms.Label mineName;
 		private System.Windows.Forms.Label label12;
 		private System.Windows.Forms.Label label11;
 		private System.Windows.Forms.Label label10;
-		private System.Windows.Forms.Label label9;
 		private System.Windows.Forms.Label label8;
 		private System.Windows.Forms.Label label7;
 		private System.Windows.Forms.Label label6;
 		private System.Windows.Forms.Label label5;
 		private System.Windows.Forms.Label label4;
 		private System.Windows.Forms.Label label3;
-		private System.Windows.Forms.Label label2;
+		private System.Windows.Forms.Label mineSign;
 		private CCWin.SkinControl.SkinPictureBox skinPictureBox5;
 		private CCWin.SkinControl.SkinPictureBox skinPictureBox4;
 		private CCWin.SkinControl.SkinPictureBox skinPictureBox3;
@@ -667,5 +676,7 @@
 		private CCWin.SkinControl.SkinContextMenuStrip choosePhoto;
 		private System.Windows.Forms.ToolStripMenuItem 选择图片ToolStripMenuItem;
 		private System.Windows.Forms.OpenFileDialog openFile;
+		private System.Windows.Forms.TextBox entryMyName;
+		private System.Windows.Forms.TextBox signText;
 	}
 }

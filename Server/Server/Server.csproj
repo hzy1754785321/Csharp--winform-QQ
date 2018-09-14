@@ -84,6 +84,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ServerManager.cs" />
     <Compile Include="Settings.cs" />
+    <Compile Include="User.cs" />
+    <Compile Include="User_Methods.cs" />
+    <Compile Include="User_Save.cs" />
     <EmbeddedResource Include="server.resx">
       <DependentUpon>server.cs</DependentUpon>
     </EmbeddedResource>

@@ -10,6 +10,9 @@ namespace Server
 	{
 		login =1,
 		register =2,
+		setName =3,
+		setSign =4,
+		setPhoto =5,
 	}
 	
 }

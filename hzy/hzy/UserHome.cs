@@ -9,20 +9,52 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
 using System.Collections;
+using Newtonsoft.Json;
 
 namespace hzy
 {
 	public partial class UserHome : Form
 	{
 		private ContextMenuStrip onlyfornumber;
+		public UserInfo _mineInfo;
+
+		private bool _isFirstClick = true;
+		private bool _isDoubleClick = false;
+		private int _milliseconds = 0;
+		private Timer _doubleClickTimer;
+		private Rectangle _doubleRec;
+
 		public UserHome()
 		{
 			InitializeComponent();
 			onlyfornumber = new ContextMenuStrip();
 			onlyfornumber.Items.Add("选择图片");
-			onlyfornumber.Items[0].Click += SelectPhoto; 
+			onlyfornumber.Items[0].Click += SelectPhoto;
 			UserPhoto.ContextMenuStrip = onlyfornumber;
+			this.mineInfo.MouseDown += new MouseEventHandler(mineInfo_MouseDown);
+			_doubleClickTimer = new Timer();
+			_doubleClickTimer.Interval = 100;
+			_doubleClickTimer.Tick += new EventHandler(StartChat);
 		}
+
+		public void InitUserHome(UserInfo user)
+		{
+			userName.Text = user.name;
+			if (!string.IsNullOrEmpty(user.signature))
+			{
+				signature.Text = user.signature;
+			}
+			if (user.photo != null)
+			{
+				var photoByte = Convert.FromBase64String(user.photo);
+				var ts = new MemoryStream(photoByte);
+				ts.Position = 0;
+				var img = Image.FromStream(ts);
+				UserPhoto.Image = img;
+				ts.Close();
+			}
+		}
+
 		private void SetNewPhoto(object sender, MouseEventArgs e)
 		{
 			base.OnMouseUp(e);
@@ -32,7 +64,7 @@ namespace hzy
 			}
 		}
 		MemoryStream ms;
-		public void SelectPhoto(object sender ,EventArgs e)
+		public void SelectPhoto(object sender, EventArgs e)
 		{
 			OpenFileDialog fileDialog = new OpenFileDialog();
 
@@ -57,41 +89,133 @@ namespace hzy
 						ms = new MemoryStream();
 						Image bi = UserPhoto.Image;
 						bi.Save(ms, UserPhoto.Image.RawFormat);
+						var arr = ms.ToArray();
+						var sendArr = Convert.ToBase64String(arr);
+						ms.Position = 0;
+						ms.Close();
+						List<object> userStr = new List<object>();
+						userStr.Add(_mineInfo.userId);
+						userStr.Add(sendArr);
+						Form1.SendMessage((int)Interface.setPhoto, userStr);
+						Form1.Received();
 					}
 				}
 			}
 		}
 
-		private void skinTextBox1_Paint(object sender, PaintEventArgs e)
+		public void EntryName(object sender, EventArgs e)
 		{
-
+			entryMyName.Visible = true;
+		}
+		public void EntrySign(object sender, EventArgs e)
+		{
+			signText.Visible = true;
 		}
 
-		private void skinTextBox2_Paint(object sender, PaintEventArgs e)
-		{
 
+		public void CloseChild(object sender, EventArgs e)
+		{
+			if (entryMyName.Visible)
+				entryMyName.Visible = false;
+			if (signText.Visible)
+				signText.Visible = false;
 		}
 
-		private void skinLabel2_Click(object sender, EventArgs e)
+		private void SetMySign(object sender, KeyEventArgs e)
 		{
-
+			if (e.KeyCode == Keys.Enter)
+			{
+				entryMyName.Visible = false;
+				signature.Text = entryMyName.Text;
+				List<object> userStr = new List<object>();
+				userStr.Add(_mineInfo.userId);
+				userStr.Add(signature.Text);
+				Form1.SendMessage((int)Interface.setSign, userStr);
+				Form1.Received();
+			}
 		}
 
-		private void skinPictureBox2_Click(object sender, EventArgs e)
+		private void SetMyName(object sender, KeyEventArgs e)
 		{
-
+			if (e.KeyCode == Keys.Enter)
+			{
+				entryMyName.Visible = false;
+				userName.Text = entryMyName.Text;
+				List<object> userStr = new List<object>();
+				userStr.Add(_mineInfo.userId);
+				userStr.Add(userName.Text);
+				Form1.SendMessage((int)Interface.setName, userStr);
+				Form1.Received();
+			}
+		}
+		public class ButtonEx : CCWin.SkinControl.SkinButton
+		{
+			public new event EventHandler DoubleClick;
+			DateTime clickTime;
+			bool isClicked = false;
+			protected override void OnClick(EventArgs e)
+			{
+				base.OnClick(e);
+				if (isClicked)
+				{
+					TimeSpan span = DateTime.Now - clickTime;
+					if (span.Milliseconds < SystemInformation.DoubleClickTime)
+					{
+						DoubleClick(this, e);
+						isClicked = false;
+					}
+				}
+				else
+				{
+					isClicked = true;
+					clickTime = DateTime.Now;
+				}
+			}
 		}
 
-		private void label1_Click(object sender, EventArgs e)
+		private void mineInfo_MouseDown(object sender, MouseEventArgs e)
 		{
-
+			if (_isFirstClick)
+			{
+				_doubleRec = new Rectangle(e.X - SystemInformation.DoubleClickSize.Width / 2,
+					e.Y - SystemInformation.DoubleClickSize.Height / 2,
+					SystemInformation.DoubleClickSize.Width,
+					SystemInformation.DoubleClickSize.Height);
+				_isFirstClick = false;
+				_doubleClickTimer.Start();
+			}
+			else
+			{
+				if (_doubleRec.Contains(e.Location))
+				{
+					_isDoubleClick = true;
+				}
+			}
 		}
 
-		private void UserHome_Load(object sender, EventArgs e)
+		public void StartChat(object sender, EventArgs e)
 		{
-
+			_milliseconds += 100;
+			if (_milliseconds >= SystemInformation.DoubleClickTime)
+			{
+				_doubleClickTimer.Stop();
+				if (_isDoubleClick)
+				{
+					var chat = new Chat();
+					chat.MdiParent = this.MdiParent;
+					chat.Show();
+					this.Hide();
+				}
+				else
+				{
+					return;
+				}
+				_isDoubleClick = false;
+				_isFirstClick = true;
+				_milliseconds = 0;
+			}
 		}
 
-	
+
 	}
 }
