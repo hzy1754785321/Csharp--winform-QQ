@@ -31,7 +31,7 @@ namespace hzy
 			onlyfornumber.Items.Add("选择图片");
 			onlyfornumber.Items[0].Click += SelectPhoto;
 			UserPhoto.ContextMenuStrip = onlyfornumber;
-			this.mineInfo.MouseDown += new MouseEventHandler(mineInfo_MouseDown);
+			
 			_doubleClickTimer = new Timer();
 			_doubleClickTimer.Interval = 100;
 			_doubleClickTimer.Tick += new EventHandler(StartChat);

@@ -1,4 +1,6 @@
-﻿namespace hzy
+﻿using System.Windows.Forms;
+
+namespace hzy
 {
 	partial class UserHome
 	{
@@ -567,6 +569,7 @@
 			this.mineInfo.Size = new System.Drawing.Size(309, 48);
 			this.mineInfo.TabIndex = 4;
 			this.mineInfo.UseVisualStyleBackColor = false;
+			this.mineInfo.MouseDown += new MouseEventHandler(mineInfo_MouseDown);
 			// 
 			// skinPictureBox6
 			// 

@@ -21,6 +21,7 @@ namespace hzy
 	{
 		public static string ipAddress = "192.168.8.190";
 		public static string port = "36001";
+		public Task task1 = null;
 		public Form1()
 		{
 			InitializeComponent();
@@ -33,16 +34,17 @@ namespace hzy
 			userStr.Add(int.Parse(name.Text));
 			userStr.Add(passwd.Text);
 			SendMessage((int)Interface.login, userStr);
-			var task = new Task<string>(Received);
+			//	var task = new Task<string>(Received);
+			//	task.Wait();
 			task.Start();
-			task.Wait();
-			var receiveStr = task.Result;
+			var receiveStr = task
 			var result = JsonConvert.DeserializeObject<Result>(receiveStr);
 			var userInfo = new UserInfo();
 			userInfo = JsonConvert.DeserializeObject<UserInfo>(result.Value);
 			if (result.ret == 1)
 			{
-				MessageBox.Show("登陆成功,欢迎使用"); 
+				MessageBox.Show("登陆成功,欢迎使用");
+				task = new Task<string>(Received);
 				UserHomeStart(userInfo);
 			}
 			else if (result.ret == 0)
@@ -70,7 +72,9 @@ namespace hzy
 				socketSend = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
 				IPAddress ip = IPAddress.Parse(Form1.ipAddress);
 				IPEndPoint point = new IPEndPoint(ip, Convert.ToInt32(Form1.port));
-				socketSend.Connect(point); 
+				socketSend.Connect(point);
+				task = new Task<string>(Received);
+				task.Start();
 				MessageBox.Show("连接成功！");
 			}
 			catch (Exception)

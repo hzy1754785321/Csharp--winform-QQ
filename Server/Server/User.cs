@@ -22,8 +22,10 @@ namespace ServerUser
 	public partial class User
 	{
 		public static Dictionary<int, UserInfo> userKey = new Dictionary<int, UserInfo>();
-
+		public static Socket _connection ;
 		
+		public User()
+		{ }
 
 		public bool Register(int userId, string name, string passwd)
 		{

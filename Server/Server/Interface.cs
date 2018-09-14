@@ -13,6 +13,7 @@ namespace Server
 		setName =3,
 		setSign =4,
 		setPhoto =5,
+		message = 6,
 	}
 	
 }

@@ -23,6 +23,7 @@ namespace Server
 		public static string QQChatPath = @"\Data\QQChat.db3";
 		public static string strPath = strAppPath + QQChatPath;
 		public static Dictionary<int, UserInfo> activeUser = new Dictionary<int, UserInfo>();
+		public static Dictionary<int, Socket> userConnections = new Dictionary<int, Socket>();
 		public server()
 		{
 			InitializeComponent();
@@ -75,16 +76,16 @@ namespace Server
 		{
 			//try
 			//{
-				Socket socketWatch = o as Socket;
-				while (true)
-				{
-					socketSend = socketWatch.Accept();
-					ShowMsg(socketSend.RemoteEndPoint + ":" + "连接成功");
-					Thread r_thread = new Thread(Receive);
-					var s = new ServerUser.User();
-					r_thread.IsBackground = true;
-					r_thread.Start(socketSend);
-				}
+			Socket socketWatch = o as Socket;
+			while (true)
+			{
+				socketSend = socketWatch.Accept();
+				ShowMsg(socketSend.RemoteEndPoint + ":" + "连接成功");
+				Thread r_thread = new Thread(Receive);
+				var s = new ServerUser.User();
+				r_thread.IsBackground = true;
+				r_thread.Start(socketSend);
+			}
 			//}
 			//catch (Exception ex)
 			//{
@@ -96,31 +97,31 @@ namespace Server
 		{
 			//try
 			//{
-				Socket socketSend = o as Socket;
-				while (true)
+			Socket socketSend = o as Socket;
+			while (true)
+			{
+				byte[] buffer = new byte[1024 * 1024 * 10];
+				int len = socketSend.Receive(buffer);
+				if (len == 0)
 				{
-					byte[] buffer = new byte[1024 * 1024 * 10];
-					int len = socketSend.Receive(buffer);
-					if (len == 0)
-					{
-						break;
-					}
-					string str = Encoding.UTF8.GetString(buffer, 0, len);
-					var msg = JsonConvert.DeserializeObject<Message>(str);
-					//var msg = ToMessage(str)
-					var count = msg.Values.Count;
-					var funInfo = ServerManager.GetFunInfo(msg.key);
-					var parseFun = funInfo.Split('.');
-					string strClass = parseFun[0]+"."+parseFun[1];
-					var callMethodName = parseFun[2];
-					Type t;  
-					object obj;  
-					t = Type.GetType(strClass);    
-					System.Reflection.MethodInfo method = t.GetMethod(callMethodName); 
-					obj = System.Activator.CreateInstance(t);
-					var value = new object[count];
-					for (int i = 0; i < msg.length.Count; i++)
-					{
+					break;
+				}
+				string str = Encoding.UTF8.GetString(buffer, 0, len);
+				var msg = JsonConvert.DeserializeObject<Message>(str);
+				//var msg = ToMessage(str)
+				var count = msg.Values.Count;
+				var funInfo = ServerManager.GetFunInfo(msg.key);
+				var parseFun = funInfo.Split('.');
+				string strClass = parseFun[0] + "." + parseFun[1];
+				var callMethodName = parseFun[2];
+				Type t;
+				object obj;
+				t = Type.GetType(strClass);
+				System.Reflection.MethodInfo method = t.GetMethod(callMethodName);
+				obj = System.Activator.CreateInstance(t);
+				var value = new object[count];
+				for (int i = 0; i < msg.length.Count; i++)
+				{
 					var type = msg.Values[i].GetType();
 					if (msg.length[i] == 0)
 					{
@@ -128,19 +129,24 @@ namespace Server
 					}
 					else if (msg.length[i] == 1)
 						value[i] = Convert.ToInt32(msg.Values[i]);
-					}
-					Object result = new Object();
-					if (count > 0)
-					{
-						result = method.Invoke(obj, value);
-					}
-					else
-					{
-						result = method.Invoke(obj, null);
-					}
-					string retStr = JsonConvert.SerializeObject(result);
-					SendMessage(retStr);
 				}
+				if (msg.key == 1)
+				{
+					var userId = Convert.ToInt32(msg.Values[0]);
+					userConnections.Add(userId, socketSend);
+				}
+				Object result = new Object();
+				if (count > 0)
+				{
+					result = method.Invoke(obj, value);
+				}
+				else
+				{
+					result = method.Invoke(obj, null);
+				}
+				string retStr = JsonConvert.SerializeObject(result);
+				SendMessage(retStr);
+			}
 			//}
 			//catch (Exception ex)
 			//{
@@ -148,7 +154,7 @@ namespace Server
 			//}
 		}
 
-	
+
 
 		//public static Message ToMessage(string message)
 		//{
@@ -174,12 +180,18 @@ namespace Server
 			socketSend.Send(buffer);
 		}
 
+		public static void SendMessage(Socket socket, string str)
+		{
+			byte[] buffer = Encoding.UTF8.GetBytes(str);
+			socket.Send(buffer);
+		}
+
 		private void ServerForm_Load(object sender, EventArgs e)
 		{
 			Control.CheckForIllegalCrossThreadCalls = false;
 		}
 
-	
+
 
 		private void showWindow_DrawItem(object sender, DrawItemEventArgs e)
 		{
@@ -187,12 +199,12 @@ namespace Server
 			{
 				e.DrawBackground();
 				Brush mybsh = Brushes.Black;
-			//	MessageBox.Show(showWindow.Items[e.Index].ToString().Substring(0,2));
-				if (showWindow.Items[e.Index].ToString().Substring(0,5) == "Error")
+				//	MessageBox.Show(showWindow.Items[e.Index].ToString().Substring(0,2));
+				if (showWindow.Items[e.Index].ToString().Substring(0, 5) == "Error")
 				{
 					mybsh = Brushes.Red;
 				}
-				if (showWindow.Items[e.Index].ToString().Substring(0,5) == "Debug")
+				if (showWindow.Items[e.Index].ToString().Substring(0, 5) == "Debug")
 				{
 					mybsh = Brushes.Blue;
 				}

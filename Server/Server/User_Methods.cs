@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Backend;
 using Server;
+using System.Net.Sockets;
 
 namespace ServerUser
 {
@@ -38,6 +39,14 @@ namespace ServerUser
 			{
 				userInfo.photo = photo;
 				UpdateUserInfo(userInfo);
+			}
+		}
+
+		public void ChatWithOther(int userId, string content)
+		{
+			if(server.userConnections.TryGetValue(userId,out Socket socket))
+			{
+				server.SendMessage(socket, content);
 			}
 		}
 
