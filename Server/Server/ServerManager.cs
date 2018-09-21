@@ -51,6 +51,8 @@ namespace Server
 			AddDispatcher(3, "ServerUser.User.SetName");
 			AddDispatcher(4, "ServerUser.User.SetSign");
 			AddDispatcher(5, "ServerUser.User.SetPhoto");
+			AddDispatcher(6, "ServerUser.User.ChatWithOther");
+			AddDispatcher(7, "ServerUser.User.QueryUserInfo");
 		}
 
 		public static string GetFunInfo(int key)

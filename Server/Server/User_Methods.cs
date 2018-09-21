@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Backend;
 using Server;
 using System.Net.Sockets;
+using Newtonsoft.Json;
 
 namespace ServerUser
 {
@@ -42,11 +43,38 @@ namespace ServerUser
 			}
 		}
 
-		public void ChatWithOther(int userId, string content)
+		public void ChatWithOther(string msg)
 		{
-			if(server.userConnections.TryGetValue(userId,out Socket socket))
+			var chatMessage = JsonConvert.DeserializeObject<ChatMessage>(msg);
+			if (server.userConnections.TryGetValue(chatMessage.targetId, out Socket socket))
 			{
-				server.SendMessage(socket, content);
+				var ret = new Result();
+				ret.retKey = (int)Interface.message;
+				ret.Value = JsonConvert.SerializeObject(chatMessage);
+				var retStr = JsonConvert.SerializeObject(ret);
+				server.SendMessage(socket,retStr);
+			}
+			else
+			{
+				var friend = new FriendInfo();
+				friend.friendId = chatMessage.targetId;
+				friend.history.Add(chatMessage);
+				if (userKey.TryGetValue(chatMessage.chatId, out UserInfo userInfo))
+				{
+					userInfo.friend.Add(friend);
+					userInfo.historyId.Add(chatMessage.targetId);
+					UpdateUserInfo(userInfo);
+				}
+				else
+				{
+					var info = DataStorage.SQLiteHelper.QueryUserInfo(chatMessage.chatId);
+					if (info != null)
+					{
+						info.friend.Add(friend);
+						info.historyId.Add(chatMessage.targetId);
+						UpdateUserInfo(info);
+					}
+				}
 			}
 		}
 

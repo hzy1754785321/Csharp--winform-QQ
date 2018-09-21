@@ -19,47 +19,46 @@ namespace hzy
 
 	public partial class Form1 : Form
 	{
-		public static string ipAddress = "192.168.8.190";
+		public static string ipAddress = "192.168.8.105";
 		public static string port = "36001";
-		public Task task1 = null;
+		public static Thread thread;
+		public static Dictionary<int, string> _message = new Dictionary<int, string>();
+		public delegate void NotifyEventHandler(object sender);
+		public static NotifyEventHandler NotifyEvent;
 		public Form1()
 		{
 			InitializeComponent();
 		}
-		private void login(object sender, EventArgs e)
+
+			private void login(object sender, EventArgs e)
 		{
-			//var userAccount = new UserAccount() { name = name.Text, passwd = passwd.Text };
-			//	var userStr = JsonConvert.SerializeObject(userAccount);
-			List<object> userStr = new List<object>();
-			userStr.Add(int.Parse(name.Text));
-			userStr.Add(passwd.Text);
-			SendMessage((int)Interface.login, userStr);
-			//	var task = new Task<string>(Received);
-			//	task.Wait();
-			task.Start();
-			var receiveStr = task
-			var result = JsonConvert.DeserializeObject<Result>(receiveStr);
-			var userInfo = new UserInfo();
-			userInfo = JsonConvert.DeserializeObject<UserInfo>(result.Value);
-			if (result.ret == 1)
+			if (!string.IsNullOrEmpty(name.Text) || !string.IsNullOrEmpty(passwd.Text))
 			{
+				List<object> userStr = new List<object>();
+				userStr.Add(int.Parse(name.Text));
+				userStr.Add(passwd.Text);
+				SendMessage((int)Interface.login, userStr);
+				string result;
+				while (true)
+				{
+					if (_message.TryGetValue((int)Interface.login, out result))
+					{
+						_message.Remove((int)Interface.login);
+						break;
+					}
+				}
+				if (string.IsNullOrEmpty(result))
+				{
+					MessageBox.Show("登陆失败,账号不存在或密码错误!");
+					return;
+				}
+				var userInfo = JsonConvert.DeserializeObject<UserInfo>(result);
 				MessageBox.Show("登陆成功,欢迎使用");
-				task = new Task<string>(Received);
 				UserHomeStart(userInfo);
 			}
-			else if (result.ret == 0)
+			else
 			{
-				MessageBox.Show("登陆失败,账号不存在!");
-				return;
-			}
-			else if (result.ret == -1)
-			{
-				MessageBox.Show("登陆失败,密码错误");
-				return;
-			}
-			else if (result.ret == -2)
-			{
-				MessageBox.Show("登陆失败,账号或密码为空");
+				MessageBox.Show("账号与密码不能为空!");
 				return;
 			}
 		}
@@ -73,8 +72,9 @@ namespace hzy
 				IPAddress ip = IPAddress.Parse(Form1.ipAddress);
 				IPEndPoint point = new IPEndPoint(ip, Convert.ToInt32(Form1.port));
 				socketSend.Connect(point);
-				task = new Task<string>(Received);
-				task.Start();
+				Thread r_thread = new Thread(Received);
+				r_thread.IsBackground = true;
+				r_thread.Start();
 				MessageBox.Show("连接成功！");
 			}
 			catch (Exception)
@@ -82,8 +82,10 @@ namespace hzy
 				MessageBox.Show("IP或端口错误,无法连接服务器");
 			}
 		}
+
+	
 		  
-		public static string Received()
+		public void Received()
 		{
 			while (true)
 			{
@@ -94,10 +96,39 @@ namespace hzy
 					break;
 				}
 				string str = Encoding.UTF8.GetString(buffer, 0, len);
-				return str;
+				var ret = JsonConvert.DeserializeObject<Result>(str);
+				if (ret.retKey == (int)Interface.message)
+				{
+					UserHome._msg = JsonConvert.DeserializeObject<ChatMessage>(ret.Value);
+					AddObserver(new NotifyEventHandler(SetNewMessage));
+					Updates();
+					continue;
+				}
+				_message.Add(ret.retKey, ret.Value);
 			}
-			return null;
 		}
+
+		public static void AddObserver(NotifyEventHandler ob)
+		{
+			NotifyEvent += ob;
+		}
+		public static void RemoveObserver(NotifyEventHandler ob)
+		{
+			NotifyEvent -= ob;
+		}
+
+		public void Updates()
+		{
+			NotifyEvent?.Invoke(this);
+		}
+
+		public static void SetNewMessage(Object obj)
+		{
+			var newMsg = UserHome._msg;
+			MessageBox.Show(UserHome._msg.content);
+			RemoveObserver(new NotifyEventHandler(SetNewMessage));
+		}
+
 
 		public static void SendMessage(int key,List<object> content)
 		{
@@ -116,7 +147,7 @@ namespace hzy
 				}
 			}
 			var sendMsg = JsonConvert.SerializeObject(msg);
-			byte[] buffer = new byte[1024 * 1024 * 10];
+			byte[] buffer = new byte[1024 * 1024 * 3];
 			buffer = Encoding.UTF8.GetBytes(sendMsg);
 			socketSend.Send(buffer);
 		}

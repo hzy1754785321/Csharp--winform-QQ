@@ -31,10 +31,10 @@
 			this.components = new System.ComponentModel.Container();
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Chat));
 			this.skinPanel1 = new CCWin.SkinControl.SkinPanel();
+			this.chatBox = new CCWin.SkinControl.RtfRichTextBox();
+			this.skinListBox1 = new CCWin.SkinControl.SkinListBox();
 			this.skinButton1 = new CCWin.SkinControl.SkinButton();
 			this.skinButton2 = new CCWin.SkinControl.SkinButton();
-			this.skinListBox1 = new CCWin.SkinControl.SkinListBox();
-			this.rtfRichTextBox1 = new CCWin.SkinControl.RtfRichTextBox();
 			this.skinPictureBox1 = new CCWin.SkinControl.SkinPictureBox();
 			this.skinLabel1 = new CCWin.SkinControl.SkinLabel();
 			this.skinLabel2 = new CCWin.SkinControl.SkinLabel();
@@ -46,7 +46,7 @@
 			// skinPanel1
 			// 
 			this.skinPanel1.BackColor = System.Drawing.Color.Snow;
-			this.skinPanel1.Controls.Add(this.rtfRichTextBox1);
+			this.skinPanel1.Controls.Add(this.chatBox);
 			this.skinPanel1.Controls.Add(this.skinListBox1);
 			this.skinPanel1.ControlState = CCWin.SkinClass.ControlState.Normal;
 			this.skinPanel1.DownBack = null;
@@ -56,6 +56,27 @@
 			this.skinPanel1.NormlBack = null;
 			this.skinPanel1.Size = new System.Drawing.Size(472, 558);
 			this.skinPanel1.TabIndex = 0;
+			// 
+			// chatBox
+			// 
+			this.chatBox.HiglightColor = CCWin.SkinControl.RtfRichTextBox.RtfColor.White;
+			this.chatBox.Location = new System.Drawing.Point(0, 408);
+			this.chatBox.Name = "chatBox";
+			this.chatBox.Size = new System.Drawing.Size(469, 151);
+			this.chatBox.TabIndex = 1;
+			this.chatBox.Text = "";
+			this.chatBox.TextColor = CCWin.SkinControl.RtfRichTextBox.RtfColor.Black;
+			this.chatBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.SendChatMessage);
+			// 
+			// skinListBox1
+			// 
+			this.skinListBox1.Back = null;
+			this.skinListBox1.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+			this.skinListBox1.FormattingEnabled = true;
+			this.skinListBox1.Location = new System.Drawing.Point(0, 3);
+			this.skinListBox1.Name = "skinListBox1";
+			this.skinListBox1.Size = new System.Drawing.Size(472, 368);
+			this.skinListBox1.TabIndex = 0;
 			// 
 			// skinButton1
 			// 
@@ -71,6 +92,7 @@
 			this.skinButton1.TabIndex = 1;
 			this.skinButton1.Text = "关闭";
 			this.skinButton1.UseVisualStyleBackColor = false;
+			this.skinButton1.Click += new System.EventHandler(this.CloseChat);
 			// 
 			// skinButton2
 			// 
@@ -86,26 +108,7 @@
 			this.skinButton2.TabIndex = 2;
 			this.skinButton2.Text = "发送";
 			this.skinButton2.UseVisualStyleBackColor = false;
-			// 
-			// skinListBox1
-			// 
-			this.skinListBox1.Back = null;
-			this.skinListBox1.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-			this.skinListBox1.FormattingEnabled = true;
-			this.skinListBox1.Location = new System.Drawing.Point(0, 3);
-			this.skinListBox1.Name = "skinListBox1";
-			this.skinListBox1.Size = new System.Drawing.Size(472, 368);
-			this.skinListBox1.TabIndex = 0;
-			// 
-			// rtfRichTextBox1
-			// 
-			this.rtfRichTextBox1.HiglightColor = CCWin.SkinControl.RtfRichTextBox.RtfColor.White;
-			this.rtfRichTextBox1.Location = new System.Drawing.Point(0, 408);
-			this.rtfRichTextBox1.Name = "rtfRichTextBox1";
-			this.rtfRichTextBox1.Size = new System.Drawing.Size(469, 151);
-			this.rtfRichTextBox1.TabIndex = 1;
-			this.rtfRichTextBox1.Text = "";
-			this.rtfRichTextBox1.TextColor = CCWin.SkinControl.RtfRichTextBox.RtfColor.Black;
+			this.skinButton2.Click += new System.EventHandler(this.SendChatMessage);
 			// 
 			// skinPictureBox1
 			// 
@@ -140,7 +143,6 @@
 			this.skinLabel2.Size = new System.Drawing.Size(93, 20);
 			this.skinLabel2.TabIndex = 5;
 			this.skinLabel2.Text = "我的个性签名";
-			this.skinLabel2.Click += new System.EventHandler(this.skinLabel2_Click);
 			// 
 			// skinButton3
 			// 
@@ -187,7 +189,7 @@
 		#endregion
 
 		private CCWin.SkinControl.SkinPanel skinPanel1;
-		private CCWin.SkinControl.RtfRichTextBox rtfRichTextBox1;
+		private CCWin.SkinControl.RtfRichTextBox chatBox;
 		private CCWin.SkinControl.SkinListBox skinListBox1;
 		private CCWin.SkinControl.SkinButton skinButton1;
 		private CCWin.SkinControl.SkinButton skinButton2;

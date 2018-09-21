@@ -27,8 +27,11 @@ namespace ServerUser
 		public User()
 		{ }
 
-		public bool Register(int userId, string name, string passwd)
+		public Result Register(int userId, string name, string passwd)
 		{
+
+			var ret = new Result();
+			ret.retKey = (int)Interface.register;
 			//	ServerManager.AddDispatcher((int)Interface.register, System.Reflection.MethodBase.GetCurrentMethod().Name);
 			if (!string.IsNullOrEmpty(name) && !string.IsNullOrEmpty(userId.ToString()) && !string.IsNullOrEmpty(passwd))
 			{
@@ -37,34 +40,34 @@ namespace ServerUser
 				if (info != null)
 				{
 					Log.Error("该ID已存在");
-					return false;
+					ret.Value = JsonConvert.SerializeObject(false);
+					return ret;
 				}
 				var now = DateTime.Now;
 				DataStorage.SQLiteHelper.CreateUserInfoAsync(userId, now, now, name, passwd);
 				Log.Debug("user:{0} register success!", userId);
-				return true;
+				ret.Value = JsonConvert.SerializeObject(true);
+				return ret;
 			}
 			Log.Error("账号或密码为空");
-			return false;
+			ret.Value = JsonConvert.SerializeObject(false);
+			return ret;
 		}
 
 		public Result Login(int userId, string passwd)
 		{
-			var ret = new Result();
+			var ret = new Result
+			{
+				retKey = (int)Interface.login
+			};
 			if (!string.IsNullOrEmpty(userId.ToString()) && !string.IsNullOrEmpty(passwd))
 			{
 				var users = new List<UserAccount>();
 				var info = DataStorage.SQLiteHelper.QueryUserInfo(userId);
-				if (info == null)
+				if (info == null || info.passwd.CompareTo(passwd) != 0)
 				{
-					Log.Error("该账号不存在");
-					ret.ret = 0;
-					return ret;
-				}
-				if (info.passwd.CompareTo(passwd) != 0)
-				{
-					Log.Error("密码错误");
-					ret.ret = -1;
+					ret.Value = null;
+					Log.Error("该账号不存在或密码错误");
 					return ret;
 				}
 				var now = DateTime.Now;
@@ -72,14 +75,32 @@ namespace ServerUser
 				info.signature = "这个人很懒,什么都没写";
 				UpdateUserInfo(info);
 				userKey.Add(info.userId, info);
-				ret.ret = 1;
 				ret.Value = JsonConvert.SerializeObject(info);
 				return ret;
 			}
 			else
 			{
+				ret.Value = null;
 				Log.Error("账号或密码为空");
-				ret.ret = -2;
+				return ret;
+			}
+		}
+
+		public Result QueryUserInfo(int userId)
+		{
+			var ret = new Result
+			{
+				retKey = (int)Interface.userInfo
+			};
+			if (userKey.TryGetValue(userId, out UserInfo userInfo))
+			{
+				ret.Value = JsonConvert.SerializeObject(userInfo);
+				return ret;
+			}
+			else
+			{
+				var info = DataStorage.SQLiteHelper.QueryUserInfo(userId);
+				ret.Value = JsonConvert.SerializeObject(info);
 				return ret;
 			}
 		}

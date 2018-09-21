@@ -31,11 +31,16 @@ namespace hzy
 			content.Add(name.Text);
 			content.Add(passwd.Text);
 			Form1.SendMessage((int)Interface.register, content);
-			var task = new Task<string>(Form1.Received);
-			task.Start();
-			task.Wait();
-			var receiveStr = task.Result;
-			var isSuccess = JsonConvert.DeserializeObject<Boolean>(receiveStr);
+			string result;
+			while (true)
+			{
+				if (Form1._message.TryGetValue((int)Interface.register, out result))
+				{
+					Form1._message.Remove((int)Interface.register);
+					break;
+				}
+			}
+			var isSuccess = JsonConvert.DeserializeObject<Boolean>(result);
 			if (isSuccess)
 			{
 				MessageBox.Show("注册成功!");

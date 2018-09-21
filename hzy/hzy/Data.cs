@@ -32,9 +32,9 @@ namespace hzy
 	public class Result
 	{
 		/// <summary>
-		/// 执行结果   1:成功 else:失败
+		/// 执行结果  
 		/// </summary>
-		public int ret;
+		public int retKey;
 		/// <summary>
 		/// 返回字符内容
 		/// </summary>
@@ -129,6 +129,10 @@ namespace hzy
 		/// 发言者ID
 		/// </summary>
 		public int chatId;
+		/// <summary>
+		/// 目标ID 为0表示为群聊
+		/// </summary>
+		public int targetId;
 		/// <summary>
 		/// 发出时间
 		/// </summary>

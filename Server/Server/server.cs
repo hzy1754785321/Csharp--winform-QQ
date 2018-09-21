@@ -53,6 +53,8 @@ namespace Server
 				{
 					Socket socketWatch = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
 					IPAddress iP = IPAddress.Any;
+					if (string.IsNullOrEmpty(port_text.Text))
+						port_text.Text = "36001";
 					IPEndPoint point = new IPEndPoint(iP, Convert.ToInt32(port_text.Text));
 					socketWatch.Bind(point);
 					ShowMsg("监听成功!");
@@ -71,7 +73,7 @@ namespace Server
 			}
 		}
 
-		Socket socketSend;
+		Socket socketSend1;
 		public void Listen(object o)
 		{
 			//try
@@ -79,12 +81,12 @@ namespace Server
 			Socket socketWatch = o as Socket;
 			while (true)
 			{
-				socketSend = socketWatch.Accept();
-				ShowMsg(socketSend.RemoteEndPoint + ":" + "连接成功");
+				socketSend1 = socketWatch.Accept();
+				ShowMsg(socketSend1.RemoteEndPoint + ":" + "连接成功");
 				Thread r_thread = new Thread(Receive);
 				var s = new ServerUser.User();
 				r_thread.IsBackground = true;
-				r_thread.Start(socketSend);
+				r_thread.Start(socketSend1);
 			}
 			//}
 			//catch (Exception ex)
@@ -100,7 +102,7 @@ namespace Server
 			Socket socketSend = o as Socket;
 			while (true)
 			{
-				byte[] buffer = new byte[1024 * 1024 * 10];
+				byte[] buffer = new byte[1024 * 1024 * 3];
 				int len = socketSend.Receive(buffer);
 				if (len == 0)
 				{
@@ -144,8 +146,11 @@ namespace Server
 				{
 					result = method.Invoke(obj, null);
 				}
-				string retStr = JsonConvert.SerializeObject(result);
-				SendMessage(retStr);
+				if (result != null)
+				{
+					string retStr = JsonConvert.SerializeObject(result);
+					SendMessage(retStr);
+				}
 			}
 			//}
 			//catch (Exception ex)
@@ -174,15 +179,16 @@ namespace Server
 		//	return msg;
 		//}
 
+
 		public void SendMessage(string str)
 		{
 			byte[] buffer = Encoding.UTF8.GetBytes(str);
-			socketSend.Send(buffer);
+			socketSend1.Send(buffer);
 		}
 
 		public static void SendMessage(Socket socket, string str)
 		{
-			byte[] buffer = Encoding.UTF8.GetBytes(str);
+			var buffer = Encoding.UTF8.GetBytes(str);
 			socket.Send(buffer);
 		}
 

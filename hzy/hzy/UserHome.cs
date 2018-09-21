@@ -10,29 +10,42 @@ using System.Windows.Forms;
 using System.IO;
 using System.Collections;
 using Newtonsoft.Json;
+using System.Threading;
+using System.Net.Sockets;
 
 namespace hzy
 {
+
 	public partial class UserHome : Form
 	{
 		private ContextMenuStrip onlyfornumber;
 		public UserInfo _mineInfo;
+		public static Form localForm;
+
+		
+		public static AutoResetEvent _mre = new AutoResetEvent(false);
+
+		public static ChatMessage _msg { set; get; }
 
 		private bool _isFirstClick = true;
 		private bool _isDoubleClick = false;
 		private int _milliseconds = 0;
-		private Timer _doubleClickTimer;
+		private System.Windows.Forms.Timer _doubleClickTimer;
 		private Rectangle _doubleRec;
 
+
+
+	
 		public UserHome()
 		{
 			InitializeComponent();
+			localForm = this;
 			onlyfornumber = new ContextMenuStrip();
 			onlyfornumber.Items.Add("选择图片");
 			onlyfornumber.Items[0].Click += SelectPhoto;
 			UserPhoto.ContextMenuStrip = onlyfornumber;
 			
-			_doubleClickTimer = new Timer();
+			_doubleClickTimer = new System.Windows.Forms.Timer();
 			_doubleClickTimer.Interval = 100;
 			_doubleClickTimer.Tick += new EventHandler(StartChat);
 		}
@@ -54,6 +67,8 @@ namespace hzy
 				ts.Close();
 			}
 		}
+
+
 
 		private void SetNewPhoto(object sender, MouseEventArgs e)
 		{
@@ -97,7 +112,6 @@ namespace hzy
 						userStr.Add(_mineInfo.userId);
 						userStr.Add(sendArr);
 						Form1.SendMessage((int)Interface.setPhoto, userStr);
-						Form1.Received();
 					}
 				}
 			}
@@ -131,7 +145,6 @@ namespace hzy
 				userStr.Add(_mineInfo.userId);
 				userStr.Add(signature.Text);
 				Form1.SendMessage((int)Interface.setSign, userStr);
-				Form1.Received();
 			}
 		}
 
@@ -145,7 +158,6 @@ namespace hzy
 				userStr.Add(_mineInfo.userId);
 				userStr.Add(userName.Text);
 				Form1.SendMessage((int)Interface.setName, userStr);
-				Form1.Received();
 			}
 		}
 		public class ButtonEx : CCWin.SkinControl.SkinButton
@@ -193,6 +205,25 @@ namespace hzy
 			}
 		}
 
+		public UserInfo QueryUserInfo(int userId)
+		{
+			List<object> userStr = new List<object>();
+			userStr.Add(userId);
+			Form1.SendMessage((int)Interface.userInfo, userStr);
+			string result;
+			while (true)
+			{
+				if (Form1._message.TryGetValue((int)Interface.userInfo, out result))
+				{
+					Form1._message.Remove((int)Interface.userInfo);
+					break;
+				}
+			}
+			var userInfo = JsonConvert.DeserializeObject<UserInfo>(result);
+			return userInfo;
+
+		}
+
 		public void StartChat(object sender, EventArgs e)
 		{
 			_milliseconds += 100;
@@ -205,6 +236,8 @@ namespace hzy
 					chat.MdiParent = this.MdiParent;
 					chat.Show();
 					this.Hide();
+					chat.mineInfo = _mineInfo;
+					chat.targetInfo = QueryUserInfo(123);
 				}
 				else
 				{

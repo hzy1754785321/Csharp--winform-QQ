@@ -1,0 +1,7 @@
+C:\Users\ychi\source\repos\ObserverTest\ObserverTest\bin\Debug\ObserverTest.exe.config
+C:\Users\ychi\source\repos\ObserverTest\ObserverTest\bin\Debug\ObserverTest.exe
+C:\Users\ychi\source\repos\ObserverTest\ObserverTest\bin\Debug\ObserverTest.pdb
+C:\Users\ychi\source\repos\ObserverTest\ObserverTest\obj\Debug\ObserverTest.csprojResolveAssemblyReference.cache
+C:\Users\ychi\source\repos\ObserverTest\ObserverTest\obj\Debug\ObserverTest.csproj.CoreCompileInputs.cache
+C:\Users\ychi\source\repos\ObserverTest\ObserverTest\obj\Debug\ObserverTest.exe
+C:\Users\ychi\source\repos\ObserverTest\ObserverTest\obj\Debug\ObserverTest.pdb
