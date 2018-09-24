@@ -31,8 +31,8 @@
 			this.components = new System.ComponentModel.Container();
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Chat));
 			this.skinPanel1 = new CCWin.SkinControl.SkinPanel();
+			chatListBox = new System.Windows.Forms.ListBox();
 			this.chatBox = new CCWin.SkinControl.RtfRichTextBox();
-			this.skinListBox1 = new CCWin.SkinControl.SkinListBox();
 			this.skinButton1 = new CCWin.SkinControl.SkinButton();
 			this.skinButton2 = new CCWin.SkinControl.SkinButton();
 			this.skinPictureBox1 = new CCWin.SkinControl.SkinPictureBox();
@@ -46,8 +46,8 @@
 			// skinPanel1
 			// 
 			this.skinPanel1.BackColor = System.Drawing.Color.Snow;
+			this.skinPanel1.Controls.Add(chatListBox);
 			this.skinPanel1.Controls.Add(this.chatBox);
-			this.skinPanel1.Controls.Add(this.skinListBox1);
 			this.skinPanel1.ControlState = CCWin.SkinClass.ControlState.Normal;
 			this.skinPanel1.DownBack = null;
 			this.skinPanel1.Location = new System.Drawing.Point(3, 97);
@@ -56,6 +56,15 @@
 			this.skinPanel1.NormlBack = null;
 			this.skinPanel1.Size = new System.Drawing.Size(472, 558);
 			this.skinPanel1.TabIndex = 0;
+			// 
+			// chatListBox
+			// 
+			chatListBox.FormattingEnabled = true;
+			chatListBox.ItemHeight = 12;
+			chatListBox.Location = new System.Drawing.Point(0, 3);
+			chatListBox.Name = "chatListBox";
+			chatListBox.Size = new System.Drawing.Size(469, 376);
+			chatListBox.TabIndex = 2;
 			// 
 			// chatBox
 			// 
@@ -67,16 +76,6 @@
 			this.chatBox.Text = "";
 			this.chatBox.TextColor = CCWin.SkinControl.RtfRichTextBox.RtfColor.Black;
 			this.chatBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.SendChatMessage);
-			// 
-			// skinListBox1
-			// 
-			this.skinListBox1.Back = null;
-			this.skinListBox1.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-			this.skinListBox1.FormattingEnabled = true;
-			this.skinListBox1.Location = new System.Drawing.Point(0, 3);
-			this.skinListBox1.Name = "skinListBox1";
-			this.skinListBox1.Size = new System.Drawing.Size(472, 368);
-			this.skinListBox1.TabIndex = 0;
 			// 
 			// skinButton1
 			// 
@@ -190,12 +189,12 @@
 
 		private CCWin.SkinControl.SkinPanel skinPanel1;
 		private CCWin.SkinControl.RtfRichTextBox chatBox;
-		private CCWin.SkinControl.SkinListBox skinListBox1;
 		private CCWin.SkinControl.SkinButton skinButton1;
 		private CCWin.SkinControl.SkinButton skinButton2;
 		private CCWin.SkinControl.SkinPictureBox skinPictureBox1;
 		private CCWin.SkinControl.SkinLabel skinLabel1;
 		private CCWin.SkinControl.SkinLabel skinLabel2;
 		private CCWin.SkinControl.SkinButton skinButton3;
+		public static System.Windows.Forms.ListBox chatListBox;
 	}
 }

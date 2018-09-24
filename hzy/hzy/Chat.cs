@@ -14,10 +14,11 @@ namespace hzy
 	public partial class Chat : Form
 	{
 		public UserInfo mineInfo = new UserInfo();
-		public UserInfo targetInfo = new UserInfo();
+		public static UserInfo targetInfo = new UserInfo();
 		public Chat()
 		{
 			InitializeComponent();
+			CheckForIllegalCrossThreadCalls = false;
 		}
 
 		public void SendChatMessage(object sender, KeyEventArgs e)
@@ -31,6 +32,8 @@ namespace hzy
 				msg.content = chatBox.Text;
 				msg.time = DateTime.Now;
 				userStr.Add(JsonConvert.SerializeObject(msg));
+				chatListBox.Items.Add(mineInfo.name + "\n");
+				chatListBox.Items.Add("\t\t\t" + msg.content);
 				Form1.SendMessage((int)Interface.message, userStr);
 			}
 		}
@@ -49,7 +52,27 @@ namespace hzy
 			msg.content = chatBox.Text;
 			msg.time = DateTime.Now;
 			userStr.Add(JsonConvert.SerializeObject(msg));
+			chatListBox.Items.Add(mineInfo.name + "\n");
+			chatListBox.Items.Add("\t\t\t" + msg.content);
 			Form1.SendMessage((int)Interface.message, userStr);
+		}
+
+		public static void SetNewMessage(Object obj)
+		{
+			var newMsg = UserHome._msg;
+			if (newMsg.targetId == targetInfo.userId)
+			{
+				var sendPeople = targetInfo.name + ":" + "\r\n";
+				chatListBox.Items.Add(sendPeople + newMsg.content + "\r\n");
+				MessageBox.Show(UserHome._msg.content);
+				Form1.RemoveObserver(new Form1.NotifyEventHandler(SetNewMessage));
+			}
+			
+		}
+
+		public void ShowChatMessage()
+		{
+			
 		}
 
 		public void CloseChat(object sender, EventArgs e)

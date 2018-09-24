@@ -19,7 +19,7 @@ namespace hzy
 
 	public partial class Form1 : Form
 	{
-		public static string ipAddress = "192.168.8.105";
+		public static string ipAddress = "192.168.0.103";
 		public static string port = "36001";
 		public static Thread thread;
 		public static Dictionary<int, string> _message = new Dictionary<int, string>();
@@ -100,7 +100,7 @@ namespace hzy
 				if (ret.retKey == (int)Interface.message)
 				{
 					UserHome._msg = JsonConvert.DeserializeObject<ChatMessage>(ret.Value);
-					AddObserver(new NotifyEventHandler(SetNewMessage));
+					AddObserver(new NotifyEventHandler(Chat.SetNewMessage));
 					Updates();
 					continue;
 				}
@@ -122,12 +122,12 @@ namespace hzy
 			NotifyEvent?.Invoke(this);
 		}
 
-		public static void SetNewMessage(Object obj)
-		{
-			var newMsg = UserHome._msg;
-			MessageBox.Show(UserHome._msg.content);
-			RemoveObserver(new NotifyEventHandler(SetNewMessage));
-		}
+		//public static void SetNewMessage(Object obj)
+		//{
+		//	var newMsg = UserHome._msg;
+		//	MessageBox.Show(UserHome._msg.content);
+		//	RemoveObserver(new NotifyEventHandler(SetNewMessage));
+		//}
 
 
 		public static void SendMessage(int key,List<object> content)
