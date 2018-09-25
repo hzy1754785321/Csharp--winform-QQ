@@ -237,7 +237,7 @@ namespace hzy
 					chat.Show();
 					this.Hide();
 					chat.mineInfo = _mineInfo;
-					chat.targetInfo = QueryUserInfo(123);
+					Chat.targetInfo = QueryUserInfo(123);
 				}
 				else
 				{
