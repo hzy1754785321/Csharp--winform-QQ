@@ -34,6 +34,7 @@
 			this.Start = new CCWin.SkinControl.SkinButton();
 			this.last = new CCWin.SkinControl.SkinButton();
 			this.next = new CCWin.SkinControl.SkinButton();
+			this.media = new System.Windows.Forms.Button();
 			this.SuspendLayout();
 			// 
 			// open
@@ -104,11 +105,22 @@
 			this.next.Click += new System.EventHandler(this.NextMusic);
 			this.next.Paint += new System.Windows.Forms.PaintEventHandler(this.button1_Paint);
 			// 
+			// media
+			// 
+			this.media.Location = new System.Drawing.Point(236, 13);
+			this.media.Name = "media";
+			this.media.Size = new System.Drawing.Size(82, 20);
+			this.media.TabIndex = 8;
+			this.media.Text = "去看视频";
+			this.media.UseVisualStyleBackColor = true;
+			this.media.Click += new System.EventHandler(this.GotoMedia);
+			// 
 			// music
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(319, 458);
+			this.Controls.Add(this.media);
 			this.Controls.Add(this.next);
 			this.Controls.Add(this.last);
 			this.Controls.Add(this.Start);
@@ -126,6 +138,7 @@
 		private CCWin.SkinControl.SkinButton Start;
 		private CCWin.SkinControl.SkinButton last;
 		private CCWin.SkinControl.SkinButton next;
+		private System.Windows.Forms.Button media;
 	}
 }
 

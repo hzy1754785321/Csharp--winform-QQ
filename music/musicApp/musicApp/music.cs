@@ -104,6 +104,14 @@ namespace musicApp
 			sp.Play();
 		}
 
+		public void GotoMedia(object sender,EventArgs e)
+		{
+			MediaPlay mp = new MediaPlay();
+			mp.MdiParent = this.MdiParent;
+			mp.Show();
+			this.Hide();
+		}
+
 		private void button1_Paint(object sender, PaintEventArgs e)
 		{
 			Button btn = sender as Button;

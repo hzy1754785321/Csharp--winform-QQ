@@ -31,16 +31,17 @@
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MediaPlay));
 			this.MediaPlayer = new AxWMPLib.AxWindowsMediaPlayer();
 			this.MediaList = new System.Windows.Forms.ListBox();
+			this.open = new System.Windows.Forms.Button();
 			((System.ComponentModel.ISupportInitialize)(this.MediaPlayer)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// MediaPlayer
 			// 
 			this.MediaPlayer.Enabled = true;
-			this.MediaPlayer.Location = new System.Drawing.Point(133, 382);
+			this.MediaPlayer.Location = new System.Drawing.Point(188, 41);
 			this.MediaPlayer.Name = "MediaPlayer";
 			this.MediaPlayer.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("MediaPlayer.OcxState")));
-			this.MediaPlayer.Size = new System.Drawing.Size(549, 45);
+			this.MediaPlayer.Size = new System.Drawing.Size(610, 385);
 			this.MediaPlayer.TabIndex = 0;
 			// 
 			// MediaList
@@ -51,12 +52,24 @@
 			this.MediaList.Name = "MediaList";
 			this.MediaList.Size = new System.Drawing.Size(170, 364);
 			this.MediaList.TabIndex = 1;
+			this.MediaList.DoubleClick += new System.EventHandler(this.StartMedia);
+			// 
+			// open
+			// 
+			this.open.Location = new System.Drawing.Point(188, 12);
+			this.open.Name = "open";
+			this.open.Size = new System.Drawing.Size(75, 23);
+			this.open.TabIndex = 2;
+			this.open.Text = "打开";
+			this.open.UseVisualStyleBackColor = true;
+			this.open.Click += new System.EventHandler(this.OpenMedia);
 			// 
 			// MediaPlay
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(800, 450);
+			this.Controls.Add(this.open);
 			this.Controls.Add(this.MediaList);
 			this.Controls.Add(this.MediaPlayer);
 			this.Name = "MediaPlay";
@@ -70,5 +83,6 @@
 
 		private AxWMPLib.AxWindowsMediaPlayer MediaPlayer;
 		private System.Windows.Forms.ListBox MediaList;
+		private System.Windows.Forms.Button open;
 	}
 }
