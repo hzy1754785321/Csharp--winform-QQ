@@ -470,7 +470,10 @@
         QbwL+1Z8APC/gzQNI8SWXiHT9ZtdTvLjVrW3jtnCWtxFIEaOd2JLzKRlQMA8g8EA/wD/2Q==
 </value>
   </data>
-  <data name="skinPictureBox6.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <metadata name="Menu.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>248, 17</value>
+  </metadata>
+  <data name="Setting.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABkAAAAYCAYAAAAPtVbGAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
         YQUAAAVZSURBVEhLlVZJbBtlGDVQ27EnjtfYM57NszrOZsceu4WKsrWRSlOQEAKB1B6gvZZFcEIVQgLE

@@ -19,6 +19,7 @@ namespace hzy
 	public partial class UserHome : Form
 	{
 		private ContextMenuStrip onlyfornumber;
+		private ContextMenuStrip findFriend;
 		public UserInfo _mineInfo;
 		public static Form localForm;
 
@@ -44,7 +45,12 @@ namespace hzy
 			onlyfornumber.Items.Add("选择图片");
 			onlyfornumber.Items[0].Click += SelectPhoto;
 			UserPhoto.ContextMenuStrip = onlyfornumber;
-			
+
+			findFriend = new ContextMenuStrip();
+			findFriend.Items.Add("添加好友");
+			findFriend.Items[0].Click += FindFriend;
+			Setting.ContextMenuStrip = findFriend;
+
 			_doubleClickTimer = new System.Windows.Forms.Timer();
 			_doubleClickTimer.Interval = 100;
 			_doubleClickTimer.Tick += new EventHandler(StartChat);
@@ -68,6 +74,30 @@ namespace hzy
 			}
 		}
 
+		public void CheckPopUP()
+		{
+			if (_mineInfo.ext != null)
+			{
+				if (_mineInfo.ext.type != null)
+				{
+					foreach
+				}
+			}
+		}
+
+		public void PopUp(object sender, EventArgs e)
+		{
+			DialogResult dr = MessageBox.Show("好友申请","是否同意？", MessageBoxButtons.OKCancel);
+
+			if (dr == DialogResult.OK)
+			{
+				button1.Text = "确定按钮";
+			}
+			else if (dr == DialogResult.Cancel)
+			{
+				button1.Text = "取消了！";
+			}
+		}
 
 
 		private void SetNewPhoto(object sender, MouseEventArgs e)
@@ -104,6 +134,7 @@ namespace hzy
 						ms = new MemoryStream();
 						Image bi = UserPhoto.Image;
 						bi.Save(ms, UserPhoto.Image.RawFormat);
+
 						var arr = ms.ToArray();
 						var sendArr = Convert.ToBase64String(arr);
 						ms.Position = 0;
@@ -205,7 +236,7 @@ namespace hzy
 			}
 		}
 
-		public UserInfo QueryUserInfo(int userId)
+		public static UserInfo QueryUserInfo(int userId)
 		{
 			List<object> userStr = new List<object>();
 			userStr.Add(userId);
@@ -219,9 +250,31 @@ namespace hzy
 					break;
 				}
 			}
-			var userInfo = JsonConvert.DeserializeObject<UserInfo>(result);
-			return userInfo;
+			try
+			{
+				var userInfo = JsonConvert.DeserializeObject<UserInfo>(result);
+				return userInfo;
+			}
+			catch (Exception)
+			{
+				return null;
+			}
+		}
 
+		public void ShowMenu(MouseEventArgs e)
+		{
+			base.OnMouseUp(e);
+			if (e.Button == MouseButtons.Left)
+			{
+				Menu.Show(this, e.Location);
+			}
+		}
+
+		public void FindFriend(object sender, EventArgs e)
+		{
+			AddFriend addFriend = new AddFriend();
+			addFriend.Location = this.Location;
+			addFriend.Show();
 		}
 
 		public void StartChat(object sender, EventArgs e)

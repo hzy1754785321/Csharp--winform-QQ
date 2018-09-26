@@ -37,4 +37,12 @@ namespace hzy
 		/// </summary>
 		userInfo,
 	}
+
+	public enum PopType
+	{
+		/// <summary>
+		/// 好友申请
+		/// </summary>
+		friend = 0,
+	}
 }

@@ -28,6 +28,18 @@ namespace hzy
 		public Form1()
 		{
 			InitializeComponent();
+			string HostName = Dns.GetHostName(); 
+			IPHostEntry IpEntry = Dns.GetHostEntry(HostName);
+			for (int i = 0; i < IpEntry.AddressList.Length; i++)
+			{
+
+				if (IpEntry.AddressList[i].AddressFamily == AddressFamily.InterNetwork)
+				{
+					ipAddress = IpEntry.AddressList[i].ToString();
+					MessageBox.Show(ipAddress);
+				}
+			}
+			startConnect();
 		}
 
 			private void login(object sender, EventArgs e)
@@ -64,23 +76,34 @@ namespace hzy
 		}
 
 		public static Socket socketSend;
-		public  void startConnect(object sender, EventArgs e)
+		public  void startConnect()
 		{
-			try
+			//	try
+			//	{
+			while (true)
 			{
-				socketSend = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-				IPAddress ip = IPAddress.Parse(Form1.ipAddress);
-				IPEndPoint point = new IPEndPoint(ip, Convert.ToInt32(Form1.port));
-				socketSend.Connect(point);
-				Thread r_thread = new Thread(Received);
-				r_thread.IsBackground = true;
-				r_thread.Start();
-				MessageBox.Show("连接成功！");
+				try
+				{
+					socketSend = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+					IPAddress ip = IPAddress.Parse(Form1.ipAddress);
+					IPEndPoint point = new IPEndPoint(ip, Convert.ToInt32(Form1.port));
+					socketSend.Connect(point);
+					Thread r_thread = new Thread(Received);
+					r_thread.IsBackground = true;
+					r_thread.Start();
+					MessageBox.Show("连接成功！");
+					break;
+				}
+				catch (Exception)
+				{
+					continue;
+				}
 			}
-			catch (Exception)
-			{
-				MessageBox.Show("IP或端口错误,无法连接服务器");
-			}
+	//		}
+	//		catch (Exception)
+	//		{
+	//			MessageBox.Show("IP或端口错误,无法连接服务器");
+	//		}
 		}
 
 	

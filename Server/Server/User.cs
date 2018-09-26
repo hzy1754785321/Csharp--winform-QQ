@@ -100,7 +100,10 @@ namespace ServerUser
 			else
 			{
 				var info = DataStorage.SQLiteHelper.QueryUserInfo(userId);
-				ret.Value = JsonConvert.SerializeObject(info);
+				if (info == null)
+					ret.Value = JsonConvert.SerializeObject(false);
+				else
+					ret.Value = JsonConvert.SerializeObject(info);
 				return ret;
 			}
 		}

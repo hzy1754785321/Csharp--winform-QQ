@@ -70,6 +70,23 @@ namespace Server
 		/// 密码
 		/// </summary>
 		public string passwd;
+		/// <summary>
+		/// 扩展通知
+		/// </summary>
+		public Extend ext;
+	}
+
+	[Serializable]
+	public class Extend
+	{
+		/// <summary>
+		/// 好友申请
+		/// </summary>
+		public List<int> friendApply;
+		/// <summary>
+		/// 类型
+		/// </summary>
+		public List<int> type;
 	}
 
 	[Serializable]

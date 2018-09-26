@@ -66,10 +66,12 @@ namespace hzy
 			this.mineName = new System.Windows.Forms.Label();
 			this.skinPictureBox2 = new CCWin.SkinControl.SkinPictureBox();
 			this.mineInfo = new CCWin.SkinControl.SkinButton();
-			this.skinPictureBox6 = new CCWin.SkinControl.SkinPictureBox();
+			this.Setting = new CCWin.SkinControl.SkinPictureBox();
 			this.openFile = new System.Windows.Forms.OpenFileDialog();
 			this.entryMyName = new System.Windows.Forms.TextBox();
 			this.signText = new System.Windows.Forms.TextBox();
+			this.Menu = new System.Windows.Forms.ContextMenuStrip(this.components);
+			this.添加好友ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			((System.ComponentModel.ISupportInitialize)(this.UserPhoto)).BeginInit();
 			this.choosePhoto.SuspendLayout();
 			this.skinPanel1.SuspendLayout();
@@ -77,7 +79,8 @@ namespace hzy
 			((System.ComponentModel.ISupportInitialize)(this.skinPictureBox4)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.skinPictureBox3)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.skinPictureBox2)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.skinPictureBox6)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.Setting)).BeginInit();
+			this.Menu.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// skinButton1
@@ -569,18 +572,19 @@ namespace hzy
 			this.mineInfo.Size = new System.Drawing.Size(309, 48);
 			this.mineInfo.TabIndex = 4;
 			this.mineInfo.UseVisualStyleBackColor = false;
-			this.mineInfo.MouseDown += new MouseEventHandler(mineInfo_MouseDown);
+			this.mineInfo.MouseDown += new System.Windows.Forms.MouseEventHandler(this.mineInfo_MouseDown);
 			// 
-			// skinPictureBox6
+			// Setting
 			// 
-			this.skinPictureBox6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-			this.skinPictureBox6.Image = ((System.Drawing.Image)(resources.GetObject("skinPictureBox6.Image")));
-			this.skinPictureBox6.Location = new System.Drawing.Point(0, 512);
-			this.skinPictureBox6.Name = "skinPictureBox6";
-			this.skinPictureBox6.Size = new System.Drawing.Size(25, 24);
-			this.skinPictureBox6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
-			this.skinPictureBox6.TabIndex = 12;
-			this.skinPictureBox6.TabStop = false;
+			this.Setting.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+			this.Setting.ContextMenuStrip = this.Menu;
+			this.Setting.Image = ((System.Drawing.Image)(resources.GetObject("Setting.Image")));
+			this.Setting.Location = new System.Drawing.Point(0, 512);
+			this.Setting.Name = "Setting";
+			this.Setting.Size = new System.Drawing.Size(25, 24);
+			this.Setting.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+			this.Setting.TabIndex = 12;
+			this.Setting.TabStop = false;
 			// 
 			// openFile
 			// 
@@ -604,6 +608,19 @@ namespace hzy
 			this.signText.Visible = false;
 			this.signText.KeyDown += new System.Windows.Forms.KeyEventHandler(this.SetMySign);
 			// 
+			// Menu
+			// 
+			this.Menu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.添加好友ToolStripMenuItem});
+			this.Menu.Name = "Menu";
+			this.Menu.Size = new System.Drawing.Size(125, 26);
+			// 
+			// 添加好友ToolStripMenuItem
+			// 
+			this.添加好友ToolStripMenuItem.Name = "添加好友ToolStripMenuItem";
+			this.添加好友ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+			this.添加好友ToolStripMenuItem.Text = "添加好友";
+			// 
 			// UserHome
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -612,7 +629,7 @@ namespace hzy
 			this.ClientSize = new System.Drawing.Size(340, 538);
 			this.Controls.Add(this.signText);
 			this.Controls.Add(this.entryMyName);
-			this.Controls.Add(this.skinPictureBox6);
+			this.Controls.Add(this.Setting);
 			this.Controls.Add(this.skinButton10);
 			this.Controls.Add(this.skinPanel1);
 			this.Controls.Add(this.skinButton5);
@@ -637,7 +654,8 @@ namespace hzy
 			((System.ComponentModel.ISupportInitialize)(this.skinPictureBox4)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.skinPictureBox3)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.skinPictureBox2)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.skinPictureBox6)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.Setting)).EndInit();
+			this.Menu.ResumeLayout(false);
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -675,11 +693,13 @@ namespace hzy
 		private CCWin.SkinControl.SkinPictureBox skinPictureBox5;
 		private CCWin.SkinControl.SkinPictureBox skinPictureBox4;
 		private CCWin.SkinControl.SkinPictureBox skinPictureBox3;
-		private CCWin.SkinControl.SkinPictureBox skinPictureBox6;
+		private CCWin.SkinControl.SkinPictureBox Setting;
 		private CCWin.SkinControl.SkinContextMenuStrip choosePhoto;
 		private System.Windows.Forms.ToolStripMenuItem 选择图片ToolStripMenuItem;
 		private System.Windows.Forms.OpenFileDialog openFile;
 		private System.Windows.Forms.TextBox entryMyName;
 		private System.Windows.Forms.TextBox signText;
+		private ContextMenuStrip Menu;
+		private ToolStripMenuItem 添加好友ToolStripMenuItem;
 	}
 }

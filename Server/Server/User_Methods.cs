@@ -78,5 +78,12 @@ namespace ServerUser
 			}
 		}
 
+		public void addFriend(int mineId,int friendId)
+		{
+			if (userKey.TryGetValue(mineId, out UserInfo userInfo))
+			{
+				UserInfo
+			}
+
 	}
 }
