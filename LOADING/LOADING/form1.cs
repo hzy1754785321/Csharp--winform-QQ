@@ -22,9 +22,7 @@ namespace LOADING
         
         public Loading()
         {
-            InitializeComponent();
-			FormBorderStyle = FormBorderStyle.None;
-			MessageBox.Show(IsInt("请搜索").ToString());
+            InitializeComponent();	
 		}
 
 		public static bool IsInt(string str)
@@ -39,7 +37,6 @@ namespace LOADING
 				return false;
 			}
 		}
-
 
 
 		public Color CircleColor

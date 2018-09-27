@@ -13,6 +13,7 @@ namespace hzy
 {
 	public partial class AddFriend : Form
 	{
+		public int mineId;
 		public AddFriend()
 		{
 			InitializeComponent();
@@ -57,9 +58,13 @@ namespace hzy
 			}
 		}
 
-		public void AddFriend(object sender, EventArgs e)
+		public void AddFriendApply(object sender, EventArgs e)
 		{
-
+			List<object> userStr = new List<object>();
+			userStr.Add(mineId);
+			userStr.Add(Convert.ToInt32(searchText.Text));
+			Form1.SendMessage((int)Interface.friendApply, userStr);
+			MessageBox.Show("发送好友申请成功");
 		}
 
 		public static bool IsInt(string str)

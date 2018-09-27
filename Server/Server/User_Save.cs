@@ -13,7 +13,7 @@ namespace ServerUser
 	{
 		public static void UpdateUserInfo(UserInfo info)
 		{
-			DataStorage.SQLiteHelper.UpdateUserInfoAsync(info.userId, info.name, info.passwd, JsonConvert.SerializeObject(info.friend), JsonConvert.SerializeObject(info.historyId), info.photo, info.signature, info.CreateTime, info.lastActive);
+			DataStorage.SQLiteHelper.UpdateUserInfoAsync(info.userId, info.name, info.passwd, JsonConvert.SerializeObject(info.friend), JsonConvert.SerializeObject(info.historyId), info.photo, info.signature, info.CreateTime, info.lastActive,JsonConvert.SerializeObject(info.ext),JsonConvert.SerializeObject(info.groupId));
 		}
 	}
 }

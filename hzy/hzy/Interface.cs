@@ -36,6 +36,14 @@ namespace hzy
 		/// 用户信息
 		/// </summary>
 		userInfo,
+		/// <summary>
+		/// 添加好友
+		/// </summary>
+		friendApply,
+		/// <summary>
+		/// 添加好友成功
+		/// </summary>
+		friendSuccess,
 	}
 
 	public enum PopType

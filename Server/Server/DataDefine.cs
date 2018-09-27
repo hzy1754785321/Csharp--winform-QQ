@@ -74,6 +74,10 @@ namespace Server
 		/// 扩展通知
 		/// </summary>
 		public Extend ext;
+		/// <summary>
+		/// 加入的群
+		/// </summary>
+		public List<int> groupId;
 	}
 
 	[Serializable]

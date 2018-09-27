@@ -19,7 +19,7 @@ namespace hzy
 	public partial class UserHome : Form
 	{
 		private ContextMenuStrip onlyfornumber;
-		private ContextMenuStrip findFriend;
+		private ContextMenuStrip setting;
 		public UserInfo _mineInfo;
 		public static Form localForm;
 
@@ -46,10 +46,14 @@ namespace hzy
 			onlyfornumber.Items[0].Click += SelectPhoto;
 			UserPhoto.ContextMenuStrip = onlyfornumber;
 
-			findFriend = new ContextMenuStrip();
-			findFriend.Items.Add("添加好友");
-			findFriend.Items[0].Click += FindFriend;
-			Setting.ContextMenuStrip = findFriend;
+			setting = new ContextMenuStrip();
+			setting.Items.Add("添加好友");
+			setting.Items.Add("加入群聊");
+			setting.Items[0].Click += FindFriend;
+			setting.Items[1].Click += 
+
+
+			Setting.ContextMenuStrip = setting;
 
 			_doubleClickTimer = new System.Windows.Forms.Timer();
 			_doubleClickTimer.Interval = 100;
@@ -76,26 +80,54 @@ namespace hzy
 
 		public void CheckPopUP()
 		{
+			int temp = 0;
 			if (_mineInfo.ext != null)
 			{
 				if (_mineInfo.ext.type != null)
 				{
-					foreach
+					for (int i = 0; i < _mineInfo.ext.type.Count; i++)
+					{
+						while (_mineInfo.ext.type[(int)PopType.friend] > 0)
+						{
+							PopUp(_mineInfo.ext.friendApply[temp]);
+							temp++;
+						}
+					}
 				}
 			}
 		}
 
-		public void PopUp(object sender, EventArgs e)
+		public void PopUp(int userId)
 		{
-			DialogResult dr = MessageBox.Show("好友申请","是否同意？", MessageBoxButtons.OKCancel);
+			string str = string.Format("用户:" + userId + " 请求加你为好友，是否同意？");
+			DialogResult dr = MessageBox.Show(str,"好友申请", MessageBoxButtons.YesNoCancel);
 
-			if (dr == DialogResult.OK)
+			if (dr == DialogResult.Yes)
 			{
-				button1.Text = "确定按钮";
+				_mineInfo.ext.type[(int)PopType.friend]--;
+				_mineInfo.ext.friendApply.Remove(userId);
+				var fInfo = new FriendInfo();
+				fInfo.friendId = userId;
+				if (_mineInfo.friend == null)
+					_mineInfo.friend = new List<FriendInfo>();
+				_mineInfo.friend.Add(fInfo);
+				List<object> userStr = new List<object>();
+				userStr.Add(JsonConvert.SerializeObject(_mineInfo));
+				userStr.Add(userId);
+				Form1.SendMessage((int)Interface.friendSuccess, userStr);
+			}
+			else if (dr == DialogResult.No)
+			{
+				_mineInfo.ext.type[(int)PopType.friend]--;
+				_mineInfo.ext.friendApply.Remove(userId);
+				List<object> userStr = new List<object>();
+				userStr.Add(_mineInfo.userId);
+				userStr.Add(userId);
+				Form1.SendMessage((int)Interface.friendSuccess, userStr);
 			}
 			else if (dr == DialogResult.Cancel)
 			{
-				button1.Text = "取消了！";
+				return;
 			}
 		}
 
@@ -274,8 +306,11 @@ namespace hzy
 		{
 			AddFriend addFriend = new AddFriend();
 			addFriend.Location = this.Location;
+			addFriend.mineId = _mineInfo.userId;
 			addFriend.Show();
 		}
+
+		public void 
 
 		public void StartChat(object sender, EventArgs e)
 		{

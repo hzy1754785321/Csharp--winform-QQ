@@ -635,7 +635,8 @@ namespace Backend
 																	"signature text null," +
 																	"CreateTime datetime null," +
 																	"lastActive datetime null," +
-																	"ext json null)";
+																	"ext json null," +
+																	"groupId json null)";
 					cmd.ExecuteNonQuery();
 				}
 				sqliteConn.Close();
@@ -725,7 +726,7 @@ namespace Backend
 				}
 			}
 
-			public static void CreateUserInfoAsync(int userId, DateTime CreateTime,DateTime lastActive, string name = null,string passwd = null, string friend = null, string historyId = null, string photo = null, string signature = null,string ext = null)
+			public static void CreateUserInfoAsync(int userId, DateTime CreateTime,DateTime lastActive, string name = null,string passwd = null, string friend = null, string historyId = null, string photo = null, string signature = null,string ext = null,string groupId = null)
 			{
 				var sqliteConn = new SQLiteConnection("data source=" + server.strPath);
 				if (sqliteConn.State != System.Data.ConnectionState.Open)
@@ -734,7 +735,7 @@ namespace Backend
 					var cmd = new SQLiteCommand();
 					cmd.Connection = sqliteConn;
 				//	var sql = string.Format("insert into user(userId,name,passwd,friend,historyId,photo,signature,Createtime) values({0},{1},{2},{3},{4},{5},{6},{7});", userId, name, passwd ,friend, historyId, photo, signature, CreateTime);
-					cmd.CommandText = "INSERT INTO user(userId,name,passwd,friend,historyId,photo,signature,Createtime) VALUES(?,?,?,?,?,?,?,?)";
+					cmd.CommandText = "INSERT INTO user(userId,name,passwd,friend,historyId,photo,signature,Createtime,lastActive,ext,groupId) VALUES(?,?,?,?,?,?,?,?,?,?,?)";
 					cmd.Parameters.Add("userId", DbType.Int32).Value = userId;
 					cmd.Parameters.Add("name", DbType.String).Value = name;
 					cmd.Parameters.Add("passwd", DbType.String).Value = passwd;
@@ -745,12 +746,13 @@ namespace Backend
 					cmd.Parameters.Add("CreateTime", DbType.DateTime).Value = CreateTime;
 					cmd.Parameters.Add("lastActive",DbType.DateTime).Value = lastActive;
 					cmd.Parameters.Add("ext", DbType.String).Value = ext;
+					cmd.Parameters.Add("groupId", DbType.String).Value = groupId;
 					cmd.ExecuteNonQuery();
 				}
 				sqliteConn.Close();
 			}
 
-			public static void UpdateUserInfoAsync(int userId, string name , string passwd , string friend , string historyId ,string photo , string signature, DateTime CreateTime, DateTime lastActive,string ext)
+			public static void UpdateUserInfoAsync(int userId, string name , string passwd , string friend , string historyId ,string photo , string signature, DateTime CreateTime, DateTime lastActive,string ext,string groupId)
 			{
 				var sqliteConn = new SQLiteConnection("data source=" + server.strPath);
 				if (sqliteConn.State != System.Data.ConnectionState.Open)
@@ -758,7 +760,7 @@ namespace Backend
 					sqliteConn.Open();
 					var cmd = new SQLiteCommand();
 					cmd.Connection = sqliteConn;
-					var sql = string.Format("update user set name=@name,passwd=@passwd,friend=@friend,historyId=@historyId,photo=@photo,signature=@signature,CreateTime=@CreateTime,lastActive=@lastActive,ext=@ext where userId={0}", userId);
+					var sql = string.Format("update user set name=@name,passwd=@passwd,friend=@friend,historyId=@historyId,photo=@photo,signature=@signature,CreateTime=@CreateTime,lastActive=@lastActive,ext=@ext,groupId=@groupId where userId={0}", userId);
 					cmd.CommandText = sql;
 					cmd.Parameters.Add("name", DbType.String).Value = name;
 					cmd.Parameters.Add("passwd", DbType.String).Value = passwd;
@@ -769,6 +771,7 @@ namespace Backend
 					cmd.Parameters.Add("CreateTime", DbType.DateTime).Value = CreateTime;
 					cmd.Parameters.Add("lastActive", DbType.DateTime).Value = lastActive;
 					cmd.Parameters.Add("ext", DbType.String).Value = ext;
+					cmd.Parameters.Add("groupId", DbType.String).Value = groupId;
 					var result = cmd.ExecuteNonQuery();
 				}
 				sqliteConn.Close();
@@ -813,8 +816,10 @@ namespace Backend
 							info.CreateTime = (DateTime)reader["Createtime"];
 						if(reader["lastActive"] != DBNull.Value)
 							info.lastActive = (DateTime)reader["lastActive"];
-						if (reader["ext"] != DBNull.Value])
+						if (reader["ext"] != DBNull.Value)
 							info.ext = JsonConvert.DeserializeObject<Extend>(Convert.ToString(reader["ext"]));
+						if (reader["groupId"] != DBNull.Value)
+							info.groupId = JsonConvert.DeserializeObject<List<int>>(Convert.ToString(reader["groupId"]));
 					}
 				}
 				sqliteConn.Close();

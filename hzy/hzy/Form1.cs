@@ -25,52 +25,66 @@ namespace hzy
 		public static Dictionary<int, string> _message = new Dictionary<int, string>();
 		public delegate void NotifyEventHandler(object sender);
 		public static NotifyEventHandler NotifyEvent;
+		public static bool isConnect;
+		public Loading temp;
 		public Form1()
 		{
-			InitializeComponent();
+			var load = new Loading();
+			temp = load;
+			load.Show();
 			string HostName = Dns.GetHostName(); 
 			IPHostEntry IpEntry = Dns.GetHostEntry(HostName);
 			for (int i = 0; i < IpEntry.AddressList.Length; i++)
 			{
-
 				if (IpEntry.AddressList[i].AddressFamily == AddressFamily.InterNetwork)
 				{
 					ipAddress = IpEntry.AddressList[i].ToString();
-					MessageBox.Show(ipAddress);
 				}
 			}
-			startConnect();
+			Thread thread = new Thread(startConnect);
+			thread.Start();
+	//		startConnect();
+	//		load.Close();
+			InitializeComponent();
 		}
 
 			private void login(object sender, EventArgs e)
 		{
-			if (!string.IsNullOrEmpty(name.Text) || !string.IsNullOrEmpty(passwd.Text))
+			if (isConnect)
 			{
-				List<object> userStr = new List<object>();
-				userStr.Add(int.Parse(name.Text));
-				userStr.Add(passwd.Text);
-				SendMessage((int)Interface.login, userStr);
-				string result;
-				while (true)
+				if (!string.IsNullOrEmpty(name.Text) || !string.IsNullOrEmpty(passwd.Text))
 				{
-					if (_message.TryGetValue((int)Interface.login, out result))
+					List<object> userStr = new List<object>();
+					userStr.Add(int.Parse(name.Text));
+					userStr.Add(passwd.Text);
+					SendMessage((int)Interface.login, userStr);
+					string result;
+					while (true)
 					{
-						_message.Remove((int)Interface.login);
-						break;
+						if (_message.TryGetValue((int)Interface.login, out result))
+						{
+							_message.Remove((int)Interface.login);
+							break;
+						}
 					}
+					if (string.IsNullOrEmpty(result))
+					{
+						MessageBox.Show("登陆失败,账号不存在或密码错误!");
+						return;
+					}
+					var userInfo = JsonConvert.DeserializeObject<UserInfo>(result);
+					MessageBox.Show("登陆成功,欢迎使用");
+					UserHomeStart(userInfo);
 				}
-				if (string.IsNullOrEmpty(result))
+				else
 				{
-					MessageBox.Show("登陆失败,账号不存在或密码错误!");
+					MessageBox.Show("账号与密码不能为空!");
 					return;
 				}
-				var userInfo = JsonConvert.DeserializeObject<UserInfo>(result);
-				MessageBox.Show("登陆成功,欢迎使用");
-				UserHomeStart(userInfo);
 			}
 			else
 			{
-				MessageBox.Show("账号与密码不能为空!");
+				MessageBox.Show("未连上服务器，请检查您的网络设置");
 				return;
 			}
 		}
@@ -80,6 +94,7 @@ namespace hzy
 		{
 			//	try
 			//	{
+			CheckForIllegalCrossThreadCalls = false;
 			while (true)
 			{
 				try
@@ -91,7 +106,9 @@ namespace hzy
 					Thread r_thread = new Thread(Received);
 					r_thread.IsBackground = true;
 					r_thread.Start();
+					temp.Close();
 					MessageBox.Show("连接成功！");
+					isConnect = true;
 					break;
 				}
 				catch (Exception)
@@ -99,6 +116,7 @@ namespace hzy
 					continue;
 				}
 			}
+			return;
 	//		}
 	//		catch (Exception)
 	//		{
@@ -190,6 +208,7 @@ namespace hzy
 			userHome.InitUserHome(info);
 			userHome.MdiParent = this.MdiParent;
 			userHome.Show();
+			userHome.CheckPopUP();
 			this.Hide();
 		}
 

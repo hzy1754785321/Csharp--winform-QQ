@@ -34,7 +34,6 @@
 			this.passwd = new System.Windows.Forms.TextBox();
 			this.label1 = new System.Windows.Forms.Label();
 			this.label2 = new System.Windows.Forms.Label();
-			this.button3 = new System.Windows.Forms.Button();
 			this.SuspendLayout();
 			// 
 			// name
@@ -89,21 +88,11 @@
 			this.label2.TabIndex = 5;
 			this.label2.Text = "密码";
 			// 
-			// button3
-			// 
-			this.button3.Location = new System.Drawing.Point(640, 110);
-			this.button3.Name = "button3";
-			this.button3.Size = new System.Drawing.Size(75, 23);
-			this.button3.TabIndex = 6;
-			this.button3.Text = "connect";
-			this.button3.UseVisualStyleBackColor = true;
-			// 
 			// Form1
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(800, 450);
-			this.Controls.Add(this.button3);
 			this.Controls.Add(this.label2);
 			this.Controls.Add(this.label1);
 			this.Controls.Add(this.passwd);
@@ -112,7 +101,6 @@
 			this.Controls.Add(this.name);
 			this.Name = "Form1";
 			this.Text = "登陆界面";
-//			this.Load += new System.EventHandler(this.Form1_Load);
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -126,7 +114,6 @@
 		private System.Windows.Forms.TextBox passwd;
 		private System.Windows.Forms.Label label1;
 		private System.Windows.Forms.Label label2;
-		private System.Windows.Forms.Button button3;
 	}
 }
 

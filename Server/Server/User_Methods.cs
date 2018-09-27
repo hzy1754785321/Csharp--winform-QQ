@@ -52,7 +52,7 @@ namespace ServerUser
 				ret.retKey = (int)Interface.message;
 				ret.Value = JsonConvert.SerializeObject(chatMessage);
 				var retStr = JsonConvert.SerializeObject(ret);
-				server.SendMessage(socket,retStr);
+				server.SendMessage(socket, retStr);
 			}
 			else
 			{
@@ -78,12 +78,65 @@ namespace ServerUser
 			}
 		}
 
-		public void addFriend(int mineId,int friendId)
+		public void AddFriendApply(int applyId, int frindId)
 		{
-			if (userKey.TryGetValue(mineId, out UserInfo userInfo))
+			if (userKey.TryGetValue(frindId, out UserInfo friendInfo))
 			{
-				UserInfo
+				if (friendInfo.ext == null)
+					friendInfo.ext = new Extend();
+				if (friendInfo.ext.type == null)
+					friendInfo.ext.type = new List<int>();
+				if (friendInfo.ext.friendApply == null)
+					friendInfo.ext.friendApply = new List<int>();
+				try
+				{
+					friendInfo.ext.type[(int)PopType.friend]++;
+				}
+				catch (Exception)
+				{
+					friendInfo.ext.type.Add(0);
+					friendInfo.ext.type[(int)PopType.friend]++;
+				}
+				friendInfo.ext.friendApply.Add(applyId);
+				UpdateUserInfo(friendInfo);
+			}
+		}
+
+		public void addFriendSuccess(string userInfo, int friendId)
+		{
+			var user = JsonConvert.DeserializeObject<UserInfo>(userInfo);
+			if (userKey.TryGetValue(user.userId, out UserInfo temp))
+			{
+				userKey[user.userId] = user;
+				UpdateUserInfo(user);
+			}
+			else
+			{
+				UpdateUserInfo(user);
 			}
 
+			if (userKey.TryGetValue(friendId, out UserInfo friend))
+			{
+				var newFriend = new FriendInfo();
+				newFriend.friendId = user.userId;
+				if (friend.friend == null)
+					friend.friend = new List<FriendInfo>();
+				friend.friend.Add(newFriend);
+				UpdateUserInfo(friend);
+			}
+			else
+			{
+				var friendInfo = DataStorage.SQLiteHelper.QueryUserInfo(friendId);
+				if (friendInfo != null)
+				{
+					var newFriend = new FriendInfo();
+					newFriend.friendId = user.userId;
+					if (friendInfo.friend == null)
+						friendInfo.friend = new List<FriendInfo>();
+					friendInfo.friend.Add(newFriend);
+					UpdateUserInfo(friendInfo);
+				}
+			}
+		}
 	}
 }

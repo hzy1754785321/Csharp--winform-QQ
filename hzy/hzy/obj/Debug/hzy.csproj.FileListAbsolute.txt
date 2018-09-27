@@ -15,7 +15,6 @@ C:\Users\ychi\source\repos\hzy\hzy\obj\Debug\hzy.UserHome.resources
 C:\Users\ychi\source\repos\hzy\hzy\obj\Debug\hzy.Chat.resources
 C:\Users\ychi\source\repos\hzy\hzy\bin\Debug\CSkin.dll
 C:\Users\ychi\source\repos\hzy\hzy\bin\Debug\CSkin.xml
-C:\Users\ychi\source\repos\hzy\hzy\obj\Debug\hzy.csprojResolveAssemblyReference.cache
 D:\Work\hzy\hzy\bin\Debug\hzy.exe.config
 D:\Work\hzy\hzy\bin\Debug\hzy.exe
 D:\Work\hzy\hzy\bin\Debug\hzy.pdb
@@ -33,3 +32,7 @@ D:\Work\hzy\hzy\obj\Debug\hzy.csproj.CoreCompileInputs.cache
 D:\Work\hzy\hzy\obj\Debug\hzy.csproj.CopyComplete
 D:\Work\hzy\hzy\obj\Debug\hzy.exe
 D:\Work\hzy\hzy\obj\Debug\hzy.pdb
+C:\Users\ychi\source\repos\hzy\hzy\obj\Debug\hzy.AddFriend.resources
+C:\Users\ychi\source\repos\hzy\hzy\obj\Debug\hzy.Loading.resources
+C:\Users\ychi\source\repos\hzy\hzy\obj\Debug\hzy.csprojResolveAssemblyReference.cache
+C:\Users\ychi\source\repos\hzy\hzy\obj\Debug\hzy.Group.resources
