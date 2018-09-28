@@ -32,8 +32,8 @@ namespace hzy
 				msg.content = chatBox.Text;
 				msg.time = DateTime.Now;
 				userStr.Add(JsonConvert.SerializeObject(msg));
-				chatListBox.Items.Add(mineInfo.name + "\n");
-				chatListBox.Items.Add("\t\t\t" + msg.content);
+				chatListBox.Font = new Font(this.Font.FontFamily, 20); 
+				chatListBox.Items.Add("我:" + msg.content + "\r\n");
 				Form1.SendMessage((int)Interface.message, userStr);
 			}
 		}
@@ -52,8 +52,8 @@ namespace hzy
 			msg.content = chatBox.Text;
 			msg.time = DateTime.Now;
 			userStr.Add(JsonConvert.SerializeObject(msg));
-			chatListBox.Items.Add(mineInfo.name + "\n");
-			chatListBox.Items.Add("\t\t\t" + msg.content);
+			chatListBox.Font = new Font(this.Font.FontFamily, 20);
+			chatListBox.Items.Add(targetInfo.name + ":" +msg.content + "\r\n");
 			Form1.SendMessage((int)Interface.message, userStr);
 		}
 

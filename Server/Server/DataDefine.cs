@@ -162,7 +162,12 @@ namespace Server
 		/// 管理员
 		/// </summary>
 		public List<int> admin;
+		/// <summary>
+		/// 入群申请
+		/// </summary>
+		public List<int> apply; 
 	}
+
 
 	[Serializable]
 	public class Message

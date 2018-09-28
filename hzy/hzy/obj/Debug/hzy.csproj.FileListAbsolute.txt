@@ -36,3 +36,4 @@ C:\Users\ychi\source\repos\hzy\hzy\obj\Debug\hzy.AddFriend.resources
 C:\Users\ychi\source\repos\hzy\hzy\obj\Debug\hzy.Loading.resources
 C:\Users\ychi\source\repos\hzy\hzy\obj\Debug\hzy.csprojResolveAssemblyReference.cache
 C:\Users\ychi\source\repos\hzy\hzy\obj\Debug\hzy.Group.resources
+C:\Users\ychi\source\repos\hzy\hzy\obj\Debug\hzy.AddGroup.resources

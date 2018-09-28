@@ -636,7 +636,39 @@ namespace Backend
 																	"CreateTime datetime null," +
 																	"lastActive datetime null," +
 																	"ext json null," +
-																	"groupId json null)";
+																	"groupId json null)," +
+																	"adminGroup json null)";
+					cmd.ExecuteNonQuery();
+				}
+				sqliteConn.Close();
+			}
+
+			/// <summary>
+			/// 创建用户群表
+			/// </summary>
+			/// <param name="dbPath">指定数据库文件</param>
+			/// <param name="tableName">表名称</param>
+			static public void NewGroupTable(string dbPath, string tableName)
+			{
+
+				SQLiteConnection sqliteConn = new SQLiteConnection("data source=" + dbPath);
+				if (sqliteConn.State != System.Data.ConnectionState.Open)
+				{
+					sqliteConn.Open();
+					SQLiteCommand cmd = new SQLiteCommand();
+					cmd.Connection = sqliteConn;
+					cmd.CommandText = "CREATE TABLE " + tableName + "(userId INT PRIMARY KEY not null," +
+																	"name char(50)  null," +
+																	"passwd char(50) null," +
+																	"friend json null," +
+																	"historyId json  null," +
+																	"photo text null," +
+																	"signature text null," +
+																	"CreateTime datetime null," +
+																	"lastActive datetime null," +
+																	"ext json null," +
+																	"groupId json null)," +
+																	"adminGroup json null)";
 					cmd.ExecuteNonQuery();
 				}
 				sqliteConn.Close();

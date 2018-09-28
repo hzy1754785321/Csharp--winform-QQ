@@ -50,7 +50,7 @@ namespace hzy
 			setting.Items.Add("添加好友");
 			setting.Items.Add("加入群聊");
 			setting.Items[0].Click += FindFriend;
-			setting.Items[1].Click += 
+			setting.Items[1].Click += FindGroup;
 
 
 			Setting.ContextMenuStrip = setting;
@@ -309,8 +309,14 @@ namespace hzy
 			addFriend.mineId = _mineInfo.userId;
 			addFriend.Show();
 		}
-
-		public void 
+	
+		public void FindGroup(object sender, EventArgs e)
+		{
+			AddGroup addGroup = new AddGroup();
+			addGroup.Location = this.Location;
+			addGroup.mineId = _mineInfo.userId;
+			addGroup.Show();
+		}
 
 		public void StartChat(object sender, EventArgs e)
 		{
