@@ -25,7 +25,6 @@ namespace hzy
 				MessageBox.Show("请输入正确的用户ID!");
 				return;
 			}
-			
 		}
 
 		public static bool IsInt(string str)

@@ -648,7 +648,7 @@ namespace Backend
 			/// </summary>
 			/// <param name="dbPath">指定数据库文件</param>
 			/// <param name="tableName">表名称</param>
-			static public void NewGroupTable(string dbPath, string tableName)
+			static public void NewGroupsTable(string dbPath, string tableName)
 			{
 
 				SQLiteConnection sqliteConn = new SQLiteConnection("data source=" + dbPath);
@@ -657,18 +657,15 @@ namespace Backend
 					sqliteConn.Open();
 					SQLiteCommand cmd = new SQLiteCommand();
 					cmd.Connection = sqliteConn;
-					cmd.CommandText = "CREATE TABLE " + tableName + "(userId INT PRIMARY KEY not null," +
-																	"name char(50)  null," +
-																	"passwd char(50) null," +
-																	"friend json null," +
-																	"historyId json  null," +
-																	"photo text null," +
-																	"signature text null," +
-																	"CreateTime datetime null," +
-																	"lastActive datetime null," +
-																	"ext json null," +
-																	"groupId json null)," +
-																	"adminGroup json null)";
+					cmd.CommandText = "CREATE TABLE " + tableName + "(groupId INT PRIMARY KEY not null," +
+																	"groupName char(50) null," +
+																	"groupSynopsis char(50) null," +
+																	"groupMember json null," +
+																	"historyChat json null," +
+																	"master int null," + 
+																	"admin json null," +
+																	"apply json null," +
+																	"createTime datetime null)";
 					cmd.ExecuteNonQuery();
 				}
 				sqliteConn.Close();
@@ -784,6 +781,30 @@ namespace Backend
 				sqliteConn.Close();
 			}
 
+			public static void CreateGroupAsync(int groupId, DateTime createTime,int master, string groupName = null, string admin = null,string groupSynopsis = null, string groupMember = null, string historyChat = null, string apply = null)
+			{
+				var sqliteConn = new SQLiteConnection("data source=" + server.strPath);
+				if (sqliteConn.State != System.Data.ConnectionState.Open)
+				{
+					sqliteConn.Open();
+					var cmd = new SQLiteCommand();
+					cmd.Connection = sqliteConn;
+					//	var sql = string.Format("insert into user(userId,name,passwd,friend,historyId,photo,signature,Createtime) values({0},{1},{2},{3},{4},{5},{6},{7});", userId, name, passwd ,friend, historyId, photo, signature, CreateTime);
+					cmd.CommandText = "INSERT INTO groups(groupId,groupName,groupSynopsis,groupMember,historyChat,master,admin,apply,createTime) VALUES(?,?,?,?,?,?,?,?,?)";
+					cmd.Parameters.Add("groupId", DbType.Int32).Value = groupId;
+					cmd.Parameters.Add("groupName", DbType.String).Value = groupName;
+					cmd.Parameters.Add("groupSynopsis", DbType.String).Value = groupSynopsis;
+					cmd.Parameters.Add("groupMember", DbType.String).Value = groupMember;
+					cmd.Parameters.Add("historyChat", DbType.String).Value = historyChat;
+					cmd.Parameters.Add("master", DbType.Int32).Value = master;
+					cmd.Parameters.Add("admin", DbType.String).Value = admin;
+					cmd.Parameters.Add("apply", DbType.String).Value = apply;
+					cmd.Parameters.Add("createTime", DbType.DateTime).Value = createTime;
+					cmd.ExecuteNonQuery();
+				}
+				sqliteConn.Close();
+			}
+
 			public static void UpdateUserInfoAsync(int userId, string name , string passwd , string friend , string historyId ,string photo , string signature, DateTime CreateTime, DateTime lastActive,string ext,string groupId)
 			{
 				var sqliteConn = new SQLiteConnection("data source=" + server.strPath);
@@ -808,6 +829,76 @@ namespace Backend
 				}
 				sqliteConn.Close();
 			}
+
+			public static void UpdateGroupAsync(int groupId, string groupName, string groupSynopsis, string historyChat,string groupMember, int master, string admin, string apply, DateTime createTime)
+			{
+				var sqliteConn = new SQLiteConnection("data source=" + server.strPath);
+				if (sqliteConn.State != System.Data.ConnectionState.Open)
+				{
+					sqliteConn.Open();
+					var cmd = new SQLiteCommand();
+					cmd.Connection = sqliteConn;
+					var sql = string.Format("update groups set groupName=@groupName,groupSynopsis=@groupSynopsis,groupMember=@groupMember,historyChat=@historyChat,master=@master,admin=@admin,apply=@apply,createTime=@createTime where groupId={0}", groupId);
+					cmd.CommandText = sql;
+					cmd.Parameters.Add("groupId", DbType.Int32).Value = groupId;
+					cmd.Parameters.Add("groupName", DbType.String).Value = groupName;
+					cmd.Parameters.Add("groupSynopsis", DbType.String).Value = groupSynopsis;
+					cmd.Parameters.Add("groupMember", DbType.String).Value = groupMember;
+					cmd.Parameters.Add("historyChat", DbType.String).Value = historyChat;
+					cmd.Parameters.Add("master", DbType.Int32).Value = master;
+					cmd.Parameters.Add("admin", DbType.String).Value = admin;
+					cmd.Parameters.Add("apply", DbType.String).Value = apply;
+					cmd.Parameters.Add("createTime", DbType.DateTime).Value = createTime;
+					var result = cmd.ExecuteNonQuery();
+				}
+				sqliteConn.Close();
+			}
+
+			public static GroupInfo QueryGroupsInfo(int groupId)
+			{
+
+				var sqliteConn = new SQLiteConnection("data source=" + server.strPath);
+				var info = new GroupInfo();
+				if (sqliteConn.State != System.Data.ConnectionState.Open)
+				{
+					sqliteConn.Open();
+					var cmd = new SQLiteCommand();
+					cmd.Connection = sqliteConn;
+					string sql = string.Format("select * from groups where userId={0};", groupId);
+					cmd.CommandText = sql;
+					SQLiteDataReader reader = cmd.ExecuteReader();
+					if (!reader.HasRows)
+					{
+						sqliteConn.Close();
+						return null;
+					}
+					while (reader.Read())
+					{
+						if (reader["groupId"] == DBNull.Value)
+							continue;
+						info.groupId = (int)reader["groupId"];
+						if (reader["groupName"] != DBNull.Value)
+							info.groupName = (string)reader["groupName"];
+						if (reader["groupSynopsis"] != DBNull.Value)
+							info.groupSynopsis = (string)reader["groupSynopsis"];
+						if (reader["groupMember"] != DBNull.Value)
+							info.groupMember = JsonConvert.DeserializeObject<List<int>>(Convert.ToString(reader["groupMember"]));
+						if (reader["historyChat"] != DBNull.Value)
+							info.historyChat = JsonConvert.DeserializeObject<List<ChatMessage>>(Convert.ToString(reader["historyChat"]));
+						if (reader["master"] != DBNull.Value)
+							info.master = (int)reader["master"];
+						if (reader["admin"] != DBNull.Value)
+							info.admin = JsonConvert.DeserializeObject<List<int>>(Convert.ToString(reader["admin"]));
+						if (reader["apply"] != DBNull.Value)
+							info.apply = JsonConvert.DeserializeObject<List<int>>(Convert.ToString(reader["apply"]));
+						if (reader["createTime"] != DBNull.Value)
+							info.createTime = (DateTime)reader["createTime"];
+					}
+				}
+				sqliteConn.Close();
+				return info;
+			}
+
 
 			public static UserInfo QueryUserInfo(int userId)
 			{

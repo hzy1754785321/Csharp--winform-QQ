@@ -80,6 +80,8 @@ namespace Server
 				DataStorage.SQLiteHelper.NewDbFile(strPath);
 				string tableName = "user";
 				DataStorage.SQLiteHelper.NewUserTable(strPath, tableName);
+				tableName = "groups";
+				DataStorage.SQLiteHelper.NewGroupsTable(strPath, tableName);
 			}
 		}
 	}

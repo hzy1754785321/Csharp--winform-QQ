@@ -165,7 +165,11 @@ namespace Server
 		/// <summary>
 		/// 入群申请
 		/// </summary>
-		public List<int> apply; 
+		public List<int> apply;
+		/// <summary>
+		/// 创建时间
+		/// </summary>
+		public DateTime createTime;
 	}
 
 
