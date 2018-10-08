@@ -25,7 +25,7 @@ namespace hzy
 				MessageBox.Show("请输入正确的用户ID!");
 				return;
 			}
-            var groupInfo = UserHome.QueryGroupInfo(Convert.ToInt32(searchText));
+            var groupInfo = UserHome.QueryGroupInfo(Convert.ToInt32(searchText.Text));
             if (groupInfo == null)
             {
                 MessageBox.Show("该群不存在");

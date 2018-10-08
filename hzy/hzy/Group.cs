@@ -36,7 +36,7 @@ namespace hzy
             }
         }
 
-        public void GroupChat()
+        public void GroupChat(object sender,EventArgs e)
         {
             List<object> userStr = new List<object>();
             var msg = new ChatMessage();
@@ -56,6 +56,8 @@ namespace hzy
         {
             GroupApply groupApply = new GroupApply();
             groupApply.Location = this.Location;
+            groupApply._groupId = _groupId;
+            groupApply.InitGroupApply();
             groupApply.Show();
         }
 

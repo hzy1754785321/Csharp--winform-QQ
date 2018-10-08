@@ -58,9 +58,10 @@ namespace Server
             AddDispatcher(10, "ServerUser.Group.CreateGroup");
             AddDispatcher(11, "ServerUser.Group.JoinGroup");
             AddDispatcher(12, "ServerUser.Group.JoinGroupSuccess");
-            AddDispatcher(13, "ServerUser.Group.QueryGroupInfo");
-            AddDispatcher(14, "ServerUser.User.UserInfoSave");
-            AddDispatcher(15, "ServerUser.Group.ChatWithGroup");
+            AddDispatcher(13, "ServerUser.Group.JoinGroupFailed");
+            AddDispatcher(14, "ServerUser.Group.QueryGroupInfo");
+            AddDispatcher(15, "ServerUser.User.UserInfoSave");
+            AddDispatcher(16, "ServerUser.Group.ChatWithGroup");
         }
 
 		public static string GetFunInfo(int key)

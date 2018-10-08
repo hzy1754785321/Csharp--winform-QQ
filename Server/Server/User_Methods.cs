@@ -58,10 +58,14 @@ namespace ServerUser
 			{
 				var friend = new FriendInfo();
 				friend.friendId = chatMessage.targetId;
+                if (friend.history == null)
+                    friend.history = new List<ChatMessage>();
 				friend.history.Add(chatMessage);
 				if (userKey.TryGetValue(chatMessage.chatId, out UserInfo userInfo))
 				{
 					userInfo.friend.Add(friend);
+                    if (userInfo.historyId == null)
+                        userInfo.historyId = new List<int>();
 					userInfo.historyId.Add(chatMessage.targetId);
 					UpdateUserInfo(userInfo);
 				}
@@ -70,7 +74,11 @@ namespace ServerUser
 					var info = DataStorage.SQLiteHelper.QueryUserInfo(chatMessage.chatId);
 					if (info != null)
 					{
+                        if (info.friend == null)
+                            info.friend = new List<FriendInfo>();
 						info.friend.Add(friend);
+                        if (info.historyId == null)
+                            info.historyId = new List<int>();
 						info.historyId.Add(chatMessage.targetId);
 						UpdateUserInfo(info);
 					}
@@ -80,26 +88,47 @@ namespace ServerUser
 
 		public void AddFriendApply(int applyId, int frindId)
 		{
-			if (userKey.TryGetValue(frindId, out UserInfo friendInfo))
-			{
-				if (friendInfo.ext == null)
-					friendInfo.ext = new Extend();
-				if (friendInfo.ext.type == null)
-					friendInfo.ext.type = new List<int>();
-				if (friendInfo.ext.friendApply == null)
-					friendInfo.ext.friendApply = new List<int>();
-				try
-				{
-					friendInfo.ext.type[(int)PopType.friend]++;
-				}
-				catch (Exception)
-				{
-					friendInfo.ext.type.Add(0);
-					friendInfo.ext.type[(int)PopType.friend]++;
-				}
-				friendInfo.ext.friendApply.Add(applyId);
-				UpdateUserInfo(friendInfo);
-			}
+            if (userKey.TryGetValue(frindId, out UserInfo friendInfo))
+            {
+                if (friendInfo.ext == null)
+                    friendInfo.ext = new Extend();
+                if (friendInfo.ext.type == null)
+                    friendInfo.ext.type = new List<int>();
+                if (friendInfo.ext.friendApply == null)
+                    friendInfo.ext.friendApply = new List<int>();
+                try
+                {
+                    friendInfo.ext.type[(int)PopType.friend]++;
+                }
+                catch (Exception)
+                {
+                    friendInfo.ext.type.Add(0);
+                    friendInfo.ext.type[(int)PopType.friend]++;
+                }
+                friendInfo.ext.friendApply.Add(applyId);
+                UpdateUserInfo(friendInfo);
+            }
+            else
+            {
+                var userInfo = DataStorage.SQLiteHelper.QueryUserInfo(frindId);
+                if (userInfo.ext == null)
+                    userInfo.ext = new Extend();
+                if (userInfo.ext.type == null)
+                    userInfo.ext.type = new List<int>();
+                if (userInfo.ext.friendApply == null)
+                    userInfo.ext.friendApply = new List<int>();
+                try
+                {
+                    userInfo.ext.type[(int)PopType.friend]++;
+                }
+                catch (Exception)
+                {
+                    userInfo.ext.type.Add(0);
+                    userInfo.ext.type[(int)PopType.friend]++;
+                }
+                userInfo.ext.friendApply.Add(applyId);
+                UpdateUserInfo(userInfo);
+            }
 		}
 
 		public void addFriendSuccess(string userInfo, int friendId)

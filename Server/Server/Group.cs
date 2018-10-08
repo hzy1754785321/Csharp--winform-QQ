@@ -58,6 +58,8 @@ namespace ServerUser
         public void JoinGroup(int userId, int groupId)
         {
             var groupInfo = DataStorage.SQLiteHelper.QueryGroupsInfo(groupId);
+            if (groupInfo.apply == null)
+                groupInfo.apply = new List<int>();
             groupInfo.apply.Add(userId);
             UpdateGroupInfo(groupInfo);
         }
@@ -104,6 +106,8 @@ namespace ServerUser
         {
             var chatMessage = JsonConvert.DeserializeObject<ChatMessage>(msg);
             var groupInfo = DataStorage.SQLiteHelper.QueryGroupsInfo(groupId);
+            if (groupInfo.historyChat == null)
+                groupInfo.historyChat = new List<ChatMessage>();
             groupInfo.historyChat.Add(chatMessage);
             var member = groupInfo.groupMember;
             for (int i = 0; i < member.Count; i++)

@@ -31,7 +31,7 @@
             this.components = new System.ComponentModel.Container();
             this.groupMemberList = new System.Windows.Forms.ListBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.groupChatList = new System.Windows.Forms.ListBox();
+            groupChatList = new System.Windows.Forms.ListBox();
             this.groupNotice = new System.Windows.Forms.Label();
             this.groupText = new CCWin.SkinControl.SkinTextBox();
             this.groupSend = new CCWin.SkinControl.SkinButton();
@@ -64,12 +64,12 @@
             // 
             // groupChatList
             // 
-            this.groupChatList.FormattingEnabled = true;
-            this.groupChatList.ItemHeight = 12;
-            this.groupChatList.Location = new System.Drawing.Point(1, 52);
-            this.groupChatList.Name = "groupChatList";
-            this.groupChatList.Size = new System.Drawing.Size(476, 400);
-            this.groupChatList.TabIndex = 2;
+            groupChatList.FormattingEnabled = true;
+            groupChatList.ItemHeight = 12;
+            groupChatList.Location = new System.Drawing.Point(1, 52);
+            groupChatList.Name = "groupChatList";
+            groupChatList.Size = new System.Drawing.Size(476, 400);
+            groupChatList.TabIndex = 2;
             // 
             // groupNotice
             // 
@@ -135,6 +135,7 @@
             this.groupSend.TabIndex = 5;
             this.groupSend.Text = "发送";
             this.groupSend.UseVisualStyleBackColor = false;
+            this.groupSend.Click += new System.EventHandler(this.GroupChat);
             // 
             // groupClose
             // 
@@ -195,6 +196,7 @@
             this.groupApply.TabIndex = 11;
             this.groupApply.Text = "入群申请";
             this.groupApply.UseVisualStyleBackColor = true;
+            this.groupApply.Click += new System.EventHandler(this.showApply);
             // 
             // Group
             // 
@@ -210,7 +212,7 @@
             this.Controls.Add(this.groupSend);
             this.Controls.Add(this.groupText);
             this.Controls.Add(this.groupNotice);
-            this.Controls.Add(this.groupChatList);
+            this.Controls.Add(groupChatList);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.groupMemberList);
             this.Name = "Group";

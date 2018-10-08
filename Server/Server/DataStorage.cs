@@ -864,7 +864,7 @@ namespace Backend
 					sqliteConn.Open();
 					var cmd = new SQLiteCommand();
 					cmd.Connection = sqliteConn;
-					string sql = string.Format("select * from groups where userId={0};", groupId);
+					string sql = string.Format("select * from groups where groupId={0};", groupId);
 					cmd.CommandText = sql;
 					SQLiteDataReader reader = cmd.ExecuteReader();
 					if (!reader.HasRows)

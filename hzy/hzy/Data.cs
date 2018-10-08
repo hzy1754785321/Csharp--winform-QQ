@@ -195,7 +195,15 @@ namespace hzy
 		/// 管理员
 		/// </summary>
 		public List<int> admin;
-	}
+        /// <summary>
+		/// 入群申请
+		/// </summary>
+		public List<int> apply;
+        /// <summary>
+        /// 创建时间
+        /// </summary>
+        public DateTime createTime;
+    }
 
 
 }

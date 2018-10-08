@@ -156,6 +156,7 @@
             this.createButton.TabIndex = 4;
             this.createButton.Text = "创建";
             this.createButton.UseVisualStyleBackColor = false;
+            this.createButton.Click += new System.EventHandler(this.Create);
             // 
             // CreateGroup
             // 

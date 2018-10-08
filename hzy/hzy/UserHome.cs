@@ -20,7 +20,7 @@ namespace hzy
 	{
 		private ContextMenuStrip onlyfornumber;
 		private ContextMenuStrip setting;
-		public static UserInfo _mineInfo;
+		public UserInfo _mineInfo;
 		public static Form localForm;
 
 		
@@ -365,7 +365,7 @@ namespace hzy
 					chat.Show();
 					this.Hide();
 					chat.mineInfo = _mineInfo;
-					Chat.targetInfo = QueryUserInfo(123);
+					Chat.targetInfo = QueryUserInfo(666);
 				}
 				else
 				{
@@ -377,6 +377,14 @@ namespace hzy
 			}
 		}
 
-
-	}
+        private void groupButton_Click(object sender, EventArgs e)
+        {
+            Group group = new Group();
+            group.Location = this.Location;
+            group._groupId = 544823;
+            group.mineInfo = _mineInfo;
+            group.InitGroupInfo();
+            group.Show();
+        }
+    }
 }

@@ -108,8 +108,9 @@ namespace ServerUser
 			}
 		}
 
-        public void UserInfoSave(UserInfo userInfo)
+        public void UserInfoSave(string user)
         {
+            var userInfo = JsonConvert.DeserializeObject<UserInfo>(user);
             if (userKey.TryGetValue(userInfo.userId, out UserInfo oldInfo))
             {
                 userKey[userInfo.userId] = userInfo;

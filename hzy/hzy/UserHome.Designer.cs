@@ -35,7 +35,7 @@ namespace hzy
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UserHome));
             this.skinButton1 = new CCWin.SkinControl.SkinButton();
-            this.skinButton2 = new CCWin.SkinControl.SkinButton();
+            this.groupButton = new CCWin.SkinControl.SkinButton();
             this.skinButton3 = new CCWin.SkinControl.SkinButton();
             this.skinButton4 = new CCWin.SkinControl.SkinButton();
             this.skinTextBox1 = new CCWin.SkinControl.SkinTextBox();
@@ -98,19 +98,20 @@ namespace hzy
             this.skinButton1.Text = "好友";
             this.skinButton1.UseVisualStyleBackColor = false;
             // 
-            // skinButton2
+            // groupButton
             // 
-            this.skinButton2.BackColor = System.Drawing.Color.Transparent;
-            this.skinButton2.ControlState = CCWin.SkinClass.ControlState.Normal;
-            this.skinButton2.DownBack = null;
-            this.skinButton2.Location = new System.Drawing.Point(120, 142);
-            this.skinButton2.MouseBack = null;
-            this.skinButton2.Name = "skinButton2";
-            this.skinButton2.NormlBack = null;
-            this.skinButton2.Size = new System.Drawing.Size(102, 35);
-            this.skinButton2.TabIndex = 1;
-            this.skinButton2.Text = "群组";
-            this.skinButton2.UseVisualStyleBackColor = false;
+            this.groupButton.BackColor = System.Drawing.Color.Transparent;
+            this.groupButton.ControlState = CCWin.SkinClass.ControlState.Normal;
+            this.groupButton.DownBack = null;
+            this.groupButton.Location = new System.Drawing.Point(120, 142);
+            this.groupButton.MouseBack = null;
+            this.groupButton.Name = "groupButton";
+            this.groupButton.NormlBack = null;
+            this.groupButton.Size = new System.Drawing.Size(102, 35);
+            this.groupButton.TabIndex = 1;
+            this.groupButton.Text = "群组";
+            this.groupButton.UseVisualStyleBackColor = false;
+            this.groupButton.Click += new System.EventHandler(this.groupButton_Click);
             // 
             // skinButton3
             // 
@@ -639,7 +640,7 @@ namespace hzy
             this.Controls.Add(this.skinTextBox1);
             this.Controls.Add(this.skinButton4);
             this.Controls.Add(this.skinButton3);
-            this.Controls.Add(this.skinButton2);
+            this.Controls.Add(this.groupButton);
             this.Controls.Add(this.skinButton1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "UserHome";
@@ -664,7 +665,7 @@ namespace hzy
 		#endregion
 
 		private CCWin.SkinControl.SkinButton skinButton1;
-		private CCWin.SkinControl.SkinButton skinButton2;
+		private CCWin.SkinControl.SkinButton groupButton;
 		private CCWin.SkinControl.SkinButton skinButton3;
 		private CCWin.SkinControl.SkinButton skinButton4;
 		private CCWin.SkinControl.SkinTextBox skinTextBox1;

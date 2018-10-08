@@ -41,8 +41,9 @@ namespace hzy
                 }
             }
             var groupInfo = JsonConvert.DeserializeObject<GroupInfo>(result);
-            MessageBox.Show("创建成功，群号为:{0}", groupInfo.groupId.ToString());
-            UserHome._mineInfo.groupId.Add(groupInfo.groupId);
+            var content = string.Format("创建成功，群号为:{0}", groupInfo.groupId);
+            MessageBox.Show(content);
+         //   UserHome._mineInfo.groupId.Add(groupInfo.groupId);
         }
     }
 }
