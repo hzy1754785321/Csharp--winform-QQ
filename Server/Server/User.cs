@@ -107,5 +107,15 @@ namespace ServerUser
 				return ret;
 			}
 		}
+
+        public void UserInfoSave(UserInfo userInfo)
+        {
+            if (userKey.TryGetValue(userInfo.userId, out UserInfo oldInfo))
+            {
+                userKey[userInfo.userId] = userInfo;
+            }
+            UpdateUserInfo(userInfo);
+        }
+
 	}
 }

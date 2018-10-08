@@ -20,13 +20,14 @@ namespace hzy
 	{
 		private ContextMenuStrip onlyfornumber;
 		private ContextMenuStrip setting;
-		public UserInfo _mineInfo;
+		public static UserInfo _mineInfo;
 		public static Form localForm;
 
 		
 		public static AutoResetEvent _mre = new AutoResetEvent(false);
 
 		public static ChatMessage _msg { set; get; }
+        public static ChatMessage _groupMsg { set; get; }
 
 		private bool _isFirstClick = true;
 		private bool _isDoubleClick = false;
@@ -49,9 +50,10 @@ namespace hzy
 			setting = new ContextMenuStrip();
 			setting.Items.Add("添加好友");
 			setting.Items.Add("加入群聊");
+            setting.Items.Add("创建群聊");
 			setting.Items[0].Click += FindFriend;
 			setting.Items[1].Click += FindGroup;
-
+            setting.Items[2].Click += CreateGroup;
 
 			Setting.ContextMenuStrip = setting;
 
@@ -121,9 +123,8 @@ namespace hzy
 				_mineInfo.ext.type[(int)PopType.friend]--;
 				_mineInfo.ext.friendApply.Remove(userId);
 				List<object> userStr = new List<object>();
-				userStr.Add(_mineInfo.userId);
-				userStr.Add(userId);
-				Form1.SendMessage((int)Interface.friendSuccess, userStr);
+                userStr.Add(JsonConvert.SerializeObject(_mineInfo));
+				Form1.SendMessage((int)Interface.userInfoSave, userStr);
 			}
 			else if (dr == DialogResult.Cancel)
 			{
@@ -293,7 +294,32 @@ namespace hzy
 			}
 		}
 
-		public void ShowMenu(MouseEventArgs e)
+        public static GroupInfo QueryGroupInfo(int groupId)
+        {
+            List<object> userStr = new List<object>();
+            userStr.Add(groupId);
+            Form1.SendMessage((int)Interface.groupInfo, userStr);
+            string result;
+            while (true)
+            {
+                if (Form1._message.TryGetValue((int)Interface.groupInfo, out result))
+                {
+                    Form1._message.Remove((int)Interface.groupInfo);
+                    break;
+                }
+            }
+            try
+            {
+                var groupInfo = JsonConvert.DeserializeObject<GroupInfo>(result);
+                return groupInfo;
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+
+        public void ShowMenu(MouseEventArgs e)
 		{
 			base.OnMouseUp(e);
 			if (e.Button == MouseButtons.Left)
@@ -317,6 +343,14 @@ namespace hzy
 			addGroup.mineId = _mineInfo.userId;
 			addGroup.Show();
 		}
+
+        public void CreateGroup(object sender, EventArgs e)
+        {
+            CreateGroup createGroup = new CreateGroup();
+            createGroup.Location = this.Location;
+            createGroup._mineId = _mineInfo.userId;
+            createGroup.Show();
+        }
 
 		public void StartChat(object sender, EventArgs e)
 		{

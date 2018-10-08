@@ -781,7 +781,7 @@ namespace Backend
 				sqliteConn.Close();
 			}
 
-			public static void CreateGroupAsync(int groupId, DateTime createTime,int master, string groupName = null, string admin = null,string groupSynopsis = null, string groupMember = null, string historyChat = null, string apply = null)
+			public static void CreateGroupAsync(int groupId, DateTime createTime,int master, string groupName, string groupSynopsis , string groupMember ,string admin = null , string historyChat = null, string apply = null)
 			{
 				var sqliteConn = new SQLiteConnection("data source=" + server.strPath);
 				if (sqliteConn.State != System.Data.ConnectionState.Open)

@@ -145,6 +145,11 @@ namespace hzy
 					Updates();
 					continue;
 				}
+                if (ret.retKey == (int)Interface.sendGroupMessage)
+                {
+                    UserHome._groupMsg = JsonConvert.DeserializeObject<ChatMessage>(ret.Value);
+                    AddObserver(new NotifyEventHandler(Group.SetNewMessage));
+                }
 				_message.Add(ret.retKey, ret.Value);
 			}
 		}

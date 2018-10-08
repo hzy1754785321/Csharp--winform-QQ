@@ -121,10 +121,14 @@ namespace Server
 		/// 发言者ID
 		/// </summary>
 		public int chatId;
-		/// <summary>
-		/// 目标ID 为0表示为群聊
-		/// </summary>
-		public int targetId;
+        /// <summary>
+        /// 发言者名字
+        /// </summary>
+        public string name;
+        /// <summary>
+        /// 目标ID 为0表示为群聊
+        /// </summary>
+        public int targetId;
 		/// <summary>
 		/// 发出时间
 		/// </summary>

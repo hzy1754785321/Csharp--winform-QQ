@@ -55,7 +55,13 @@ namespace Server
 			AddDispatcher(7, "ServerUser.User.QueryUserInfo");
 			AddDispatcher(8, "ServerUser.User.AddFriendApply");
 			AddDispatcher(9, "ServerUser.User.addFriendSuccess");
-		}
+            AddDispatcher(10, "ServerUser.Group.CreateGroup");
+            AddDispatcher(11, "ServerUser.Group.JoinGroup");
+            AddDispatcher(12, "ServerUser.Group.JoinGroupSuccess");
+            AddDispatcher(13, "ServerUser.Group.QueryGroupInfo");
+            AddDispatcher(14, "ServerUser.User.UserInfoSave");
+            AddDispatcher(15, "ServerUser.Group.ChatWithGroup");
+        }
 
 		public static string GetFunInfo(int key)
 		{

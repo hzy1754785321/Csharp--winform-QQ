@@ -103,7 +103,11 @@ namespace hzy
 		/// 扩展通知
 		/// </summary>
 		public Extend ext;
-	}
+        /// <summary>
+		/// 加入的群
+		/// </summary>
+		public List<int> groupId;
+    }
 
 	[Serializable]
 	public class Extend
@@ -146,6 +150,10 @@ namespace hzy
 		/// 发言者ID
 		/// </summary>
 		public int chatId;
+        /// <summary>
+        /// 发言者名字
+        /// </summary>
+        public string name;
 		/// <summary>
 		/// 目标ID 为0表示为群聊
 		/// </summary>

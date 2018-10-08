@@ -73,6 +73,7 @@
   <ItemGroup>
     <Compile Include="DataDefine.cs" />
     <Compile Include="DataStorage.cs" />
+    <Compile Include="Group.cs" />
     <Compile Include="Interface.cs" />
     <Compile Include="server.cs">
       <SubType>Form</SubType>

@@ -31,6 +31,7 @@ namespace hzy
 				msg.targetId = targetInfo.userId;
 				msg.content = chatBox.Text;
 				msg.time = DateTime.Now;
+                msg.name = mineInfo.name;
 				userStr.Add(JsonConvert.SerializeObject(msg));
 				chatListBox.Font = new Font(this.Font.FontFamily, 20); 
 				chatListBox.Items.Add("我:" + msg.content + "\r\n");
@@ -51,6 +52,7 @@ namespace hzy
 			msg.targetId = targetInfo.userId;
 			msg.content = chatBox.Text;
 			msg.time = DateTime.Now;
+            msg.name = mineInfo.name;
 			userStr.Add(JsonConvert.SerializeObject(msg));
 			chatListBox.Font = new Font(this.Font.FontFamily, 20);
 			chatListBox.Items.Add(targetInfo.name + ":" +msg.content + "\r\n");
