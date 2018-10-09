@@ -12,11 +12,18 @@ namespace musicApp
 		/// 应用程序的主入口点。
 		/// </summary>
 		[STAThread]
-		static void Main()
+		static void Main(string[] args)
 		{
 			Application.EnableVisualStyles();
 			Application.SetCompatibleTextRenderingDefault(false);
-			Application.Run(new music());
+            if (args.Length == 0)
+            {
+                Application.Run(new music());
+            }
+            else
+            {
+                Application.Run(new music(args));
+            }
 		}
 	}
 }

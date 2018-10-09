@@ -42,3 +42,5 @@ D:\Work\hzy\hzy\obj\Debug\hzy.Group.resources
 D:\Work\hzy\hzy\obj\Debug\hzy.GroupApply.resources
 D:\Work\hzy\hzy\obj\Debug\hzy.Loading.resources
 D:\Work\hzy\hzy\obj\Debug\hzy.csprojAssemblyReference.cache
+C:\Users\ychi\source\repos\hzy\hzy\obj\Debug\hzy.CreateGroup.resources
+C:\Users\ychi\source\repos\hzy\hzy\obj\Debug\hzy.GroupApply.resources

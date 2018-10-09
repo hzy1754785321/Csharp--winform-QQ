@@ -8,12 +8,16 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Newtonsoft.Json;
+using System.Runtime.InteropServices;
+using System.IO;
+using System.Diagnostics;
 
 namespace hzy
 {
 	public partial class Chat : Form
 	{
-		public UserInfo mineInfo = new UserInfo();
+        const int WM_COPYDATA = 0x004A;
+        public UserInfo mineInfo = new UserInfo();
 		public static UserInfo targetInfo = new UserInfo();
 		public Chat()
 		{
@@ -83,5 +87,85 @@ namespace hzy
 			UserHome.localForm.MdiParent = this.MdiParent;
 			UserHome.localForm.Show();
 		}
-	}
+
+        protected override void DefWndProc(ref System.Windows.Forms.Message m)
+        {
+            switch (m.Msg)
+            {
+                case WM_COPYDATA:
+                    COPYDATASTRUCT mystr = new COPYDATASTRUCT();
+                    Type mytype = mystr.GetType();
+                    mystr = (COPYDATASTRUCT)m.GetLParam(mytype);
+                    var musicName = Path.GetFileName(mystr.lpData);
+                    var name = musicName.Split('.');
+                    if (mystr.type == 0)
+                    {
+                        string str = string.Format("有人分享了一首:{0} 给你，要去听听吗？", name[0]);
+                        DialogResult dr = MessageBox.Show(str, "音乐分享", MessageBoxButtons.YesNo);
+
+                        if (dr == DialogResult.Yes)
+                        {
+                            try
+                            {
+
+                                ProcessStartInfo startInfo = new ProcessStartInfo();
+                                startInfo.FileName = @"C:\Users\ychi\source\repos\music\musicApp\musicApp\bin\Debug\musicApp.exe";
+                                startInfo.Arguments = mystr.lpData;
+                                startInfo.WindowStyle = ProcessWindowStyle.Normal;
+                                Process.Start(startInfo);
+                            }
+                            catch (Exception ex)
+                            {
+                                throw;
+                            }
+                        }
+                        else if (dr == DialogResult.No)
+                        {
+                            return;
+                        }
+                    }
+                    else if (mystr.type == 1)
+                    {
+                        string str = string.Format("有人分享视频:{0} 给你，要去看看吗？", name[0]);
+                        DialogResult dr = MessageBox.Show(str, "视频分享", MessageBoxButtons.YesNo);
+                        if (dr == DialogResult.Yes)
+                        {
+                            try
+                            {
+                                ProcessStartInfo startInfo = new ProcessStartInfo();
+                                startInfo.FileName = @"C:\Users\ychi\source\repos\music\musicApp\musicApp\bin\Debug\musicApp.exe";
+                                startInfo.Arguments = mystr.lpData + " " + 1;
+                                startInfo.WindowStyle = ProcessWindowStyle.Normal;
+                                Process.Start(startInfo);
+                            }
+                            catch (Exception ex)
+                            {
+                                throw;
+                            }
+                        }
+                        else if (dr == DialogResult.No)
+                        {
+                            return;
+                        }
+                    }
+
+                    //      chatListBox.Items.Add(content + "\r\n");
+                    //     this.textBox1.Text = mystr.lpData;
+                    break;
+                default:
+                    base.DefWndProc(ref m);
+                    break;
+            }
+        }
+
+
+        public struct COPYDATASTRUCT
+        {
+            public IntPtr dwData;
+            public int cbData;
+            public int type; // 0:音乐 1:视频
+            [MarshalAs(UnmanagedType.LPStr)]
+            public string lpData;
+        }
+    }
 }

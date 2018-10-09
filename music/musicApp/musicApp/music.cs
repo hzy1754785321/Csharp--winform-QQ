@@ -9,15 +9,47 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
 using System.Media;
+using System.Runtime.InteropServices;
 
 namespace musicApp
 {
 	public partial class music : Form
 	{
-		public music()
+        const int WM_COPYDATA = 0x004A;
+        public music()
 		{
 			InitializeComponent();
 		}
+
+        public music(string[] str)
+        {
+            if (str.Length == 1)
+            {
+                InitializeComponent();
+                musicList.Items.Add(Path.GetFileName(str[0]));
+                musicPath.Add(str[0]);
+                SoundPlayer sp = new SoundPlayer();
+                sp.SoundLocation = musicPath[0];
+                if (!isStart)
+                {
+                    isStart = true;
+                    Start.Text = "暂停";
+                    sp.Play();
+                }
+                else
+                {
+                    isStart = false;
+                    Start.Text = "播放";
+                    sp.Stop();
+                }
+            }
+            else
+            {
+                MediaPlay mp = new MediaPlay(str[0]);
+                mp.Show();
+            }
+        }
+
 
 		public static bool isStart;
 		List<string> musicPath = new List<string>();
@@ -123,5 +155,45 @@ namespace musicApp
 			btnPath.AddEllipse(newRectangle);
 			btn.Region = new System.Drawing.Region(btnPath);
 		}
-	}
+
+
+
+        [DllImport("User32.dll", EntryPoint = "SendMessage")]
+        private static extern int SendMessage(
+            int hWnd,
+            int Msg,
+            int wParam, 
+            ref COPYDATASTRUCT lParam
+        );
+
+        [DllImport("User32.dll", EntryPoint = "FindWindow")]
+        private static extern int FindWindow(string lpClassName, string lpWindowName);
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            //int WINDOW_HANDLER = FindWindow(null, @"欲发送程序窗口的标题");
+            int WINDOW_HANDLER = FindWindow(null, @"Chat");
+            if (WINDOW_HANDLER != 0)
+            {
+                byte[] sarr = System.Text.Encoding.Default.GetBytes(musicPath[musicList.SelectedIndex]);
+                int len = sarr.Length;
+                COPYDATASTRUCT cds;
+                cds.dwData = (IntPtr)100;
+                cds.lpData = musicPath[musicList.SelectedIndex];
+                cds.cbData = len + 1;
+                cds.type = 0; //音乐
+                SendMessage(WINDOW_HANDLER, WM_COPYDATA, 0, ref cds);
+            }
+        }
+    }
+
+    public struct COPYDATASTRUCT
+    {
+        public IntPtr dwData;
+        public int cbData;
+        public int type;
+        [MarshalAs(UnmanagedType.LPStr)]
+        public string lpData;
+    }
+
 }

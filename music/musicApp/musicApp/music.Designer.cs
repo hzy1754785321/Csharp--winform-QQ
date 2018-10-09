@@ -36,6 +36,7 @@
             this.next = new CCWin.SkinControl.SkinButton();
             this.media = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // open
@@ -124,12 +125,21 @@
             this.button1.TabIndex = 9;
             this.button1.Text = "分享给好友";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(69, 410);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(100, 21);
+            this.textBox1.TabIndex = 10;
             // 
             // music
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(319, 458);
+            this.Controls.Add(this.textBox1);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.media);
             this.Controls.Add(this.next);
@@ -140,6 +150,7 @@
             this.Name = "music";
             this.Text = "Form1";
             this.ResumeLayout(false);
+            this.PerformLayout();
 
 		}
 
@@ -151,6 +162,7 @@
 		private CCWin.SkinControl.SkinButton next;
 		private System.Windows.Forms.Button media;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.TextBox textBox1;
     }
 }
 
