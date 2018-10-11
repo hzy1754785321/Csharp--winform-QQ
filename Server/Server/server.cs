@@ -55,7 +55,16 @@ namespace Server
 					IPAddress iP = IPAddress.Any;
 					if (string.IsNullOrEmpty(port_text.Text))
 						port_text.Text = "36001";
-					IPEndPoint point = new IPEndPoint(iP, Convert.ToInt32(port_text.Text));
+                    string HostName = Dns.GetHostName();
+                    IPHostEntry IpEntry = Dns.GetHostEntry(HostName);
+                    for (int i = 0; i < IpEntry.AddressList.Length; i++)
+                    {
+                        if (IpEntry.AddressList[i].AddressFamily == AddressFamily.InterNetwork)
+                        {
+                            ip_text.Text = IpEntry.AddressList[i].ToString();
+                        }
+                    }
+                    IPEndPoint point = new IPEndPoint(iP, Convert.ToInt32(port_text.Text));
 					socketWatch.Bind(point);
 					ShowMsg("监听成功!");
 					socketWatch.Listen(10);

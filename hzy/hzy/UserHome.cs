@@ -23,6 +23,7 @@ namespace hzy
 		public UserInfo _mineInfo;
 		public static Form localForm;
 
+        public static List<GroupInfo> _group = new List<GroupInfo>();
 		
 		public static AutoResetEvent _mre = new AutoResetEvent(false);
 
@@ -408,12 +409,40 @@ namespace hzy
 
         private void groupButton_Click(object sender, EventArgs e)
         {
-            Group group = new Group();
-            group.Location = this.Location;
-            group._groupId = 544823;
-            group.mineInfo = _mineInfo;
-            group.InitGroupInfo();
-            group.Show();
+            skinPanel1.Visible = false;
+            friendTitle.Visible = false;
+            familyTitle.Visible = false;
+            workTitle.Visible = false;
+            _mineInfo = QueryUserInfo(_mineInfo.userId);
+            if (_mineInfo.groupId == null)
+                _mineInfo.groupId = new List<int>();
+            for (int i = 0; i < _mineInfo.groupId.Count; i++)
+            {
+                _group.Add(QueryGroupInfo(_mineInfo.groupId[i]));
+            }
+            int count = _group.Count;
+            if (count == 0)
+            {
+                MessageBox.Show("你尚未加入群");
+                return;
+            }
+            if (count >= 1)
+            {
+                groupName1.Text = _group[0].groupName;
+                groupButton1.Visible = true;
+            }
+            if (count >= 2)
+            {
+                groupName2.Text = _group[1].groupName;
+                groupButton2.Visible = true;
+            }
+
+            //Group group = new Group();
+            //group.Location = this.Location;
+            //group._groupId = 544823;
+            //group.mineInfo = _mineInfo;
+            //group.InitGroupInfo();
+            //group.Show();
         }
 
     }

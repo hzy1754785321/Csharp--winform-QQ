@@ -37,15 +37,15 @@ namespace hzy
             this.skinButton1 = new CCWin.SkinControl.SkinButton();
             this.groupButton = new CCWin.SkinControl.SkinButton();
             this.skinButton3 = new CCWin.SkinControl.SkinButton();
-            this.skinButton4 = new CCWin.SkinControl.SkinButton();
+            this.friendTitle = new CCWin.SkinControl.SkinButton();
             this.skinTextBox1 = new CCWin.SkinControl.SkinTextBox();
             this.userName = new CCWin.SkinControl.SkinLabel();
             this.signature = new CCWin.SkinControl.SkinLabel();
             this.UserPhoto = new CCWin.SkinControl.SkinPictureBox();
             this.choosePhoto = new CCWin.SkinControl.SkinContextMenuStrip();
             this.选择图片ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.skinButton5 = new CCWin.SkinControl.SkinButton();
-            this.skinButton10 = new CCWin.SkinControl.SkinButton();
+            this.familyTitle = new CCWin.SkinControl.SkinButton();
+            this.workTitle = new CCWin.SkinControl.SkinButton();
             this.skinButton7 = new CCWin.SkinControl.SkinButton();
             this.skinButton8 = new CCWin.SkinControl.SkinButton();
             this.skinButton9 = new CCWin.SkinControl.SkinButton();
@@ -73,6 +73,10 @@ namespace hzy
             this.entryMyName = new System.Windows.Forms.TextBox();
             this.signText = new System.Windows.Forms.TextBox();
             notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
+            this.groupButton1 = new CCWin.SkinControl.SkinButton();
+            this.groupName1 = new CCWin.SkinControl.SkinLabel();
+            this.groupButton2 = new CCWin.SkinControl.SkinButton();
+            this.groupName2 = new CCWin.SkinControl.SkinLabel();
             ((System.ComponentModel.ISupportInitialize)(this.UserPhoto)).BeginInit();
             this.choosePhoto.SuspendLayout();
             this.skinPanel1.SuspendLayout();
@@ -128,23 +132,23 @@ namespace hzy
             this.skinButton3.Text = "历史会话";
             this.skinButton3.UseVisualStyleBackColor = false;
             // 
-            // skinButton4
+            // friendTitle
             // 
-            this.skinButton4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.skinButton4.BaseColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.skinButton4.ControlState = CCWin.SkinClass.ControlState.Normal;
-            this.skinButton4.DownBack = null;
-            this.skinButton4.Image = ((System.Drawing.Image)(resources.GetObject("skinButton4.Image")));
-            this.skinButton4.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
-            this.skinButton4.Location = new System.Drawing.Point(12, 183);
-            this.skinButton4.MouseBack = null;
-            this.skinButton4.Name = "skinButton4";
-            this.skinButton4.NormlBack = null;
-            this.skinButton4.Size = new System.Drawing.Size(316, 29);
-            this.skinButton4.TabIndex = 3;
-            this.skinButton4.Text = "我的好友(1/4)";
-            this.skinButton4.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.skinButton4.UseVisualStyleBackColor = false;
+            this.friendTitle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.friendTitle.BaseColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.friendTitle.ControlState = CCWin.SkinClass.ControlState.Normal;
+            this.friendTitle.DownBack = null;
+            this.friendTitle.Image = ((System.Drawing.Image)(resources.GetObject("friendTitle.Image")));
+            this.friendTitle.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
+            this.friendTitle.Location = new System.Drawing.Point(12, 183);
+            this.friendTitle.MouseBack = null;
+            this.friendTitle.Name = "friendTitle";
+            this.friendTitle.NormlBack = null;
+            this.friendTitle.Size = new System.Drawing.Size(316, 29);
+            this.friendTitle.TabIndex = 3;
+            this.friendTitle.Text = "我的好友(1/4)";
+            this.friendTitle.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.friendTitle.UseVisualStyleBackColor = false;
             // 
             // skinTextBox1
             // 
@@ -265,39 +269,39 @@ namespace hzy
             this.选择图片ToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
             this.选择图片ToolStripMenuItem.Text = "   选择图片";
             // 
-            // skinButton5
+            // familyTitle
             // 
-            this.skinButton5.BackColor = System.Drawing.Color.Transparent;
-            this.skinButton5.ControlState = CCWin.SkinClass.ControlState.Normal;
-            this.skinButton5.DownBack = null;
-            this.skinButton5.Image = ((System.Drawing.Image)(resources.GetObject("skinButton5.Image")));
-            this.skinButton5.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
-            this.skinButton5.Location = new System.Drawing.Point(12, 439);
-            this.skinButton5.MouseBack = null;
-            this.skinButton5.Name = "skinButton5";
-            this.skinButton5.NormlBack = null;
-            this.skinButton5.Size = new System.Drawing.Size(316, 29);
-            this.skinButton5.TabIndex = 9;
-            this.skinButton5.Text = "我的家人(2/4)";
-            this.skinButton5.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.skinButton5.UseVisualStyleBackColor = false;
+            this.familyTitle.BackColor = System.Drawing.Color.Transparent;
+            this.familyTitle.ControlState = CCWin.SkinClass.ControlState.Normal;
+            this.familyTitle.DownBack = null;
+            this.familyTitle.Image = ((System.Drawing.Image)(resources.GetObject("familyTitle.Image")));
+            this.familyTitle.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
+            this.familyTitle.Location = new System.Drawing.Point(12, 439);
+            this.familyTitle.MouseBack = null;
+            this.familyTitle.Name = "familyTitle";
+            this.familyTitle.NormlBack = null;
+            this.familyTitle.Size = new System.Drawing.Size(316, 29);
+            this.familyTitle.TabIndex = 9;
+            this.familyTitle.Text = "我的家人(0/0)";
+            this.familyTitle.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.familyTitle.UseVisualStyleBackColor = false;
             // 
-            // skinButton10
+            // workTitle
             // 
-            this.skinButton10.BackColor = System.Drawing.Color.Transparent;
-            this.skinButton10.ControlState = CCWin.SkinClass.ControlState.Normal;
-            this.skinButton10.DownBack = null;
-            this.skinButton10.Image = ((System.Drawing.Image)(resources.GetObject("skinButton10.Image")));
-            this.skinButton10.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
-            this.skinButton10.Location = new System.Drawing.Point(13, 474);
-            this.skinButton10.MouseBack = null;
-            this.skinButton10.Name = "skinButton10";
-            this.skinButton10.NormlBack = null;
-            this.skinButton10.Size = new System.Drawing.Size(316, 29);
-            this.skinButton10.TabIndex = 11;
-            this.skinButton10.Text = "同事(3/5)";
-            this.skinButton10.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.skinButton10.UseVisualStyleBackColor = false;
+            this.workTitle.BackColor = System.Drawing.Color.Transparent;
+            this.workTitle.ControlState = CCWin.SkinClass.ControlState.Normal;
+            this.workTitle.DownBack = null;
+            this.workTitle.Image = ((System.Drawing.Image)(resources.GetObject("workTitle.Image")));
+            this.workTitle.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
+            this.workTitle.Location = new System.Drawing.Point(13, 474);
+            this.workTitle.MouseBack = null;
+            this.workTitle.Name = "workTitle";
+            this.workTitle.NormlBack = null;
+            this.workTitle.Size = new System.Drawing.Size(316, 29);
+            this.workTitle.TabIndex = 11;
+            this.workTitle.Text = "同事(0/0)";
+            this.workTitle.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.workTitle.UseVisualStyleBackColor = false;
             // 
             // skinButton7
             // 
@@ -351,6 +355,10 @@ namespace hzy
             // skinPanel1
             // 
             this.skinPanel1.BackColor = System.Drawing.Color.Transparent;
+            this.skinPanel1.Controls.Add(this.groupName2);
+            this.skinPanel1.Controls.Add(this.groupButton2);
+            this.skinPanel1.Controls.Add(this.groupName1);
+            this.skinPanel1.Controls.Add(this.groupButton1);
             this.skinPanel1.Controls.Add(this.label12);
             this.skinPanel1.Controls.Add(this.label11);
             this.skinPanel1.Controls.Add(this.label10);
@@ -629,6 +637,68 @@ namespace hzy
             notifyIcon1.Text = "notifyIcon1";
             notifyIcon1.Visible = true;
             // 
+            // groupButton1
+            // 
+            this.groupButton1.BackColor = System.Drawing.Color.Transparent;
+            this.groupButton1.BaseColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.groupButton1.ControlState = CCWin.SkinClass.ControlState.Normal;
+            this.groupButton1.DownBack = null;
+            this.groupButton1.DownBaseColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
+            this.groupButton1.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.groupButton1.Location = new System.Drawing.Point(3, -31);
+            this.groupButton1.MouseBack = null;
+            this.groupButton1.MouseBaseColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.groupButton1.Name = "groupButton1";
+            this.groupButton1.NormlBack = null;
+            this.groupButton1.Size = new System.Drawing.Size(316, 60);
+            this.groupButton1.TabIndex = 21;
+            this.groupButton1.UseVisualStyleBackColor = false;
+            this.groupButton1.Visible = false;
+            // 
+            // groupName1
+            // 
+            this.groupName1.AutoSize = true;
+            this.groupName1.BackColor = System.Drawing.Color.Transparent;
+            this.groupName1.BorderColor = System.Drawing.Color.White;
+            this.groupName1.Font = new System.Drawing.Font("微软雅黑", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.groupName1.Location = new System.Drawing.Point(93, -12);
+            this.groupName1.Name = "groupName1";
+            this.groupName1.Size = new System.Drawing.Size(88, 25);
+            this.groupName1.TabIndex = 22;
+            this.groupName1.Text = "你的群名";
+            this.groupName1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // groupButton2
+            // 
+            this.groupButton2.BackColor = System.Drawing.Color.Transparent;
+            this.groupButton2.BaseColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.groupButton2.ControlState = CCWin.SkinClass.ControlState.Normal;
+            this.groupButton2.DownBack = null;
+            this.groupButton2.DownBaseColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
+            this.groupButton2.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.groupButton2.Location = new System.Drawing.Point(4, 45);
+            this.groupButton2.MouseBack = null;
+            this.groupButton2.MouseBaseColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.groupButton2.Name = "groupButton2";
+            this.groupButton2.NormlBack = null;
+            this.groupButton2.Size = new System.Drawing.Size(315, 60);
+            this.groupButton2.TabIndex = 23;
+            this.groupButton2.UseVisualStyleBackColor = false;
+            this.groupButton2.Visible = false;
+            // 
+            // groupName2
+            // 
+            this.groupName2.AutoSize = true;
+            this.groupName2.BackColor = System.Drawing.Color.Transparent;
+            this.groupName2.BorderColor = System.Drawing.Color.White;
+            this.groupName2.Font = new System.Drawing.Font("微软雅黑", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.groupName2.Location = new System.Drawing.Point(94, 61);
+            this.groupName2.Name = "groupName2";
+            this.groupName2.Size = new System.Drawing.Size(88, 25);
+            this.groupName2.TabIndex = 24;
+            this.groupName2.Text = "你的群名";
+            this.groupName2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // UserHome
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -638,14 +708,14 @@ namespace hzy
             this.Controls.Add(this.signText);
             this.Controls.Add(this.entryMyName);
             this.Controls.Add(this.Setting);
-            this.Controls.Add(this.skinButton10);
+            this.Controls.Add(this.workTitle);
             this.Controls.Add(this.skinPanel1);
-            this.Controls.Add(this.skinButton5);
+            this.Controls.Add(this.familyTitle);
             this.Controls.Add(this.UserPhoto);
             this.Controls.Add(this.signature);
             this.Controls.Add(this.userName);
             this.Controls.Add(this.skinTextBox1);
-            this.Controls.Add(this.skinButton4);
+            this.Controls.Add(this.friendTitle);
             this.Controls.Add(this.skinButton3);
             this.Controls.Add(this.groupButton);
             this.Controls.Add(this.skinButton1);
@@ -675,13 +745,13 @@ namespace hzy
 		private CCWin.SkinControl.SkinButton skinButton1;
 		private CCWin.SkinControl.SkinButton groupButton;
 		private CCWin.SkinControl.SkinButton skinButton3;
-		private CCWin.SkinControl.SkinButton skinButton4;
+		private CCWin.SkinControl.SkinButton friendTitle;
 		private CCWin.SkinControl.SkinTextBox skinTextBox1;
 		private CCWin.SkinControl.SkinLabel userName;
 		private CCWin.SkinControl.SkinLabel signature;
 		private CCWin.SkinControl.SkinPictureBox UserPhoto;
-		private CCWin.SkinControl.SkinButton skinButton5;
-		private CCWin.SkinControl.SkinButton skinButton10;
+		private CCWin.SkinControl.SkinButton familyTitle;
+		private CCWin.SkinControl.SkinButton workTitle;
 		private CCWin.SkinControl.SkinButton skinButton7;
 		private CCWin.SkinControl.SkinButton skinButton8;
 		private CCWin.SkinControl.SkinButton skinButton9;
@@ -711,5 +781,9 @@ namespace hzy
 		private ContextMenuStrip Menu;
 		private ToolStripMenuItem 添加好友ToolStripMenuItem;
         public static NotifyIcon notifyIcon1;
+        private CCWin.SkinControl.SkinButton groupButton1;
+        private CCWin.SkinControl.SkinLabel groupName2;
+        private CCWin.SkinControl.SkinButton groupButton2;
+        private CCWin.SkinControl.SkinLabel groupName1;
     }
 }
