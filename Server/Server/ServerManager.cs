@@ -62,6 +62,7 @@ namespace Server
             AddDispatcher(14, "ServerUser.Group.QueryGroupInfo");
             AddDispatcher(15, "ServerUser.User.UserInfoSave");
             AddDispatcher(16, "ServerUser.Group.ChatWithGroup");
+            AddDispatcher(17, "ServerUser.User.loginOut");
         }
 
 		public static string GetFunInfo(int key)

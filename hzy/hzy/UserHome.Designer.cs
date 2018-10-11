@@ -72,6 +72,7 @@ namespace hzy
             this.openFile = new System.Windows.Forms.OpenFileDialog();
             this.entryMyName = new System.Windows.Forms.TextBox();
             this.signText = new System.Windows.Forms.TextBox();
+            notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.UserPhoto)).BeginInit();
             this.choosePhoto.SuspendLayout();
             this.skinPanel1.SuspendLayout();
@@ -622,6 +623,12 @@ namespace hzy
             this.signText.Visible = false;
             this.signText.KeyDown += new System.Windows.Forms.KeyEventHandler(this.SetMySign);
             // 
+            // notifyIcon1
+            // 
+            notifyIcon1.Icon = ((System.Drawing.Icon)(resources.GetObject("notifyIcon1.Icon")));
+            notifyIcon1.Text = "notifyIcon1";
+            notifyIcon1.Visible = true;
+            // 
             // UserHome
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -646,6 +653,7 @@ namespace hzy
             this.Name = "UserHome";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "QQ";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.CloseChoose);
             this.Click += new System.EventHandler(this.CloseChild);
             ((System.ComponentModel.ISupportInitialize)(this.UserPhoto)).EndInit();
             this.choosePhoto.ResumeLayout(false);
@@ -702,5 +710,6 @@ namespace hzy
 		private System.Windows.Forms.TextBox signText;
 		private ContextMenuStrip Menu;
 		private ToolStripMenuItem 添加好友ToolStripMenuItem;
-	}
+        public static NotifyIcon notifyIcon1;
+    }
 }

@@ -22,7 +22,8 @@ namespace hzy
 		public static string ipAddress = "192.168.0.103";
 		public static string port = "36001";
 		public static Thread thread;
-		public static Dictionary<int, string> _message = new Dictionary<int, string>();
+        public static Thread rece_thread;
+        public static Dictionary<int, string> _message = new Dictionary<int, string>();
 		public delegate void NotifyEventHandler(object sender);
 		public static NotifyEventHandler NotifyEvent;
 		public static bool isConnect;
@@ -104,6 +105,7 @@ namespace hzy
 					IPEndPoint point = new IPEndPoint(ip, Convert.ToInt32(Form1.port));
 					socketSend.Connect(point);
 					Thread r_thread = new Thread(Received);
+                    rece_thread = r_thread;
 					r_thread.IsBackground = true;
 					r_thread.Start();
 					temp.Close();

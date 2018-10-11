@@ -118,5 +118,13 @@ namespace ServerUser
             UpdateUserInfo(userInfo);
         }
 
+        public void loginOut(int userId)
+        { 
+            userKey.Remove(userId);
+            server.userConnections.Remove(userId);
+            _connection.Shutdown(SocketShutdown.Both);
+            _connection.Close();
+        }
+
 	}
 }

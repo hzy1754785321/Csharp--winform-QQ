@@ -132,8 +132,37 @@ namespace hzy
 			}
 		}
 
+        public static void CloseMain(int userId)
+        {
+            var userStr = new List<object>();
+            userStr.Add(userId);
+            Form1.SendMessage((int)Interface.loginOut, userStr);
+            Form1.rece_thread.Abort();
+            
+            localForm.Close();
+        }
 
-		private void SetNewPhoto(object sender, MouseEventArgs e)
+        public void CloseChoose(object sender, FormClosingEventArgs e)
+        {
+            CloseForm closeForm = new CloseForm();
+            closeForm.Location = this.Location;
+            closeForm._userId = _mineInfo.userId;
+            closeForm.Show();
+        }
+
+        public static void NoCloseMain()
+        {
+            localForm.ShowInTaskbar = false;
+            notifyIcon1.Visible = true;
+        }
+
+        public void notifyIcon1_DoubleClick(object sender, EventArgs e)
+        {
+            this.ShowInTaskbar = true;
+            this.WindowState = FormWindowState.Normal;
+            notifyIcon1.Visible = false;
+        }
+        private void SetNewPhoto(object sender, MouseEventArgs e)
 		{
 			base.OnMouseUp(e);
 			if (e.Button == MouseButtons.Right)
@@ -386,5 +415,6 @@ namespace hzy
             group.InitGroupInfo();
             group.Show();
         }
+
     }
 }

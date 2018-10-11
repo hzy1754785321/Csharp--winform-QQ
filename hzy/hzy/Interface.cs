@@ -72,6 +72,10 @@ namespace hzy
         /// 发送群聊信息
         /// </summary>
         sendGroupMessage,
+        /// <summary>
+        /// 退出程序
+        /// </summary>
+        loginOut,
     }
 
 	public enum PopType
