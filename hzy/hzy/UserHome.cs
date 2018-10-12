@@ -12,6 +12,8 @@ using System.Collections;
 using Newtonsoft.Json;
 using System.Threading;
 using System.Net.Sockets;
+using System.Diagnostics;
+
 
 namespace hzy
 {
@@ -81,7 +83,53 @@ namespace hzy
 			}
 		}
 
-		public void CheckPopUP()
+        public void StartMedia(object sender, EventArgs e)
+        {
+            try
+            {
+                ProcessStartInfo startInfo = new ProcessStartInfo();
+                startInfo.FileName = @"C:\Users\ychi\source\repos\music\musicApp\musicApp\bin\Debug\musicApp.exe";
+                startInfo.WindowStyle = ProcessWindowStyle.Normal;
+                Process.Start(startInfo);
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
+        public void StartAirPlane(object sender, EventArgs e)
+        {
+            try
+            {
+                ProcessStartInfo startInfo = new ProcessStartInfo();
+                startInfo.FileName = @"C:\Users\ychi\source\repos\airplane\airPlane.exe";
+                startInfo.WindowStyle = ProcessWindowStyle.Normal;
+                Process.Start(startInfo);
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
+        public void StartBird(object sender, EventArgs e)
+        {
+            try
+            {
+                ProcessStartInfo startInfo = new ProcessStartInfo();
+                startInfo.FileName = @"C:\Users\ychi\source\repos\bird\bird.exe";
+                startInfo.WindowStyle = ProcessWindowStyle.Normal;
+                Process.Start(startInfo);
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
+
+        public void CheckPopUP()
 		{
 			int temp = 0;
 			if (_mineInfo.ext != null)
@@ -233,8 +281,8 @@ namespace hzy
 		{
 			if (e.KeyCode == Keys.Enter)
 			{
-				entryMyName.Visible = false;
-				signature.Text = entryMyName.Text;
+				signText.Visible = false;
+				signature.Text = signText.Text;
 				List<object> userStr = new List<object>();
 				userStr.Add(_mineInfo.userId);
 				userStr.Add(signature.Text);
@@ -407,6 +455,18 @@ namespace hzy
 			}
 		}
 
+        public void friendButton_Click(object sender, EventArgs e)
+        {
+            skinPanel1.Visible = true;
+            friendTitle.Visible = true;
+            familyTitle.Visible = true;
+            workTitle.Visible = true;
+            groupButton1.Visible = false;
+            groupName1.Visible = false;
+            groupButton2.Visible = false;
+            groupName2.Visible = false;
+        }
+
         private void groupButton_Click(object sender, EventArgs e)
         {
             skinPanel1.Visible = false;
@@ -430,11 +490,13 @@ namespace hzy
             {
                 groupName1.Text = _group[0].groupName;
                 groupButton1.Visible = true;
+                groupName1.Visible = true;
             }
             if (count >= 2)
             {
                 groupName2.Text = _group[1].groupName;
                 groupButton2.Visible = true;
+                groupName2.Visible = true;
             }
 
             //Group group = new Group();
@@ -443,6 +505,22 @@ namespace hzy
             //group.mineInfo = _mineInfo;
             //group.InitGroupInfo();
             //group.Show();
+        }
+
+        public void group1Click(object sender, EventArgs e)
+        {
+            Group group = new Group();
+            group._groupId = _group[0].groupId;
+            group.Location = this.Location;
+            group.Show();
+        }
+
+        public void group2Click(object sender, EventArgs e)
+        {
+            Group group = new Group();
+            group._groupId = _group[1].groupId;
+            group.Location = this.Location;
+            group.Show();
         }
 
     }

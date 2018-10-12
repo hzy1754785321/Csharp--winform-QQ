@@ -50,6 +50,10 @@ namespace hzy
             this.skinButton8 = new CCWin.SkinControl.SkinButton();
             this.skinButton9 = new CCWin.SkinControl.SkinButton();
             this.skinPanel1 = new CCWin.SkinControl.SkinPanel();
+            this.groupName2 = new CCWin.SkinControl.SkinLabel();
+            this.groupButton2 = new CCWin.SkinControl.SkinButton();
+            this.groupName1 = new CCWin.SkinControl.SkinLabel();
+            this.groupButton1 = new CCWin.SkinControl.SkinButton();
             this.label12 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
@@ -73,10 +77,9 @@ namespace hzy
             this.entryMyName = new System.Windows.Forms.TextBox();
             this.signText = new System.Windows.Forms.TextBox();
             notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
-            this.groupButton1 = new CCWin.SkinControl.SkinButton();
-            this.groupName1 = new CCWin.SkinControl.SkinLabel();
-            this.groupButton2 = new CCWin.SkinControl.SkinButton();
-            this.groupName2 = new CCWin.SkinControl.SkinLabel();
+            this.birdButton = new CCWin.SkinControl.SkinButton();
+            this.airPlaneButton = new CCWin.SkinControl.SkinButton();
+            this.mediaButton = new CCWin.SkinControl.SkinButton();
             ((System.ComponentModel.ISupportInitialize)(this.UserPhoto)).BeginInit();
             this.choosePhoto.SuspendLayout();
             this.skinPanel1.SuspendLayout();
@@ -102,6 +105,7 @@ namespace hzy
             this.skinButton1.TabIndex = 0;
             this.skinButton1.Text = "好友";
             this.skinButton1.UseVisualStyleBackColor = false;
+            this.skinButton1.Click += new System.EventHandler(this.friendButton_Click);
             // 
             // groupButton
             // 
@@ -387,6 +391,72 @@ namespace hzy
             this.skinPanel1.Size = new System.Drawing.Size(317, 215);
             this.skinPanel1.TabIndex = 10;
             // 
+            // groupName2
+            // 
+            this.groupName2.AutoSize = true;
+            this.groupName2.BackColor = System.Drawing.Color.Transparent;
+            this.groupName2.BorderColor = System.Drawing.Color.White;
+            this.groupName2.Font = new System.Drawing.Font("微软雅黑", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.groupName2.Location = new System.Drawing.Point(94, 61);
+            this.groupName2.Name = "groupName2";
+            this.groupName2.Size = new System.Drawing.Size(88, 25);
+            this.groupName2.TabIndex = 24;
+            this.groupName2.Text = "你的群名";
+            this.groupName2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.groupName2.Visible = false;
+            // 
+            // groupButton2
+            // 
+            this.groupButton2.BackColor = System.Drawing.Color.Transparent;
+            this.groupButton2.BaseColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.groupButton2.ControlState = CCWin.SkinClass.ControlState.Normal;
+            this.groupButton2.DownBack = null;
+            this.groupButton2.DownBaseColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
+            this.groupButton2.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.groupButton2.Location = new System.Drawing.Point(4, 45);
+            this.groupButton2.MouseBack = null;
+            this.groupButton2.MouseBaseColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.groupButton2.Name = "groupButton2";
+            this.groupButton2.NormlBack = null;
+            this.groupButton2.Size = new System.Drawing.Size(315, 60);
+            this.groupButton2.TabIndex = 23;
+            this.groupButton2.UseVisualStyleBackColor = false;
+            this.groupButton2.Visible = false;
+            this.groupButton2.Click += new System.EventHandler(this.group2Click);
+            // 
+            // groupName1
+            // 
+            this.groupName1.AutoSize = true;
+            this.groupName1.BackColor = System.Drawing.Color.Transparent;
+            this.groupName1.BorderColor = System.Drawing.Color.White;
+            this.groupName1.Font = new System.Drawing.Font("微软雅黑", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.groupName1.Location = new System.Drawing.Point(93, -12);
+            this.groupName1.Name = "groupName1";
+            this.groupName1.Size = new System.Drawing.Size(88, 25);
+            this.groupName1.TabIndex = 22;
+            this.groupName1.Text = "你的群名";
+            this.groupName1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.groupName1.Visible = false;
+            // 
+            // groupButton1
+            // 
+            this.groupButton1.BackColor = System.Drawing.Color.Transparent;
+            this.groupButton1.BaseColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.groupButton1.ControlState = CCWin.SkinClass.ControlState.Normal;
+            this.groupButton1.DownBack = null;
+            this.groupButton1.DownBaseColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
+            this.groupButton1.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.groupButton1.Location = new System.Drawing.Point(3, -31);
+            this.groupButton1.MouseBack = null;
+            this.groupButton1.MouseBaseColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.groupButton1.Name = "groupButton1";
+            this.groupButton1.NormlBack = null;
+            this.groupButton1.Size = new System.Drawing.Size(316, 60);
+            this.groupButton1.TabIndex = 21;
+            this.groupButton1.UseVisualStyleBackColor = false;
+            this.groupButton1.Visible = false;
+            this.groupButton1.Click += new System.EventHandler(this.group1Click);
+            // 
             // label12
             // 
             this.label12.AutoSize = true;
@@ -637,67 +707,56 @@ namespace hzy
             notifyIcon1.Text = "notifyIcon1";
             notifyIcon1.Visible = true;
             // 
-            // groupButton1
+            // birdButton
             // 
-            this.groupButton1.BackColor = System.Drawing.Color.Transparent;
-            this.groupButton1.BaseColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.groupButton1.ControlState = CCWin.SkinClass.ControlState.Normal;
-            this.groupButton1.DownBack = null;
-            this.groupButton1.DownBaseColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
-            this.groupButton1.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.groupButton1.Location = new System.Drawing.Point(3, -31);
-            this.groupButton1.MouseBack = null;
-            this.groupButton1.MouseBaseColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.groupButton1.Name = "groupButton1";
-            this.groupButton1.NormlBack = null;
-            this.groupButton1.Size = new System.Drawing.Size(316, 60);
-            this.groupButton1.TabIndex = 21;
-            this.groupButton1.UseVisualStyleBackColor = false;
-            this.groupButton1.Visible = false;
+            this.birdButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.birdButton.BaseColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+            this.birdButton.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.birdButton.ControlState = CCWin.SkinClass.ControlState.Normal;
+            this.birdButton.DownBack = null;
+            this.birdButton.Location = new System.Drawing.Point(292, 515);
+            this.birdButton.MouseBack = null;
+            this.birdButton.Name = "birdButton";
+            this.birdButton.NormlBack = null;
+            this.birdButton.Size = new System.Drawing.Size(38, 23);
+            this.birdButton.TabIndex = 15;
+            this.birdButton.Text = "小鸟";
+            this.birdButton.UseVisualStyleBackColor = false;
+            this.birdButton.Click += new System.EventHandler(this.StartBird);
             // 
-            // groupName1
+            // airPlaneButton
             // 
-            this.groupName1.AutoSize = true;
-            this.groupName1.BackColor = System.Drawing.Color.Transparent;
-            this.groupName1.BorderColor = System.Drawing.Color.White;
-            this.groupName1.Font = new System.Drawing.Font("微软雅黑", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.groupName1.Location = new System.Drawing.Point(93, -12);
-            this.groupName1.Name = "groupName1";
-            this.groupName1.Size = new System.Drawing.Size(88, 25);
-            this.groupName1.TabIndex = 22;
-            this.groupName1.Text = "你的群名";
-            this.groupName1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.airPlaneButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.airPlaneButton.BaseColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+            this.airPlaneButton.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.airPlaneButton.ControlState = CCWin.SkinClass.ControlState.Normal;
+            this.airPlaneButton.DownBack = null;
+            this.airPlaneButton.Location = new System.Drawing.Point(221, 515);
+            this.airPlaneButton.MouseBack = null;
+            this.airPlaneButton.Name = "airPlaneButton";
+            this.airPlaneButton.NormlBack = null;
+            this.airPlaneButton.Size = new System.Drawing.Size(64, 23);
+            this.airPlaneButton.TabIndex = 16;
+            this.airPlaneButton.Text = "太空大战";
+            this.airPlaneButton.UseVisualStyleBackColor = false;
+            this.airPlaneButton.Click += new System.EventHandler(this.StartAirPlane);
             // 
-            // groupButton2
+            // mediaButton
             // 
-            this.groupButton2.BackColor = System.Drawing.Color.Transparent;
-            this.groupButton2.BaseColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.groupButton2.ControlState = CCWin.SkinClass.ControlState.Normal;
-            this.groupButton2.DownBack = null;
-            this.groupButton2.DownBaseColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
-            this.groupButton2.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.groupButton2.Location = new System.Drawing.Point(4, 45);
-            this.groupButton2.MouseBack = null;
-            this.groupButton2.MouseBaseColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.groupButton2.Name = "groupButton2";
-            this.groupButton2.NormlBack = null;
-            this.groupButton2.Size = new System.Drawing.Size(315, 60);
-            this.groupButton2.TabIndex = 23;
-            this.groupButton2.UseVisualStyleBackColor = false;
-            this.groupButton2.Visible = false;
-            // 
-            // groupName2
-            // 
-            this.groupName2.AutoSize = true;
-            this.groupName2.BackColor = System.Drawing.Color.Transparent;
-            this.groupName2.BorderColor = System.Drawing.Color.White;
-            this.groupName2.Font = new System.Drawing.Font("微软雅黑", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.groupName2.Location = new System.Drawing.Point(94, 61);
-            this.groupName2.Name = "groupName2";
-            this.groupName2.Size = new System.Drawing.Size(88, 25);
-            this.groupName2.TabIndex = 24;
-            this.groupName2.Text = "你的群名";
-            this.groupName2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.mediaButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.mediaButton.BaseColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+            this.mediaButton.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.mediaButton.ControlState = CCWin.SkinClass.ControlState.Normal;
+            this.mediaButton.DownBack = null;
+            this.mediaButton.Location = new System.Drawing.Point(128, 515);
+            this.mediaButton.MouseBack = null;
+            this.mediaButton.Name = "mediaButton";
+            this.mediaButton.NormlBack = null;
+            this.mediaButton.Size = new System.Drawing.Size(88, 23);
+            this.mediaButton.TabIndex = 17;
+            this.mediaButton.Text = "多媒体播放器";
+            this.mediaButton.UseVisualStyleBackColor = false;
+            this.mediaButton.Click += new System.EventHandler(this.StartMedia);
             // 
             // UserHome
             // 
@@ -705,6 +764,9 @@ namespace hzy
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.ClientSize = new System.Drawing.Size(340, 538);
+            this.Controls.Add(this.mediaButton);
+            this.Controls.Add(this.airPlaneButton);
+            this.Controls.Add(this.birdButton);
             this.Controls.Add(this.signText);
             this.Controls.Add(this.entryMyName);
             this.Controls.Add(this.Setting);
@@ -780,10 +842,13 @@ namespace hzy
 		private System.Windows.Forms.TextBox signText;
 		private ContextMenuStrip Menu;
 		private ToolStripMenuItem 添加好友ToolStripMenuItem;
-        public static NotifyIcon notifyIcon1;
         private CCWin.SkinControl.SkinButton groupButton1;
         private CCWin.SkinControl.SkinLabel groupName2;
         private CCWin.SkinControl.SkinButton groupButton2;
         private CCWin.SkinControl.SkinLabel groupName1;
+        private CCWin.SkinControl.SkinButton birdButton;
+        private CCWin.SkinControl.SkinButton airPlaneButton;
+        private CCWin.SkinControl.SkinButton mediaButton;
+        public static NotifyIcon notifyIcon1;
     }
 }
